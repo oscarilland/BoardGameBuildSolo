@@ -12,6 +12,8 @@ updated: 2026-11-17
 
 4-6 players each take a different one of six characters. The characters start with unequal money and GP, and each has one ability. They're balanced by win rate, not by starting value.
 
+> **Build status:** setup is built in `Game.start` ([plan 002](../../plans/002-players-characters-and-movement.md)): names (up to `game.maxNameLength`, 20), distinct characters, starting money and GP, random first player, everyone on square 0. The abilities' effects arrive with the actions they change (plans 003-005).
+
 ## Rules
 
 1. **Players:** 4 to 6 (`game.minPlayers`, `game.maxPlayers`). Each enters a display name and chooses a **different** character.

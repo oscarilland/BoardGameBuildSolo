@@ -3,7 +3,7 @@ title: FR-03 Dice, movement and junctions
 type: requirement
 id: FR-03
 priority: must
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -38,7 +38,15 @@ Animating the counter's move (UI polish, not logic).
 
 ## Decisions (Oscar, 17 November 2026)
 
-1. **Two-way cut-through, choice whenever a junction is reached** ([Q-05](../rules/open-questions.md)). AC-4, AC-5 and AC-7 spell out the step counting; AC-7 (no second question at the far junction) is the agent's reading of "rejoins at the other junction", for Oscar to confirm when agreeing FR-03.
+1. **Two-way cut-through, choice whenever a junction is reached** ([Q-05](../rules/open-questions.md)). AC-4, AC-5 and AC-7 spell out the step counting.
+2. **No second question at the far junction (AC-7):** confirmed. A player coming out of the cut-through carries on clockwise.
+3. **Agreed.**
+
+## Build status
+
+Built in [plan 002](../../plans/002-players-characters-and-movement.md): AC-1 to AC-5 and AC-7, tested in `BoardTest`, `MovementTest` and `DiceTest`. AC-6 (a bankrupt player doesn't move) waits for bankruptcy in plan 005, so the page stays `agreed` until then.
+
+**Confirmed by Oscar (17 November 2026):** a move that ends exactly on the far junction after the cut-through counts as landing on a junction, so the next move starts with the route question (tested in `q05_endingOnTheFarJunctionAsksNextTurn`).
 
 ## Related
 

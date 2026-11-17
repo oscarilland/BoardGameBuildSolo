@@ -12,12 +12,14 @@ updated: 2026-11-17
 
 36 squares in six Belfast districts: a clockwise loop of 30 squares, plus a 6-square City Centre cut-through between two junctions. Five square types, each with a different action.
 
+> **Build status:** the board's shape, both junctions and the two-way City Centre route are built in `Board` ([plan 002](../../plans/002-players-characters-and-movement.md)). Square types and Resilience aren't used yet.
+
 ## Rules
 
 1. **Shape** (`board.json`): the loop is ids 0-29, clockwise by ascending id, with 29 wrapping to 0. The **City Centre** route is ids 30-35. Square 30 is next to the West junction (27) and 35 next to the East junction (12).
 2. **Junctions:** Glider East (12) and Glider West (27). The cut-through is **two-way**: from 12 it runs 35 → 30 and rejoins the loop at 27; from 27 it runs 30 → 35 and rejoins at 12. Either way, play then continues clockwise ([Q-05](open-questions.md); when the choice is made is on [turn and actions](turn-and-actions.md)).
 3. **Districts** (`districts`): North (0-5), Harbour & Titanic Quarter (6-11), East (12-17), South (18-23), West (24-29), City Centre (30-35). Six squares each.
-4. **Glider stops:** 12, 27 and 30 (`gliderStops`).
+4. **Glider stops:** 12, 27 and 30 (`gliderStops`). A player who rides to Glider City Hall (30) chooses their direction along the City Centre route at the start of their next move ([Q-18](open-questions.md)).
 5. **Square types:**
 
 | Type | Count | Price | Each round, if owned | Data keys |

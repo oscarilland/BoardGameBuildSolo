@@ -12,6 +12,8 @@ updated: 2026-11-17
 
 On their turn a player rolls two dice, moves clockwise, chooses a route at junctions, acts on the square they land on, may convert one polluting square, then ends the turn. After the last player, the round ends.
 
+> **Build status:** rolling, moving and junction choices are built ([plan 002](../../plans/002-players-characters-and-movement.md)). The landing actions below aren't built yet (plans 003-004).
+
 ## Rules
 
 ### The turn

@@ -38,6 +38,7 @@ final class ConfigValidator {
         check(game.minPlayers() >= 1, CONFIG_FILE, "game.minPlayers", "is " + game.minPlayers() + ", expected at least 1");
         check(game.minPlayers() <= game.maxPlayers(), CONFIG_FILE, "game.minPlayers",
                 "is " + game.minPlayers() + ", but game.maxPlayers is " + game.maxPlayers());
+        check(game.maxNameLength() >= 1, CONFIG_FILE, "game.maxNameLength", "is " + game.maxNameLength() + ", expected at least 1");
         check(game.rounds() >= 1, CONFIG_FILE, "game.rounds", "is " + game.rounds() + ", expected at least 1");
         check(game.yearsPerRound() >= 1, CONFIG_FILE, "game.yearsPerRound", "is " + game.yearsPerRound() + ", expected at least 1");
         int expectedEnd = game.startYear() + game.rounds() * game.yearsPerRound();

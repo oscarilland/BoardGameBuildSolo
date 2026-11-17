@@ -56,6 +56,7 @@ final class ConfigParser {
                 new Rules.Game(
                         game.get("minPlayers").asInt(),
                         game.get("maxPlayers").asInt(),
+                        game.get("maxNameLength").asInt(),
                         game.get("rounds").asInt(),
                         game.get("startYear").asInt(),
                         game.get("yearsPerRound").asInt(),

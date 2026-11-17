@@ -3,6 +3,7 @@
   "game": {
     "minPlayers": 4,
     "maxPlayers": 6,
+    "maxNameLength": 20,
     "rounds": 12,
     "startYear": 2026,
     "yearsPerRound": 2,

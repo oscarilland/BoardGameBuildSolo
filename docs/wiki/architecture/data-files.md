@@ -17,6 +17,7 @@ Three JSON files hold every balance value, the board, and the card deck ([NFR-07
 | File | Key | Change | Why |
 |---|---|---|---|
 | `board.json` | `cityCentreRoute.direction` | "TBD: …" → "two-way (Q-05, decided by Oscar on 17 Nov 2026)" | [Q-05](../rules/open-questions.md) |
+| `config.json` | `game.maxNameLength` | Added: 20 | Oscar's FR-01 answer; a limit belongs in data, not code ([plan 002](../../plans/002-players-characters-and-movement.md)) |
 
 ## Files
 
@@ -32,7 +33,7 @@ Three JSON files hold every balance value, the board, and the card deck ([NFR-07
 
 | Section | Keys |
 |---|---|
-| `game` | `minPlayers` 4, `maxPlayers` 6, `rounds` 12, `startYear` 2026, `yearsPerRound` 2, `endYear` 2050, `turnsPerRound` 1, `firstPlayer` "random", `dice` "2d6" |
+| `game` | `minPlayers` 4, `maxPlayers` 6, `maxNameLength` 20 (working copy only), `rounds` 12, `startYear` 2026, `yearsPerRound` 2, `endYear` 2050, `turnsPerRound` 1, `firstPlayer` "random", `dice` "2d6" |
 | `characters[]` | `id`, `name`, `startMoney`, `startGP`, `ability` (text), `params` (ability-specific numbers) |
 | `squares.polluting` | `priceRange` [4, 7], `incomePerRound` 7, `carbonTaxGPPerRound` 1, `meterPerRound` 2 |
 | `squares.greenProject` | `priceRange` [8, 12], `incomePerRound` 2, `gpPerRound` 2, `meterPerRound` −1 |

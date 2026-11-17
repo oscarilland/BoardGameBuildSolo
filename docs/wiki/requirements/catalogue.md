@@ -16,9 +16,9 @@ The acceptance criteria on each page were written on ingest from the rules and d
 
 | ID | Requirement | Priority | Verified by | Status |
 |---|---|---|---|---|
-| [FR-01](fr-01-start-game.md) | Start a game with 4-6 players and distinct characters | Must | JUnit, manual | Draft |
-| [FR-02](fr-02-starting-values-and-first-player.md) | Starting values and a random first player | Must | JUnit | Draft |
-| [FR-03](fr-03-dice-movement-and-junctions.md) | Two dice, clockwise movement, junction choice | Must | JUnit | Draft |
+| [FR-01](fr-01-start-game.md) | Start a game with 4-6 players and distinct characters | Must | JUnit, manual | Agreed (rules built; screen in plan 007) |
+| [FR-02](fr-02-starting-values-and-first-player.md) | Starting values and a random first player | Must | JUnit | Built |
+| [FR-03](fr-03-dice-movement-and-junctions.md) | Two dice, clockwise movement, junction choice | Must | JUnit | Agreed (built except AC-6, plan 005) |
 | [FR-04](fr-04-buy-square.md) | Buy an unowned square; no buying if unaffordable | Must | JUnit | Draft |
 | [FR-05](fr-05-co-funding.md) | Co-fund a Green Project for £3M, one deal per player | Must | JUnit | Draft |
 | [FR-06](fr-06-lobbying.md) | Lobby a Polluting square for £2M | Should | JUnit | Draft |

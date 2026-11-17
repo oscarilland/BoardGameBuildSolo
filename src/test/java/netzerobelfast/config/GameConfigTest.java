@@ -98,7 +98,7 @@ class GameConfigTest {
     @Test
     void nfr07_ac1_loadsTheBalanceValues() {
         Rules rules = config.rules();
-        assertEquals(new Rules.Game(4, 6, 12, 2026, 2, 2050), rules.game());
+        assertEquals(new Rules.Game(4, 6, 20, 12, 2026, 2, 2050), rules.game());
         assertEquals(new Rules.Polluting(4, 7, 7, 1, 2), rules.polluting());
         assertEquals(new Rules.Green(8, 12, 2, 2, -1), rules.green());
         assertEquals(new Rules.Actions(5, 1, 3, 1, 1, 2, 1), rules.actions());

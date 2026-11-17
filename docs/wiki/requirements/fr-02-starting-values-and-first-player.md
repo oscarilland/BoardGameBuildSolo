@@ -3,7 +3,7 @@ title: FR-02 Starting values and first player
 type: requirement
 id: FR-02
 priority: must
-status: draft
+status: built
 sources: [../sources/sub1a-report.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -38,6 +38,11 @@ Choosing the first player by a dice roll-off on screen.
 ## Decisions (Oscar, 17 November 2026)
 
 1. **Starting position:** everyone on square 0, with no landing action ([Q-06](../rules/open-questions.md)).
+2. **Agreed.**
+
+## Build status
+
+**Built** in [plan 002](../../plans/002-players-characters-and-movement.md): AC-1 to AC-6, tested in `GameStartTest`.
 
 ## Related
 

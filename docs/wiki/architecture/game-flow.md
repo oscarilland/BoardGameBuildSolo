@@ -47,7 +47,9 @@ From the [use case diagram](../../raw/net-zero-belfast-handover/design/use_case_
 
 In the diagrams, model objects talk to the human directly ("ask for route", "show card text", `ClimateCard` → Player). Coded literally, `ClimateCard` would open a dialog, which breaks the model-UI split and makes bots and tests impossible.
 
-**Proposed approach (for plan 001 to confirm):** the model works as a small state machine. Each step either completes or returns a **pending decision** (choose route, choose landing action, answer quiz, choose option A or B, convert or not, end turn) with its legal options. The UI, or a bot, calls back with the choice, and the model validates it and continues. The sequence diagrams stay true as a description of the order of calls; only the "ask the user" arrows become a returned decision.
+**Built for movement in [plan 002](../../plans/002-players-characters-and-movement.md).** `Game` has a `Phase`: `AWAITING_ROLL` → (`AWAITING_ROUTE` or `AWAITING_DIRECTION` while moving, if there's a choice) → `MOVE_DONE` → `endTurn()` → the next player's `AWAITING_ROLL`. An action that doesn't fit the phase throws `IllegalActionException` and changes nothing. Landing actions, cards and the end of the round will add phases in plans 003-005.
+
+The approach: the model works as a small state machine. Each step either completes or returns a **pending decision** (choose route, choose landing action, answer quiz, choose option A or B, convert or not, end turn) with its legal options. The UI, or a bot, calls back with the choice, and the model validates it and continues. The sequence diagrams stay true as a description of the order of calls; only the "ask the user" arrows become a returned decision.
 
 - **For:** one code path for players, bots and tests; the model never blocks (NFR-11); every action is validated (NFR-08).
 - **Against:** a little more structure than direct method calls. The SUB2 sequence diagrams should show it.

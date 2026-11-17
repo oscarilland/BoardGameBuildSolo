@@ -167,6 +167,18 @@ class GameConfigValidationTest {
     }
 
     @Test
+    void missingMaxNameLength() {
+        assertRejected(CONFIG_FILE, c -> obj(c, "game").remove("maxNameLength"),
+                "config.json: game.maxNameLength is missing");
+    }
+
+    @Test
+    void zeroMaxNameLength() {
+        assertRejected(CONFIG_FILE, c -> obj(c, "game").addProperty("maxNameLength", 0),
+                "config.json: game.maxNameLength is 0, expected at least 1");
+    }
+
+    @Test
     void zeroRounds() {
         assertRejected(CONFIG_FILE, c -> obj(c, "game").addProperty("rounds", 0),
                 "config.json: game.rounds is 0, expected at least 1");

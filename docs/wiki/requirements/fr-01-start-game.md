@@ -3,7 +3,7 @@ title: FR-01 Start game
 type: requirement
 id: FR-01
 priority: must
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md]
 updated: 2026-11-17
 ---
@@ -26,17 +26,22 @@ See [setup and characters](../rules/setup-and-characters.md).
 
 - **AC-1** A game can be started with 4, 5 or 6 players. Starting with 3 or 7 is rejected.
 - **AC-2** Two players can't choose the same character; the model rejects it even if the UI allows it.
-- **AC-3** A name that is empty or only spaces is rejected. Names are trimmed and limited in length ([NFR-08](nfr-08-privacy-and-security.md)).
+- **AC-3** A name that is empty or only spaces is rejected. Names are trimmed, and a name longer than 20 characters after trimming is rejected ([NFR-08](nfr-08-privacy-and-security.md)).
 - **AC-4** Two players can't have the same name (after trimming, ignoring case), so the player panel is never ambiguous.
 
 ## Out of scope
 
 Saving player profiles between games.
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. Maximum name length (suggest 20 characters)?
-2. AC-4 (unique names) isn't in the SUB1a wording. Keep it?
+1. **Maximum name length:** 20 characters, after trimming.
+2. **Unique names (AC-4):** kept, although it goes beyond the SUB1a wording.
+3. **Agreed.**
+
+## Build status
+
+The rules are built in `Game.start` ([plan 002](../../plans/002-players-characters-and-movement.md)): AC-1 to AC-4 tested in `GameStartTest`. The setup screen ("manual" verification) comes in plan 007, so the page stays `agreed` until then.
 
 ## Related
 

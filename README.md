@@ -26,7 +26,7 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 
 ## Status
 
-**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plan 001, the walking skeleton, is built: the game loads and validates its data and opens an empty window. Next: plan 002 (players, characters and movement).
+**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plans 001 and 002 are built: the game loads and validates its data, and the rules for starting a game and moving around the board (with junction choices) work headlessly. Next: plan 003 (square actions).
 
 ## Setting up
 

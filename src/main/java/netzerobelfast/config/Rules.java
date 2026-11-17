@@ -23,8 +23,13 @@ public record Rules(
         Bankruptcy bankruptcy,
         Scoring scoring) {
 
-    /** {@code game}: players, rounds and years. */
-    public record Game(int minPlayers, int maxPlayers, int rounds, int startYear, int yearsPerRound, int endYear) {}
+    /**
+     * {@code game}: players, rounds and years.
+     *
+     * @param maxNameLength the longest display name allowed, after trimming (FR-01 AC-3)
+     */
+    public record Game(
+            int minPlayers, int maxPlayers, int maxNameLength, int rounds, int startYear, int yearsPerRound, int endYear) {}
 
     /**
      * One entry of {@code characters}. Ability parameters vary by character, so they're kept

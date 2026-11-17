@@ -14,7 +14,7 @@ Rules questions that must be answered before the code that depends on them is bu
 
 ## Answered (Oscar, 17 November 2026)
 
-Oscar accepted the recommended answer to every question ("all recommended"). The "Applies to" column lists the pages that now carry the answer.
+Oscar accepted the recommended answer to Q-01 to Q-17 ("all recommended"), and answered Q-18 separately. The "Applies to" column lists the pages that now carry the answer.
 
 | # | Question | Answer | Applies to |
 |---|---|---|---|
@@ -35,10 +35,11 @@ Oscar accepted the recommended answer to every question ("all recommended"). The
 | Q-15 | Closed and flooded squares: tax, meter, co-funding | They still pay carbon tax and still count towards the meter (emissions don't stop). They earn nothing, including co-funding GP for both players | [End of round](end-of-round.md), [FR-05](../requirements/fr-05-co-funding.md), [FR-11](../requirements/fr-11-end-of-round-order.md) |
 | Q-16 | Legacy Score rounding | Kept exact and compared exactly; shown to one decimal place (for example 36.4) | [Scoring](scoring-and-end-of-game.md), [FR-14](../requirements/fr-14-legacy-score-and-winner.md) |
 | Q-17 | Flood or Storm with no owned squares | Skipped: no disaster that round, as in the simulation | [Climate Meter](climate-meter-and-disasters.md), [FR-12](../requirements/fr-12-disasters.md) |
+| Q-18 | After a Glider ride to **Glider City Hall (30)**, which way does the player's next move go along the two-way City Centre route? (Found while planning plan 002) | **The player decides:** at the start of their next move they choose towards Glider West (27) or towards Glider East (12). Oscar, 17 November 2026: "the player should be able to decide their direction". Already supported by `Game`'s `AWAITING_DIRECTION` phase (plan 002) | [Board and squares](board-and-squares.md), [FR-09](../requirements/fr-09-glider.md) |
 
 ## Still open
 
-None. Add new questions above the Related section as Q-18 onwards.
+None. Add new questions here as Q-19 onwards.
 
 ## Related
 

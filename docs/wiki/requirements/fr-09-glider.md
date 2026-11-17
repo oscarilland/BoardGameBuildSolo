@@ -36,6 +36,7 @@ Passing over a Glider Stop doesn't allow a ride; only landing does.
 ## Decisions (Oscar, 17 November 2026)
 
 1. No further action after a ride ([Q-07](../rules/open-questions.md)).
+2. After a ride to Glider City Hall (30), the player chooses their direction at the start of their next move ([Q-18](../rules/open-questions.md)). Plan 003 should add an acceptance criterion for it.
 
 ## Related
 

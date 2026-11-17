@@ -2,6 +2,7 @@ package netzerobelfast;
 
 import netzerobelfast.config.ConfigException;
 import netzerobelfast.config.GameConfig;
+import netzerobelfast.model.Character;
 import netzerobelfast.ui.MainWindow;
 
 import javax.swing.JOptionPane;
@@ -29,7 +30,9 @@ public final class App {
         GameConfig config;
         try {
             config = GameConfig.load();
-        } catch (ConfigException e) {
+            // Every character in the data must have a class in the game; fail now, not at game start.
+            Character.fromAll(config.rules().characters());
+        } catch (ConfigException | IllegalArgumentException e) {
             System.err.println("Net Zero Belfast can't start: " + e.getMessage());
             if (!checkOnly && !GraphicsEnvironment.isHeadless()) {
                 showError(e.getMessage());

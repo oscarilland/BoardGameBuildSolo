@@ -8,7 +8,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [Project context](project-context.md) - why this solo repo exists, and its constraints
 - [Learning outcomes](learning-outcomes.md) - LO1-LO5 and where the game teaches them
 - [Requirements catalogue](requirements/catalogue.md) - every requirement, its priority and status
-- [Open rules questions](rules/open-questions.md) - Q-01 to Q-17, all answered by Oscar
+- [Open rules questions](rules/open-questions.md) - Q-01 to Q-18, all answered by Oscar
 - [Build progress](operations/build-progress.md) - the checklist and issues log
 
 ## Rules
@@ -21,14 +21,14 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [Bankruptcy](rules/bankruptcy.md) - trigger, sitting out, return and loan
 - [Climate cards](rules/climate-cards.md) - quiz, choice and event cards; the 30-card deck
 - [Scoring and end of game](rules/scoring-and-end-of-game.md) - Legacy Score, net zero, tie-break, report
-- [Open rules questions](rules/open-questions.md) - Oscar's answers to Q-01 to Q-17
+- [Open rules questions](rules/open-questions.md) - Oscar's answers to Q-01 to Q-18
 - [Balance and design history](rules/balance-and-history.md) - simulation results and v3 → v4 changes
 
 ## Requirements
 
-- [FR-01 Start game](requirements/fr-01-start-game.md) - must, draft
-- [FR-02 Starting values and first player](requirements/fr-02-starting-values-and-first-player.md) - must, draft
-- [FR-03 Dice, movement and junctions](requirements/fr-03-dice-movement-and-junctions.md) - must, draft
+- [FR-01 Start game](requirements/fr-01-start-game.md) - must, agreed
+- [FR-02 Starting values and first player](requirements/fr-02-starting-values-and-first-player.md) - must, built
+- [FR-03 Dice, movement and junctions](requirements/fr-03-dice-movement-and-junctions.md) - must, agreed
 - [FR-04 Buy square](requirements/fr-04-buy-square.md) - must, draft
 - [FR-05 Co-funding](requirements/fr-05-co-funding.md) - must, draft
 - [FR-06 Lobbying](requirements/fr-06-lobbying.md) - should, draft
@@ -82,6 +82,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 ## Plans
 
 - [Plan 001 Walking skeleton](../plans/001-walking-skeleton.md) - done: Maven, data loading and validation, seeded dice, coverage rule, runnable jar, empty window
+- [Plan 002 Players, characters and movement](../plans/002-players-characters-and-movement.md) - done: FR-01 to FR-03 headless; turn phases, junctions, two-way City Centre route
 
 See [build progress](operations/build-progress.md) for the proposed order of later plans.
 

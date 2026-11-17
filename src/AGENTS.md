@@ -2,7 +2,9 @@
 
 Read this before changing anything in `src/`. The root `AGENTS.md` gates still apply: no change here without an approved plan in `docs/plans/`.
 
-> **Current state:** [plan 001](../docs/plans/001-walking-skeleton.md) is built: the Maven project, `GameConfig` loading and validating the data files, a seeded `Dice`, the coverage rule, a runnable jar with `--check`, and an empty window. No game rules yet. Base package: `netzerobelfast`.
+> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) and [002](../docs/plans/002-players-characters-and-movement.md) are built: data loading and validation, seeded `Dice`, and in `model` the characters, players, board and a `Game` that starts games and runs turns of rolling and moving (with junction choices) as a phase machine. No landing actions or end-of-round effects yet; the window is still empty. Base package: `netzerobelfast`.
+>
+> **Testing tip:** `ScriptedRandom` and `Games` in `src/test/java/netzerobelfast/model/` script exact dice and place counters. Use them instead of hunting for seeds.
 
 ## Stack
 

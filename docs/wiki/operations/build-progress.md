@@ -55,6 +55,20 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 
 ### Plan 002 - Players, characters and movement (FR-01, FR-02, FR-03)
 
+- [x] FR-01, FR-02, FR-03 agreed (20-character names, unique names, no second question at the far junction), 17 November 2026
+- [x] Plan drafted ([plan 002](../../plans/002-players-characters-and-movement.md)), 17 November 2026
+- [x] Gate: plan 002 approved, 17 November 2026
+- [x] `maxNameLength` in the working `config.json`
+- [x] `Character` and six subclasses, `Player`, `Board` from the data
+- [x] `Game.start` with FR-01 checks and FR-02 starting values
+- [x] Turn phases: roll, junction choice, direction choice, end turn; illegal actions rejected
+- [x] Movement tests for every junction rule, and a headless run (30 games × 10 rounds); 129 tests, `model` coverage 100%
+- [x] Tests checked against two deliberate bugs in the junction logic; both caught
+- [x] Plan 002 marked `done` (17 November 2026)
+- [x] Gate: Oscar confirms the far-junction reading (ending exactly on it means the route question comes next turn), 17 November 2026
+
+[Q-18](../rules/open-questions.md) answered 17 November 2026: after a Glider ride to City Hall the player chooses their direction.
+
 ### Plan 003 - Square actions (FR-04 to FR-09)
 
 ### Plan 004 - Climate cards (FR-10, NFR-10)
