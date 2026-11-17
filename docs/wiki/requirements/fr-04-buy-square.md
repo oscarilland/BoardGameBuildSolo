@@ -3,7 +3,7 @@ title: FR-04 Buy square
 type: requirement
 id: FR-04
 priority: must
-status: draft
+status: built
 sources: [../sources/sub1a-report.md]
 updated: 2026-11-17
 ---
@@ -32,6 +32,14 @@ See [turn and actions](../rules/turn-and-actions.md).
 ## Out of scope
 
 Selling or trading squares; auctions.
+
+## Decisions (Oscar, 17 November 2026)
+
+1. **Agreed.** A Polluting square bought this turn may also be converted this turn ([FR-07](fr-07-convert-square.md) AC-7).
+
+## Build status
+
+**Built** in [plan 003](../../plans/003-square-actions.md): AC-1 to AC-5, tested in `BuyTest`.
 
 ## Related
 

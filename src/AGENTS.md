@@ -2,9 +2,11 @@
 
 Read this before changing anything in `src/`. The root `AGENTS.md` gates still apply: no change here without an approved plan in `docs/plans/`.
 
-> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) and [002](../docs/plans/002-players-characters-and-movement.md) are built: data loading and validation, seeded `Dice`, and in `model` the characters, players, board and a `Game` that starts games and runs turns of rolling and moving (with junction choices) as a phase machine. No landing actions or end-of-round effects yet; the window is still empty. Base package: `netzerobelfast`.
+> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) to [003](../docs/plans/003-square-actions.md) are built: data loading and validation, seeded `Dice`, and in `model` the characters (with ability hooks), players, the square classes, the board, and a `Game` that starts games, runs turns of rolling and moving (with junction choices) as a phase machine, and offers and applies the actions after moving. No Climate Cards or end-of-round effects yet; the window is still empty. Base package: `netzerobelfast`.
 >
-> **Testing tip:** `ScriptedRandom` and `Games` in `src/test/java/netzerobelfast/model/` script exact dice and place counters. Use them instead of hunting for seeds.
+> **Testing tip:** `ScriptedRandom` and `Games` in `src/test/java/netzerobelfast/model/` script exact dice, place counters, give squares owners, set money and put a player on a square ready to act (`Games.arrive`). Use them instead of hunting for seeds.
+>
+> **Adding an action:** give the square class a `landOn` result and handle the new `Action.Kind` in `Game.take`. Never let the UI or a bot apply an effect directly; everything goes through `availableActions()` and `take()`.
 
 ## Stack
 

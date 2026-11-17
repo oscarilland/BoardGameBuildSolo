@@ -3,7 +3,7 @@ title: FR-06 Lobbying
 type: requirement
 id: FR-06
 priority: should
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -27,14 +27,20 @@ updated: 2026-11-17
 - **AC-4** Lobbying by anyone except the Activist leaves the square's +2 meter rise in place.
 - **AC-5** The Activist's lobbying costs £0, and the meter update that round counts one fewer Polluting square.
 - **AC-6** Lobbying isn't offered on your own square or on a Green Project, or with less than £2M (except for the Activist).
+- **AC-7** Lobbying isn't offered on a square already lobbied this round, because it would change nothing.
 
 ## Out of scope
 
 Lobbying from a distance (only on landing).
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. Should a square already lobbied this round be lobbied again (no extra effect)? Suggest not offering it.
+1. A square already lobbied this round isn't offered for lobbying again (AC-7).
+2. **Agreed.**
+
+## Build status
+
+Built in [plan 003](../../plans/003-square-actions.md): the cost and the lobbied mark (AC-1), the mark clearing at the end of the round (AC-2), the Activist's free lobbying (AC-5), and AC-6 and AC-7, tested in `LobbyTest`. The lost income and meter effects (rest of AC-1, AC-3, AC-4) are plan 005.
 
 ## Related
 

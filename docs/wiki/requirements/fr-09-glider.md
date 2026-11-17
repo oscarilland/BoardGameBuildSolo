@@ -3,7 +3,7 @@ title: FR-09 Glider
 type: requirement
 id: FR-09
 priority: should
-status: draft
+status: built
 sources: [../sources/sub1a-report.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -28,6 +28,7 @@ The SUB1a use case diagram leaves the Glider out for readability.
 - **AC-3** The Student Commuter pays £0 and gains +1 GP for each ride.
 - **AC-4** Riding is optional.
 - **AC-5** After the ride, no further landing action is offered on the destination stop; the player may still convert (if they haven't) and end the turn ([Q-07](../rules/open-questions.md)).
+- **AC-6** After a ride to Glider City Hall (30), the player's next move starts by asking which way to go along the City Centre route ([Q-18](../rules/open-questions.md)).
 
 ## Out of scope
 
@@ -36,7 +37,12 @@ Passing over a Glider Stop doesn't allow a ride; only landing does.
 ## Decisions (Oscar, 17 November 2026)
 
 1. No further action after a ride ([Q-07](../rules/open-questions.md)).
-2. After a ride to Glider City Hall (30), the player chooses their direction at the start of their next move ([Q-18](../rules/open-questions.md)). Plan 003 should add an acceptance criterion for it.
+2. After a ride to Glider City Hall (30), the player chooses their direction at the start of their next move ([Q-18](../rules/open-questions.md)): AC-6.
+3. **Agreed.**
+
+## Build status
+
+**Built** in [plan 003](../../plans/003-square-actions.md): AC-1 to AC-6, tested in `GliderTest`.
 
 ## Related
 

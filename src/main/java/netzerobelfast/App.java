@@ -31,7 +31,7 @@ public final class App {
         try {
             config = GameConfig.load();
             // Every character in the data must have a class in the game; fail now, not at game start.
-            Character.fromAll(config.rules().characters());
+            Character.fromAll(config.rules());
         } catch (ConfigException | IllegalArgumentException e) {
             System.err.println("Net Zero Belfast can't start: " + e.getMessage());
             if (!checkOnly && !GraphicsEnvironment.isHeadless()) {

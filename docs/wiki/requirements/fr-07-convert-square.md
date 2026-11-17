@@ -3,7 +3,7 @@ title: FR-07 Convert square
 type: requirement
 id: FR-07
 priority: must
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -28,14 +28,22 @@ updated: 2026-11-17
 - **AC-4** At the next end of round, the converted square pays +£2M and +2 GP and lowers the meter by 1, instead of +£7M, −1 GP and +2.
 - **AC-5** A square converted by the Industrialist pays +£4M a round; one bought as a Green Project by the Industrialist pays +£2M.
 - **AC-6** A bankrupt player can't convert.
+- **AC-7** A Polluting square bought this turn can be converted in the same turn, as the after-landing conversion, if the player can afford it.
+- **AC-8** A converted square is a normal Green Project, not a nature project.
 
 ## Out of scope
 
 Converting Green Projects back to Polluting.
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. Does a converted square count as a nature project for the Farmer? The rules say converting creates a normal Green Project; the simulation agrees.
+1. **Buy and convert in one turn:** allowed, as the rules are written and as the balance simulation played (AC-7).
+2. **Converted squares aren't nature projects** (AC-8).
+3. **Agreed.**
+
+## Build status
+
+Built in [plan 003](../../plans/003-square-actions.md): AC-1, AC-2, AC-3, AC-7, AC-8, and the converted-by mark for AC-5, tested in `ConvertTest`. The converted square's income (AC-4, AC-5) and the bankruptcy rule (AC-6) are plan 005.
 
 ## Related
 

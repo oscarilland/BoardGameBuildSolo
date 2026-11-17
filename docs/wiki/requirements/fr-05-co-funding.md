@@ -3,7 +3,7 @@ title: FR-05 Co-funding
 type: requirement
 id: FR-05
 priority: must
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -31,6 +31,7 @@ See [turn and actions](../rules/turn-and-actions.md).
 - **AC-4** A player with a deal who co-funds a second square ends the first deal; only the new one pays.
 - **AC-5** In a round when the funded square is closed by a Storm or flooded, neither player gets the deal's GP ([Q-15](../rules/open-questions.md)).
 - **AC-6** If the owner is bankrupt, the deal still pays both players their GP.
+- **AC-7** Co-funding isn't offered on the square the player is already co-funding, because it would change nothing.
 
 ## Out of scope
 
@@ -39,6 +40,12 @@ Deals between more than two players; ending a deal without starting a new one.
 ## Decisions (Oscar, 17 November 2026)
 
 1. A deal on a flooded square pays nothing, the same as a closed one ([Q-15](../rules/open-questions.md)).
+2. Actions that would change nothing aren't offered (AC-7).
+3. **Agreed.**
+
+## Build status
+
+Built in [plan 003](../../plans/003-square-actions.md): AC-1, AC-2, AC-4 and AC-7, tested in `CoFundTest`. The deal's GP (AC-3, AC-5, AC-6) is paid at the end of the round, in plan 005.
 
 ## Related
 

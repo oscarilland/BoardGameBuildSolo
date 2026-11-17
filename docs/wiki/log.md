@@ -59,3 +59,15 @@ Oscar approved [plan 002](../plans/002-players-characters-and-movement.md) and i
 ## [2026-11-17] decide | Far-junction reading confirmed; Q-18 answered
 
 Oscar confirmed that ending a move exactly on the far junction after the cut-through means the next move starts with the route question (FR-03). He answered [Q-18](rules/open-questions.md): after a Glider ride to Glider City Hall (30), the player decides their direction at the start of their next move, which `Game`'s `AWAITING_DIRECTION` phase already supports. Recorded on the open questions, [board and squares](rules/board-and-squares.md), [FR-03](requirements/fr-03-dice-movement-and-junctions.md), [FR-09](requirements/fr-09-glider.md), plan 002's Outcome and build progress. No rules questions are open.
+
+## [2026-11-17] spec | FR-04 to FR-09 agreed
+
+Oscar answered: actions that would change nothing (re-lobbying a lobbied square, re-co-funding your own deal) aren't offered (new FR-05 AC-7, FR-06 AC-7); a Polluting square can be bought and converted in the same turn, as the rules and the simulation allow (FR-07 AC-7); converted squares aren't nature projects (FR-07 AC-8). FR-09 gained AC-6 for Q-18. FR-04 to FR-09 are now `agreed`.
+
+## [2026-11-17] plan | Plan 003 square actions drafted
+
+Drafted [plan 003](../plans/003-square-actions.md): the analysis model's square classes with `landOn()`, an `Action` list from `Game.availableActions()` that `take()` checks against, `CoFundingDeal`, `Player` money, GP and Resilience, and character hooks for the Tech Entrepreneur, Council Planner, Student Commuter and Community Activist (and the Industrialist's converted-by mark). End-of-round effects of these actions wait for plan 005; the plan lists which acceptance criteria are built here and which wait. Waiting for Oscar's approval.
+
+## [2026-11-17] build | Plan 003 square actions built
+
+Oscar approved [plan 003](../plans/003-square-actions.md) (his message said "plan 004" while starting plan 003's build; recorded as plan 003) and it is now `done`. Added the square classes with `landOn()`, `Action`, `CoFundingDeal`, `Game.availableActions()` and `take()`, `Player` money, GP, Resilience and `disasterCost`, and character ability hooks read from the data. 182 tests pass with no warnings; `model` coverage is 99.5%. Deliberate bugs in the affordability check, the one-conversion limit and the one-landing-action limit were each caught. FR-04 and FR-09 are `built`; FR-05 to FR-08 stay `agreed` until their end-of-round effects in plan 005. Updated the [domain model](architecture/domain-model.md), [game flow](architecture/game-flow.md), the rules pages' build status, the requirement pages and catalogue, [build progress](operations/build-progress.md), `src/AGENTS.md`, the [overview](overview.md), the index and the README.

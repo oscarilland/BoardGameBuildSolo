@@ -3,7 +3,7 @@ title: FR-08 Resilience
 type: requirement
 id: FR-08
 priority: should
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -35,6 +35,11 @@ Shared or district Resilience (the v3 rule).
 ## Decisions (Oscar, 17 November 2026)
 
 1. **Rounding:** half up to whole £M ([Q-08](../rules/open-questions.md)).
+2. **Agreed.**
+
+## Build status
+
+Built in [plan 003](../../plans/003-square-actions.md): AC-1 to AC-4, and the cut and rounding (AC-5, AC-7) in `Player.disasterCost`, tested in `ResilienceTest`. AC-6 (what Resilience doesn't cover) needs Event cards and disasters: plans 004-005.
 
 ## Related
 

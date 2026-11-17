@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/** The character factory picks the right subclass for each data id. */
+/** The character factory picks the right subclass for each data id. Ability hooks are in {@link CharacterHooksTest}. */
 class CharacterTest {
 
     @Test
     void eachIdMakesItsOwnSubclass() {
-        List<Character> characters = Character.fromAll(Games.CONFIG.rules().characters());
+        List<Character> characters = Character.fromAll(Games.CONFIG.rules());
         assertEquals(6, characters.size());
         assertInstanceOf(Industrialist.class, characters.get(0));
         assertInstanceOf(TechEntrepreneur.class, characters.get(1));
@@ -27,7 +27,7 @@ class CharacterTest {
 
     @Test
     void valuesComeFromTheData() {
-        Character farmer = Character.fromAll(Games.CONFIG.rules().characters()).get(3);
+        Character farmer = Character.fromAll(Games.CONFIG.rules()).get(3);
         assertEquals("FARMER", farmer.id());
         assertEquals("Farmer", farmer.name());
         assertEquals("Farmer", farmer.toString());
@@ -39,7 +39,25 @@ class CharacterTest {
     @Test
     void unknownIdIsRejected() {
         CharacterDef pirate = new CharacterDef("PIRATE", "Pirate", 10, 10, "Arr", Map.of(), Map.of());
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> Character.from(pirate));
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+                () -> Character.from(pirate, Games.CONFIG.rules()));
         assertEquals("config.json: character id 'PIRATE' has no matching character in the game", e.getMessage());
+    }
+
+    @Test
+    void missingAbilityParameterIsRejectedWhenTheCharacterIsMade() {
+        CharacterDef planner = new CharacterDef("COUNCIL_PLANNER", "Council Planner", 38, 12, "x", Map.of(), Map.of());
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+                () -> Character.from(planner, Games.CONFIG.rules()));
+        assertEquals("config.json: character COUNCIL_PLANNER is missing params.resilienceDiscount", e.getMessage());
+    }
+
+    @Test
+    void missingAbilityFlagIsRejected() {
+        CharacterDef activist = new CharacterDef("COMMUNITY_ACTIVIST", "Community Activist", 32, 18, "x",
+                Map.of("lobbyCost", 0), Map.of());
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+                () -> Character.from(activist, Games.CONFIG.rules()));
+        assertEquals("config.json: character COMMUNITY_ACTIVIST is missing params.lobbyCancelsMeter", e.getMessage());
     }
 }

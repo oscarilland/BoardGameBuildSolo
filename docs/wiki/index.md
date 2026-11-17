@@ -29,12 +29,12 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [FR-01 Start game](requirements/fr-01-start-game.md) - must, agreed
 - [FR-02 Starting values and first player](requirements/fr-02-starting-values-and-first-player.md) - must, built
 - [FR-03 Dice, movement and junctions](requirements/fr-03-dice-movement-and-junctions.md) - must, agreed
-- [FR-04 Buy square](requirements/fr-04-buy-square.md) - must, draft
-- [FR-05 Co-funding](requirements/fr-05-co-funding.md) - must, draft
-- [FR-06 Lobbying](requirements/fr-06-lobbying.md) - should, draft
-- [FR-07 Convert square](requirements/fr-07-convert-square.md) - must, draft
-- [FR-08 Resilience](requirements/fr-08-resilience.md) - should, draft
-- [FR-09 Glider](requirements/fr-09-glider.md) - should, draft
+- [FR-04 Buy square](requirements/fr-04-buy-square.md) - must, built
+- [FR-05 Co-funding](requirements/fr-05-co-funding.md) - must, agreed
+- [FR-06 Lobbying](requirements/fr-06-lobbying.md) - should, agreed
+- [FR-07 Convert square](requirements/fr-07-convert-square.md) - must, agreed
+- [FR-08 Resilience](requirements/fr-08-resilience.md) - should, agreed
+- [FR-09 Glider](requirements/fr-09-glider.md) - should, built
 - [FR-10 Climate cards](requirements/fr-10-climate-cards.md) - must, draft
 - [FR-11 End-of-round order](requirements/fr-11-end-of-round-order.md) - must, draft
 - [FR-12 Disasters](requirements/fr-12-disasters.md) - must, draft
@@ -83,6 +83,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 
 - [Plan 001 Walking skeleton](../plans/001-walking-skeleton.md) - done: Maven, data loading and validation, seeded dice, coverage rule, runnable jar, empty window
 - [Plan 002 Players, characters and movement](../plans/002-players-characters-and-movement.md) - done: FR-01 to FR-03 headless; turn phases, junctions, two-way City Centre route
+- [Plan 003 Square actions](../plans/003-square-actions.md) - done: FR-04 to FR-09; square classes, offered actions, character abilities
 
 See [build progress](operations/build-progress.md) for the proposed order of later plans.
 

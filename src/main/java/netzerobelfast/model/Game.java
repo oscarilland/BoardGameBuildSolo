@@ -25,8 +25,10 @@ import java.util.stream.Collectors;
  * a choice, it stops in a phase such as {@code AWAITING_ROUTE}, and the UI (or a bot, or a
  * test) answers by calling the matching method. See the game flow page.
  *
- * <p>Plan 002 covers starting a game (FR-01, FR-02) and moving (FR-03). Landing actions and the
- * end-of-round steps come in later plans; for now a round simply advances the year.
+ * <p>Built so far: starting a game (FR-01, FR-02), moving (FR-03, plan 002), and the actions after
+ * moving (FR-04 to FR-09, plan 003): {@link #availableActions()} lists what the player can do and
+ * {@link #take(Action)} does it. Climate Cards and the end-of-round steps come in later plans;
+ * for now the end of a round advances the year and clears lobbying.
  */
 public final class Game {
 
@@ -38,7 +40,7 @@ public final class Game {
         AWAITING_ROUTE,
         /** The player is on the City Centre route without a direction (after a Glider ride, Q-18): which way? */
         AWAITING_DIRECTION,
-        /** The move is finished; the player ends their turn. */
+        /** The move is finished: the player may take the actions in {@link #availableActions()}, then ends their turn. */
         MOVE_DONE
     }
 
@@ -48,6 +50,7 @@ public final class Game {
     /** The last finished move: the dice total and every square passed through, ending where the counter stopped. */
     public record Move(int diceTotal, List<Integer> path) {}
 
+    private final Rules rules;
     private final Board board;
     private final Dice dice;
     private final List<Player> players;
@@ -67,14 +70,19 @@ public final class Game {
     private boolean leftCityRouteThisStep;
     private Move lastMove;
 
-    private Game(Board board, Dice dice, List<Player> players, int firstPlayer, Rules.Game rules) {
+    // What the current player has done since moving (the rules allow one landing action and one conversion per turn).
+    private boolean landingActionUsed;
+    private boolean convertedThisTurn;
+
+    private Game(Rules rules, Board board, Dice dice, List<Player> players, int firstPlayer) {
+        this.rules = rules;
         this.board = board;
         this.dice = dice;
         this.players = List.copyOf(players);
         this.firstPlayer = firstPlayer;
         this.current = firstPlayer;
-        this.year = rules.startYear();
-        this.yearsPerRound = rules.yearsPerRound();
+        this.year = rules.game().startYear();
+        this.yearsPerRound = rules.game().yearsPerRound();
     }
 
     /**
@@ -88,7 +96,7 @@ public final class Game {
      */
     public static Game start(GameConfig config, Dice dice, List<PlayerSetup> setups) {
         Rules.Game rules = config.rules().game();
-        Map<String, Character> characters = Character.fromAll(config.rules().characters()).stream()
+        Map<String, Character> characters = Character.fromAll(config.rules()).stream()
                 .collect(Collectors.toMap(Character::id, Function.identity()));
 
         if (setups.size() < rules.minPlayers() || setups.size() > rules.maxPlayers()) {
@@ -123,7 +131,7 @@ public final class Game {
         }
 
         int first = dice.random().nextInt(players.size());
-        return new Game(new Board(config.board()), dice, players, first, rules);
+        return new Game(config.rules(), new Board(config.board()), dice, players, first);
     }
 
     // ---- State ---------------------------------------------------------------
@@ -158,6 +166,11 @@ public final class Game {
         return board;
     }
 
+    /** The balance values from {@code config.json}. */
+    public Rules rules() {
+        return rules;
+    }
+
     /** The last finished move, if any player has moved yet. */
     public Optional<Move> lastMove() {
         return Optional.ofNullable(lastMove);
@@ -178,6 +191,8 @@ public final class Game {
         path.clear();
         chosenRoute = null;
         leftCityRouteThisStep = false;
+        landingActionUsed = false;
+        convertedThisTurn = false;
         continueMove();
     }
 
@@ -206,11 +221,83 @@ public final class Game {
         require(Phase.MOVE_DONE, "end the turn");
         current = (current + 1) % players.size();
         if (current == firstPlayer) {
-            // FR-11 step 6. Steps 1-5 of the end of the round arrive in plan 005.
+            // FR-11 step 6. Steps 1-5 of the end of the round arrive in plan 005;
+            // until then the only effect that must end with the round is lobbying (FR-06 AC-2).
+            board.clearLobbying();
             round++;
             year += yearsPerRound;
         }
         phase = Phase.AWAITING_ROLL;
+    }
+
+    // ---- Actions after moving (plan 003) ------------------------------------
+
+    /**
+     * What the current player can do now (FR-04 to FR-09): the landing actions their square
+     * offers, if they haven't taken one this turn, and converting any Polluting square they own,
+     * if they haven't converted this turn. Only actions they can afford are listed. Empty unless
+     * the move is done.
+     */
+    public List<Action> availableActions() {
+        if (phase != Phase.MOVE_DONE) {
+            return List.of();
+        }
+        Player player = currentPlayer();
+        List<Action> actions = new ArrayList<>();
+        if (!landingActionUsed) {
+            actions.addAll(board.square(player.position()).landOn(player, this));
+        }
+        if (!convertedThisTurn) {
+            int cost = rules.actions().convertCost();
+            for (PollutingSquare square : board.pollutingOwnedBy(player)) {
+                actions.add(Action.on(Action.Kind.CONVERT, cost, square.id()));
+            }
+        }
+        actions.removeIf(action -> action.cost() > player.money());
+        return List.copyOf(actions);
+    }
+
+    /**
+     * Does one of the actions from {@link #availableActions()}.
+     *
+     * @throws IllegalActionException if the action isn't in that list right now; nothing changes
+     */
+    public void take(Action action) {
+        if (!availableActions().contains(action)) {
+            throw new IllegalActionException("That action isn't available now.");
+        }
+        Player player = currentPlayer();
+        player.pay(action.cost());
+        switch (action.kind()) {
+            case BUY -> ((OwnableSquare) board.square(action.square())).setOwner(player);
+            case CO_FUND -> player.startDeal(new CoFundingDeal(player, action.square()));
+            case LOBBY -> ((PollutingSquare) board.square(action.square())).lobby(player);
+            case BUY_RESILIENCE -> player.raiseResilience();
+            case RIDE_GLIDER -> {
+                player.addGP(player.character().gliderRideGP());
+                // No heading: arriving at City Hall by Glider, the next move asks which way (Q-18).
+                player.moveTo(action.destination(), null);
+            }
+            case CONVERT -> {
+                PollutingSquare polluting = (PollutingSquare) board.square(action.square());
+                board.replace(polluting.convert(player));
+                convertedThisTurn = true;
+            }
+        }
+        if (action.isLandingAction()) {
+            landingActionUsed = true;
+        }
+    }
+
+    /**
+     * Test set-up only: puts the current player on {@code square} as if they had just moved
+     * there, ready to act. Saves tests from scripting dice to reach a square.
+     */
+    void arriveForTest(int square) {
+        currentPlayer().moveTo(square, null);
+        landingActionUsed = false;
+        convertedThisTurn = false;
+        phase = Phase.MOVE_DONE;
     }
 
     // ---- Movement ------------------------------------------------------------

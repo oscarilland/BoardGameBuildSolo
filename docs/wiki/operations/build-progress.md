@@ -71,6 +71,14 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 
 ### Plan 003 - Square actions (FR-04 to FR-09)
 
+- [x] FR-04 to FR-09 agreed (no-op actions not offered; buy and convert in one turn allowed; converted squares aren't nature), 17 November 2026
+- [x] Plan drafted ([plan 003](../../plans/003-square-actions.md)), 17 November 2026
+- [x] Gate: plan 003 approved, 17 November 2026 (Oscar wrote "approve plan 004" while starting plan 003's build; read as plan 003)
+- [x] Square classes with `landOn`; `Action`; `availableActions()` and `take()`
+- [x] Buy, co-fund, lobby, convert, Resilience, Glider, with the character abilities
+- [x] Tests per action, the extended headless run, and the deliberate-bug check: 182 tests, `model` coverage 99.5%; all three bugs caught
+- [x] Plan 003 marked `done` (17 November 2026)
+
 ### Plan 004 - Climate cards (FR-10, NFR-10)
 
 ### Plan 005 - End of round, meter, disasters, bankruptcy (FR-11, FR-12, FR-13, FR-17)

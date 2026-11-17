@@ -3,14 +3,15 @@ package netzerobelfast.model;
 import netzerobelfast.config.BoardDef;
 import netzerobelfast.config.BoardDef.SquareDef;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * The board's shape: a clockwise loop, plus a two-way City Centre cut-through between two
- * junctions (Q-05). Everything comes from {@code board.json}, so there are no square numbers
- * in this class.
+ * The board: its squares, and its shape (a clockwise loop, plus a two-way City Centre cut-through
+ * between two junctions, Q-05). Everything comes from {@code board.json}, so there are no square
+ * numbers in this class.
  *
  * <p>The board moves a counter one square at a time with {@link #next}. {@link Game} calls it
  * once per step and pauses whenever a player has a choice to make, so a move can include any
@@ -37,6 +38,7 @@ public final class Board {
     public record Step(int position, Heading heading) {}
 
     private final BoardDef definition;
+    private final List<Square> squares = new ArrayList<>();
     private final List<Integer> loop;
     private final List<Integer> cityRoute;
     private final Map<Integer, Integer> loopIndex = new HashMap<>();
@@ -52,15 +54,68 @@ public final class Board {
         for (int i = 0; i < cityRoute.size(); i++) {
             cityIndex.put(cityRoute.get(i), i);
         }
+        for (SquareDef square : definition.squares()) {
+            squares.add(create(square));
+        }
     }
 
-    public SquareDef square(int id) {
-        return definition.square(id);
+    /** Makes the right kind of square for a data entry. */
+    private static Square create(SquareDef square) {
+        return switch (square.type()) {
+            case POLLUTING -> new PollutingSquare(square.id(), square.name(), square.district(), square.price());
+            case GREEN_PROJECT -> new GreenProjectSquare(
+                    square.id(), square.name(), square.district(), square.price(), square.nature(), null, null);
+            case RESILIENCE -> new ResilienceSquare(square.id(), square.name(), square.district());
+            case GLIDER_STOP -> new GliderStop(square.id(), square.name(), square.district());
+            case CLIMATE_CARD -> new ClimateCardSquare(square.id(), square.name(), square.district());
+        };
+    }
+
+    // ---- Squares -------------------------------------------------------------
+
+    public Square square(int id) {
+        return squares.get(id);
+    }
+
+    /** Every square, in id order. */
+    public List<Square> squares() {
+        return List.copyOf(squares);
     }
 
     public int size() {
-        return definition.squares().size();
+        return squares.size();
     }
+
+    public List<Integer> gliderStops() {
+        return definition.gliderStops();
+    }
+
+    /** The Polluting squares this player owns, in id order. */
+    public List<PollutingSquare> pollutingOwnedBy(Player player) {
+        List<PollutingSquare> owned = new ArrayList<>();
+        for (Square square : squares) {
+            if (square instanceof PollutingSquare polluting && polluting.owner() == player) {
+                owned.add(polluting);
+            }
+        }
+        return owned;
+    }
+
+    /** Puts a new square object in place of the one with the same id; used when a square is converted. */
+    void replace(Square square) {
+        squares.set(square.id(), square);
+    }
+
+    /** Lobbying lasts one round: clears every lobbied mark. */
+    void clearLobbying() {
+        for (Square square : squares) {
+            if (square instanceof PollutingSquare polluting) {
+                polluting.clearLobbying();
+            }
+        }
+    }
+
+    // ---- Shape and movement ---------------------------------------------------
 
     /** True for the two loop squares where the City Centre route starts and ends. */
     public boolean isJunction(int id) {
