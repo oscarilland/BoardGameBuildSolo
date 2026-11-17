@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * FR-07: converting a Polluting square to a Green Project. Squares used: 1 Waste Incinerator
- * (£5M), 4 Motorway Expansion (£6M), 8 Freight Terminal (£4M); 2 is a Climate Card square,
- * where there's no landing action, so only conversions are on offer.
+ * (£5M), 4 Motorway Expansion (£6M), 8 Freight Terminal (£4M). Landing on your own Polluting
+ * square offers no landing action, so only conversions are on offer there.
  */
 class ConvertTest {
 
@@ -28,7 +28,7 @@ class ConvertTest {
         Game game = Games.scripted();
         Player aoife = game.currentPlayer();
         own(game, 1, aoife);
-        arrive(game, 2);
+        arrive(game, 1);
 
         Action convert = only(game, Kind.CONVERT);
         assertEquals(Action.on(Kind.CONVERT, 5, 1), convert);
@@ -47,7 +47,7 @@ class ConvertTest {
     void fr07_ac8_aConvertedSquareIsNotANatureProject() {
         Game game = Games.scripted();
         own(game, 1, game.currentPlayer());
-        arrive(game, 2);
+        arrive(game, 1);
         game.take(only(game, Kind.CONVERT));
         assertFalse(((GreenProjectSquare) game.board().square(1)).nature());
     }
@@ -57,7 +57,7 @@ class ConvertTest {
         Game game = Games.scripted();
         own(game, 1, game.currentPlayer());
         own(game, 4, game.currentPlayer());
-        arrive(game, 2);
+        arrive(game, 1);
         assertEquals(2, actions(game, Kind.CONVERT).size(), "either square can be converted");
 
         game.take(Action.on(Kind.CONVERT, 5, 1));
@@ -80,7 +80,7 @@ class ConvertTest {
         Game game = Games.scripted();
         own(game, 1, game.currentPlayer());
         setMoney(game.currentPlayer(), 4);
-        arrive(game, 2);
+        arrive(game, 1);
         assertTrue(actions(game, Kind.CONVERT).isEmpty());
     }
 
@@ -101,7 +101,7 @@ class ConvertTest {
         Game game = Games.scripted();
         Player aoife = game.currentPlayer(); // Industrialist
         own(game, 1, aoife);
-        arrive(game, 2);
+        arrive(game, 1);
         game.take(only(game, Kind.CONVERT));
         assertSame(aoife, ((GreenProjectSquare) game.board().square(1)).convertedBy());
 
@@ -113,9 +113,9 @@ class ConvertTest {
 
     @Test
     void aConvertedSquareCanBeCoFundedByOthers() {
-        Game game = Games.scripted(2, 2);
+        Game game = Games.scripted();
         own(game, 1, game.currentPlayer());
-        arrive(game, 2);
+        arrive(game, 1);
         game.take(only(game, Kind.CONVERT));
         game.endTurn();
 

@@ -26,7 +26,7 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 
 ## Status
 
-**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plans 001 to 003 are built: the game loads and validates its data, and the rules for starting a game, moving around the board and acting on squares (with the character abilities) work headlessly. Next: plan 004 (Climate Cards).
+**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plans 001 to 004 are built: the game loads and validates its data, and the rules for starting a game, moving around the board, acting on squares (with the character abilities) and Climate Cards work headlessly. Next: plan 005 (end of round, disasters, bankruptcy).
 
 ## Setting up
 

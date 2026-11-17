@@ -2,7 +2,9 @@
 
 Read this before changing anything in `src/`. The root `AGENTS.md` gates still apply: no change here without an approved plan in `docs/plans/`.
 
-> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) to [003](../docs/plans/003-square-actions.md) are built: data loading and validation, seeded `Dice`, and in `model` the characters (with ability hooks), players, the square classes, the board, and a `Game` that starts games, runs turns of rolling and moving (with junction choices) as a phase machine, and offers and applies the actions after moving. No Climate Cards or end-of-round effects yet; the window is still empty. Base package: `netzerobelfast`.
+> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) to [004](../docs/plans/004-climate-cards.md) are built: data loading and validation, seeded `Dice`, and in `model` the characters (with ability hooks), players, the square classes, the board, the Climate Card deck, a partial `ClimateMeter`, and a `Game` that starts games and runs turns as a phase machine: rolling and moving (with junction choices), drawing and resolving cards, and offering and applying the actions after moving. No end-of-round effects yet, and bankruptcy is only the trigger; the window is still empty. Base package: `netzerobelfast`.
+>
+> **Squares that start something on arrival:** a Climate Card square draws a card in `Game.landed()`. In tests, `Games.arrive` triggers that too, so use `Games.nextCard` to choose the card, or arrive somewhere else.
 >
 > **Testing tip:** `ScriptedRandom` and `Games` in `src/test/java/netzerobelfast/model/` script exact dice, place counters, give squares owners, set money and put a player on a square ready to act (`Games.arrive`). Use them instead of hunting for seeds.
 >

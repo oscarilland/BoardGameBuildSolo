@@ -45,9 +45,9 @@ class ActionRulesTest {
 
     @Test
     void theLimitsResetOnTheNextTurn() {
-        // Aoife rolls 3 to Milewater Flood Defence (3) and buys a level; the others roll 2;
+        // Aoife rolls 3 to Milewater Flood Defence (3) and buys a level; the others roll 3;
         // Aoife then rolls 3 to Harbour Gas Plant (6), where she can buy.
-        Game game = Games.scripted(3, 2, 2, 2, 3);
+        Game game = Games.scripted(3, 3, 3, 3, 3);
         game.roll();
         assertEquals(3, game.currentPlayer().position());
         game.take(only(game, Kind.BUY_RESILIENCE));
@@ -60,13 +60,6 @@ class ActionRulesTest {
         game.roll();
         assertEquals(6, game.currentPlayer().position());
         assertEquals(1, actions(game, Kind.BUY).size());
-    }
-
-    @Test
-    void climateCardSquaresOfferNothingYet() {
-        Game game = Games.scripted();
-        arrive(game, 2);
-        assertTrue(game.availableActions().isEmpty());
     }
 
     @Test

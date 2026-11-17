@@ -10,7 +10,8 @@ import java.math.RoundingMode;
  * counter is, their Resilience level and their co-funding deal.
  *
  * <p>Only the model changes a player, through package-private methods, so the rules can't be
- * bypassed from the UI. Bankruptcy and loans arrive with plan 005.
+ * bypassed from the UI. There are two ways to pay: {@link #pay} for a choice (refused if
+ * unaffordable) and {@link #payCompulsory} for something the rules force (can bankrupt).
  */
 public final class Player {
 
@@ -22,6 +23,7 @@ public final class Player {
     private Heading heading;
     private int resilienceLevel;
     private CoFundingDeal coFundingDeal;
+    private boolean bankrupt;
 
     Player(String name, Character character, int startPosition) {
         this.name = name;
@@ -69,6 +71,14 @@ public final class Player {
     }
 
     /**
+     * True once a compulsory payment has taken more than the player had (FR-13 AC-1). What
+     * bankruptcy then does (sitting out, returning with a loan) arrives in plan 005.
+     */
+    public boolean bankrupt() {
+        return bankrupt;
+    }
+
+    /**
      * What this player actually pays for a disaster costing {@code amount}, after their
      * Resilience cut, rounded half up to whole £M (FR-08, Q-08). For example, level 1 (25%) on
      * £2M is £1.5M, which rounds to £2M. Exact decimals avoid floating-point surprises.
@@ -95,6 +105,24 @@ public final class Player {
             throw new IllegalActionException(name + " can't afford £" + amount + "M (has £" + money + "M).");
         }
         money -= amount;
+    }
+
+    /**
+     * A payment the player must make: an Event card cost (and, from plan 005, a disaster). If it's
+     * more than they have, their money drops to £0, the rest is written off, and they're bankrupt
+     * (FR-13 AC-1). Paying exactly what they have leaves £0 and isn't bankruptcy (AC-2).
+     *
+     * @return the amount actually paid, which is less than {@code amount} if some was written off
+     */
+    int payCompulsory(int amount) {
+        if (amount <= money) {
+            money -= amount;
+            return amount;
+        }
+        int paid = money;
+        money = 0;
+        bankrupt = true;
+        return paid;
     }
 
     void receive(int amount) {

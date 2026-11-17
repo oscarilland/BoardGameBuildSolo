@@ -52,6 +52,11 @@ final class Games {
         game.arriveForTest(square);
     }
 
+    /** Makes the card with this id (such as "Q01") the next one drawn. */
+    static void nextCard(Game game, String id) {
+        game.deck().putOnTop(id);
+    }
+
     /** Gives a square to a player (test set-up only). */
     static void own(Game game, int square, Player owner) {
         ((OwnableSquare) game.board().square(square)).setOwner(owner);

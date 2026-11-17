@@ -1,7 +1,7 @@
 ---
 title: Climate cards
 type: rules
-status: draft
+status: built
 sources: [../sources/handover.md, ../sources/data-files.md, ../sources/sub1a-report.md]
 updated: 2026-11-17
 ---
@@ -11,6 +11,8 @@ updated: 2026-11-17
 ## Summary
 
 Seven Climate Card squares draw from a deck of 30 cards: 12 quiz, 9 choice and 9 event. Every card ends by showing a real fact and its source. They carry most of the game's factual teaching.
+
+> **Build status:** built in [plan 004](../../plans/004-climate-cards.md). The screen showing cards and facts comes in plan 007.
 
 ## Rules
 

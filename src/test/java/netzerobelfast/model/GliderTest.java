@@ -77,8 +77,8 @@ class GliderTest {
 
     @Test
     void fr09_ac6_q18_afterRidingToCityHallTheNextMoveAsksWhichWay() {
-        // Aoife rides 12 → 30; Ben, Chloe and Dev roll 2; then Aoife rolls 3.
-        Game game = Games.scripted(2, 2, 2, 3);
+        // Aoife rides 12 → 30; Ben, Chloe and Dev roll 3; then Aoife rolls 3.
+        Game game = Games.scripted(3, 3, 3, 3);
         Player aoife = game.currentPlayer();
         arrive(game, 12);
         game.take(new Action(Kind.RIDE_GLIDER, 1, 12, 30));

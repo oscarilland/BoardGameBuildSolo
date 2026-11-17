@@ -71,3 +71,15 @@ Drafted [plan 003](../plans/003-square-actions.md): the analysis model's square 
 ## [2026-11-17] build | Plan 003 square actions built
 
 Oscar approved [plan 003](../plans/003-square-actions.md) (his message said "plan 004" while starting plan 003's build; recorded as plan 003) and it is now `done`. Added the square classes with `landOn()`, `Action`, `CoFundingDeal`, `Game.availableActions()` and `take()`, `Player` money, GP, Resilience and `disasterCost`, and character ability hooks read from the data. 182 tests pass with no warnings; `model` coverage is 99.5%. Deliberate bugs in the affordability check, the one-conversion limit and the one-landing-action limit were each caught. FR-04 and FR-09 are `built`; FR-05 to FR-08 stay `agreed` until their end-of-round effects in plan 005. Updated the [domain model](architecture/domain-model.md), [game flow](architecture/game-flow.md), the rules pages' build status, the requirement pages and catalogue, [build progress](operations/build-progress.md), `src/AGENTS.md`, the [overview](overview.md), the index and the README.
+
+## [2026-11-17] spec | FR-10 and NFR-10 agreed
+
+Oscar answered: sources are shown with their title and web address (not clickable), FR-10 AC-6 and NFR-10 AC-3; plan 004 starts bankruptcy (the compulsory payment and trigger) because Event cards need it; and facts are re-checked before any demo (new NFR-10 AC-4, and a gate in build progress). FR-10 and NFR-10 are now `agreed`.
+
+## [2026-11-17] plan | Plan 004 Climate cards drafted
+
+Drafted [plan 004](../plans/004-climate-cards.md): the card classes, a `CardDeck` shuffled by its own `Random` seeded from the game's (so a game still replays from one seed and the scripted dice tests are untouched), a partial `ClimateMeter`, quiz and choice phases with `CardResult` holding the fact and sources, and `Player.payCompulsory` for the bankruptcy trigger. Covers FR-10 AC-1 to AC-8, NFR-10 AC-3, and FR-13 AC-1 and AC-2 for Event cards. Waiting for Oscar's approval.
+
+## [2026-11-17] build | Plan 004 Climate cards built
+
+Oscar approved [plan 004](../plans/004-climate-cards.md) and it is now `done`. Added the sealed `ClimateCard` hierarchy, `CardDeck` (its own `Random` seeded from the game's), `CardResult`, a partial `ClimateMeter`, `Player.payCompulsory` and `bankrupt()`, and in `Game` the card drawn on arrival, the quiz and choice phases, `affordableOptions`, `pendingCard` and `lastCard`. 210 tests pass with no warnings; `model` coverage is 99.3%. Deliberate bugs (no reshuffle, unaffordable options allowed, no £0 floor) were each caught. Existing tests that rolled onto square 2 (now a card draw) were changed to roll 3 or stand elsewhere, with nothing they check changed. FR-10 is `built`; NFR-10, FR-08 and FR-13 have build status notes. A bankrupt player keeps playing normally until plan 005.

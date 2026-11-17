@@ -93,8 +93,8 @@ class LobbyTest {
 
     @Test
     void fr06_ac2_theMarkLastsUntilTheEndOfTheRound() {
-        // Aoife lobbies, then Ben, Chloe and Dev each roll 2 and end their turns.
-        Game game = Games.scripted(2, 2, 2);
+        // Aoife lobbies, then Ben, Chloe and Dev each roll 3 and end their turns.
+        Game game = Games.scripted(3, 3, 3);
         own(game, 1, Games.player(game, "Ben"));
         arrive(game, 1);
         game.take(only(game, Kind.LOBBY));

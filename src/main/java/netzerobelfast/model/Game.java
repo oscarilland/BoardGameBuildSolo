@@ -1,5 +1,7 @@
 package netzerobelfast.model;
 
+import netzerobelfast.config.CardDef;
+import netzerobelfast.config.CardDef.Effect;
 import netzerobelfast.config.GameConfig;
 import netzerobelfast.config.Rules;
 import netzerobelfast.model.Board.Heading;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -25,10 +28,11 @@ import java.util.stream.Collectors;
  * a choice, it stops in a phase such as {@code AWAITING_ROUTE}, and the UI (or a bot, or a
  * test) answers by calling the matching method. See the game flow page.
  *
- * <p>Built so far: starting a game (FR-01, FR-02), moving (FR-03, plan 002), and the actions after
+ * <p>Built so far: starting a game (FR-01, FR-02), moving (FR-03, plan 002), the actions after
  * moving (FR-04 to FR-09, plan 003): {@link #availableActions()} lists what the player can do and
- * {@link #take(Action)} does it. Climate Cards and the end-of-round steps come in later plans;
- * for now the end of a round advances the year and clears lobbying.
+ * {@link #take(Action)} does it; and Climate Cards (FR-10, plan 004), drawn on arrival. The
+ * end-of-round steps come in plan 005; for now the end of a round advances the year and clears
+ * lobbying.
  */
 public final class Game {
 
@@ -40,6 +44,10 @@ public final class Game {
         AWAITING_ROUTE,
         /** The player is on the City Centre route without a direction (after a Glider ride, Q-18): which way? */
         AWAITING_DIRECTION,
+        /** A quiz card was drawn: which answer? See {@link #pendingCard()}. */
+        AWAITING_QUIZ_ANSWER,
+        /** A choice card was drawn: option A or B? See {@link #affordableOptions()}. */
+        AWAITING_CHOICE,
         /** The move is finished: the player may take the actions in {@link #availableActions()}, then ends their turn. */
         MOVE_DONE
     }
@@ -53,6 +61,8 @@ public final class Game {
     private final Rules rules;
     private final Board board;
     private final Dice dice;
+    private final CardDeck deck;
+    private final ClimateMeter meter;
     private final List<Player> players;
     private final int firstPlayer;
     private final int yearsPerRound;
@@ -74,10 +84,17 @@ public final class Game {
     private boolean landingActionUsed;
     private boolean convertedThisTurn;
 
-    private Game(Rules rules, Board board, Dice dice, List<Player> players, int firstPlayer) {
+    // Climate Cards (plan 004).
+    private ClimateCard pendingCard;
+    private CardResult lastCard;
+
+    private Game(Rules rules, Board board, Dice dice, List<ClimateCard> cards, List<Player> players, int firstPlayer) {
         this.rules = rules;
         this.board = board;
         this.dice = dice;
+        // The deck gets its own Random, seeded from the game's, so one seed still replays the whole game.
+        this.deck = new CardDeck(cards, new Random(dice.random().nextLong()));
+        this.meter = new ClimateMeter(rules.meter().start());
         this.players = List.copyOf(players);
         this.firstPlayer = firstPlayer;
         this.current = firstPlayer;
@@ -131,7 +148,11 @@ public final class Game {
         }
 
         int first = dice.random().nextInt(players.size());
-        return new Game(config.rules(), new Board(config.board()), dice, players, first);
+        List<ClimateCard> cards = new ArrayList<>();
+        for (CardDef card : config.cards()) {
+            cards.add(ClimateCard.from(card, config));
+        }
+        return new Game(config.rules(), new Board(config.board()), dice, cards, players, first);
     }
 
     // ---- State ---------------------------------------------------------------
@@ -171,6 +192,25 @@ public final class Game {
         return rules;
     }
 
+    /** The shared Climate Meter. */
+    public ClimateMeter meter() {
+        return meter;
+    }
+
+    /** The card waiting for a quiz answer or a choice, if any. */
+    public Optional<ClimateCard> pendingCard() {
+        return Optional.ofNullable(pendingCard);
+    }
+
+    /** The last card resolved this turn, with what happened and its fact and sources, to show the player. */
+    public Optional<CardResult> lastCard() {
+        return Optional.ofNullable(lastCard);
+    }
+
+    CardDeck deck() {
+        return deck;
+    }
+
     /** The last finished move, if any player has moved yet. */
     public Optional<Move> lastMove() {
         return Optional.ofNullable(lastMove);
@@ -193,6 +233,7 @@ public final class Game {
         leftCityRouteThisStep = false;
         landingActionUsed = false;
         convertedThisTurn = false;
+        lastCard = null;
         continueMove();
     }
 
@@ -297,7 +338,9 @@ public final class Game {
         currentPlayer().moveTo(square, null);
         landingActionUsed = false;
         convertedThisTurn = false;
+        lastCard = null;
         phase = Phase.MOVE_DONE;
+        landed();
     }
 
     // ---- Movement ------------------------------------------------------------
@@ -337,6 +380,111 @@ public final class Game {
         }
         lastMove = new Move(diceTotal, List.copyOf(path));
         phase = Phase.MOVE_DONE;
+        landed();
+    }
+
+    /** What happens on arrival, before the player chooses actions: on a Climate Card square, a card is drawn. */
+    private void landed() {
+        if (board.square(currentPlayer().position()) instanceof ClimateCardSquare) {
+            drawCard();
+        }
+    }
+
+    // ---- Climate Cards (plan 004) ---------------------------------------------
+
+    /**
+     * Draws a card (FR-10 AC-1). The draw is compulsory, so it uses up the landing action.
+     * Quiz and choice cards wait for the player; an event card applies at once.
+     */
+    private void drawCard() {
+        ClimateCard card = deck.draw();
+        landingActionUsed = true;
+        switch (card) {
+            case QuizCard quiz -> {
+                pendingCard = quiz;
+                phase = Phase.AWAITING_QUIZ_ANSWER;
+            }
+            case ChoiceCard choice -> {
+                pendingCard = choice;
+                phase = Phase.AWAITING_CHOICE;
+            }
+            case EventCard event -> {
+                Effect effect = event.effect();
+                Player player = currentPlayer();
+                boolean wasBankrupt = player.bankrupt();
+                int moneyChange;
+                if (effect.money() >= 0) {
+                    player.receive(effect.money());
+                    moneyChange = effect.money();
+                } else {
+                    // Compulsory, and not reduced by Resilience (FR-08 AC-6).
+                    moneyChange = -player.payCompulsory(-effect.money());
+                }
+                player.addGP(effect.gp());
+                meter.adjust(effect.meter());
+                boolean madeBankrupt = !wasBankrupt && player.bankrupt();
+                lastCard = new CardResult(event, -1, false, -1, moneyChange, effect.gp(), effect.meter(), madeBankrupt);
+            }
+        }
+    }
+
+    /** Answers {@code AWAITING_QUIZ_ANSWER}: a correct answer earns the card's reward in GP (FR-10 AC-3). */
+    public void answerQuiz(int answer) {
+        require(Phase.AWAITING_QUIZ_ANSWER, "answer a quiz");
+        QuizCard quiz = (QuizCard) pendingCard;
+        if (answer < 0 || answer >= quiz.answers().size()) {
+            throw new IllegalActionException("Choose one of the " + quiz.answers().size() + " answers.");
+        }
+        boolean correct = quiz.checkAnswer(answer);
+        int gp = correct ? quiz.reward() : 0;
+        currentPlayer().addGP(gp);
+        lastCard = new CardResult(quiz, answer, correct, -1, 0, gp, 0, false);
+        pendingCard = null;
+        phase = Phase.MOVE_DONE;
+    }
+
+    /**
+     * The choice card's options the player can take: those that don't cost more than they have
+     * (Q-12). Empty unless a choice card is waiting. The data guarantees at least one.
+     */
+    public List<Integer> affordableOptions() {
+        if (phase != Phase.AWAITING_CHOICE) {
+            return List.of();
+        }
+        ChoiceCard choice = (ChoiceCard) pendingCard;
+        List<Integer> options = new ArrayList<>();
+        for (int i = 0; i < choice.options().size(); i++) {
+            if (-choice.option(i).effect().money() <= currentPlayer().money()) {
+                options.add(i);
+            }
+        }
+        return options;
+    }
+
+    /**
+     * Answers {@code AWAITING_CHOICE} with option 0 (A) or 1 (B). Its money, GP and meter changes
+     * apply at once (FR-10 AC-4).
+     *
+     * @throws IllegalActionException if the option isn't in {@link #affordableOptions()}; nothing changes
+     */
+    public void chooseOption(int option) {
+        require(Phase.AWAITING_CHOICE, "choose a card option");
+        if (!affordableOptions().contains(option)) {
+            throw new IllegalActionException("That option isn't available.");
+        }
+        ChoiceCard choice = (ChoiceCard) pendingCard;
+        Effect effect = choice.option(option).effect();
+        Player player = currentPlayer();
+        if (effect.money() >= 0) {
+            player.receive(effect.money());
+        } else {
+            player.pay(-effect.money());
+        }
+        player.addGP(effect.gp());
+        meter.adjust(effect.meter());
+        lastCard = new CardResult(choice, -1, false, option, effect.money(), effect.gp(), effect.meter(), false);
+        pendingCard = null;
+        phase = Phase.MOVE_DONE;
     }
 
     private void require(Phase expected, String action) {
@@ -350,6 +498,8 @@ public final class Game {
             case AWAITING_ROLL -> "a dice roll";
             case AWAITING_ROUTE -> "a route choice";
             case AWAITING_DIRECTION -> "a direction choice";
+            case AWAITING_QUIZ_ANSWER -> "a quiz answer";
+            case AWAITING_CHOICE -> "a card option";
             case MOVE_DONE -> "the turn to end";
         };
     }

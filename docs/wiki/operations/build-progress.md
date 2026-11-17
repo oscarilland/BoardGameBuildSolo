@@ -81,6 +81,15 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 
 ### Plan 004 - Climate cards (FR-10, NFR-10)
 
+- [x] FR-10 and NFR-10 agreed (sources shown with title and web address; plan 004 starts bankruptcy; facts re-checked before any demo), 17 November 2026
+- [x] Plan drafted ([plan 004](../../plans/004-climate-cards.md)), 17 November 2026
+- [x] Gate: plan 004 approved, 17 November 2026
+- [x] Card classes, `CardDeck` with seeded shuffle and reshuffle, `ClimateMeter` (start and adjust)
+- [x] Quiz, Choice and Event phases; `lastCard()` with fact and sources
+- [x] Compulsory payments and the bankruptcy trigger
+- [x] Tests, extended headless run, deliberate-bug check: 210 tests, `model` coverage 99.3%; all three bugs caught
+- [x] Plan 004 marked `done` (17 November 2026)
+
 ### Plan 005 - End of round, meter, disasters, bankruptcy (FR-11, FR-12, FR-13, FR-17)
 
 ### Plan 006 - Scoring, end of game and the 20-game headless run (FR-14, NFR-06)
@@ -94,6 +103,7 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 ## Phase 3 - Playtesting
 
 - [ ] Gate: decide whether the solo build gets its own playtests (NFR-01, NFR-02)
+- [ ] Gate: before any demo, re-check every card's fact and source, and update the working `climate_cards.json` where a figure has changed ([NFR-10](../requirements/nfr-10-fact-accuracy.md) AC-4)
 - [ ] Re-tune `config.json` from results ([Q-10](../rules/open-questions.md))
 
 ## Issues log

@@ -25,7 +25,7 @@ The acceptance criteria on each page were written on ingest from the rules and d
 | [FR-07](fr-07-convert-square.md) | Convert one Polluting square per turn for £5M | Must | JUnit | Agreed (actions built; end-of-round effects in plan 005) |
 | [FR-08](fr-08-resilience.md) | Resilience levels cut disaster payments | Should | JUnit | Agreed (actions built; end-of-round effects in plan 005) |
 | [FR-09](fr-09-glider.md) | Glider ride for £1M | Should | Manual | Built |
-| [FR-10](fr-10-climate-cards.md) | Climate Cards with fact and source | Must | JUnit, manual | Draft |
+| [FR-10](fr-10-climate-cards.md) | Climate Cards with fact and source | Must | JUnit, manual | Built |
 | [FR-11](fr-11-end-of-round-order.md) | End-of-round steps in a fixed order | Must | JUnit | Draft |
 | [FR-12](fr-12-disasters.md) | Disasters by danger band, cut by Resilience | Must | JUnit | Draft |
 | [FR-13](fr-13-bankruptcy.md) | Bankruptcy | Should | JUnit | Draft |
@@ -47,7 +47,7 @@ The acceptance criteria on each page were written on ingest from the rules and d
 | [NFR-07](nfr-07-data-driven-balance.md) | Balance values and cards in data files | Must | Inspection | Agreed |
 | [NFR-08](nfr-08-privacy-and-security.md) | No personal data, no network, validate all input | Must | Inspection, test | Draft |
 | [NFR-09](nfr-09-portability.md) | Windows and macOS with only a Java runtime | Should | Manual | Draft |
-| [NFR-10](nfr-10-fact-accuracy.md) | Every fact stored with a source | Should | Inspection | Draft |
+| [NFR-10](nfr-10-fact-accuracy.md) | Every fact stored with a source | Should | Inspection | Agreed |
 | [NFR-11](nfr-11-energy-efficiency.md) | Under 5% CPU while idle | Could | Profiling | Draft |
 
 ## Stretch ideas

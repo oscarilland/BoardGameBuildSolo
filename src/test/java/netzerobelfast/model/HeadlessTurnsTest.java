@@ -26,6 +26,7 @@ class HeadlessTurnsTest {
             Random choices = new Random(seed * 31L);
             int moves = 0;
             int actionsTaken = 0;
+            int cards = 0;
 
             while (game.round() <= 10) {
                 switch (game.phase()) {
@@ -33,6 +34,16 @@ class HeadlessTurnsTest {
                     case AWAITING_ROUTE -> game.chooseRoute(choices.nextBoolean() ? Route.LOOP : Route.CITY_CENTRE);
                     case AWAITING_DIRECTION -> game.chooseDirection(
                             choices.nextBoolean() ? Heading.TOWARDS_WEST : Heading.TOWARDS_EAST);
+                    case AWAITING_QUIZ_ANSWER -> {
+                        game.answerQuiz(choices.nextInt(4));
+                        cards++;
+                    }
+                    case AWAITING_CHOICE -> {
+                        List<Integer> options = game.affordableOptions();
+                        assertTrue(!options.isEmpty(), "a choice card always has an affordable option");
+                        game.chooseOption(options.get(choices.nextInt(options.size())));
+                        cards++;
+                    }
                     case MOVE_DONE -> {
                         Game.Move move = game.lastMove().orElseThrow();
                         assertEquals(move.diceTotal(), move.path().size(), "one square per pip");
@@ -54,6 +65,7 @@ class HeadlessTurnsTest {
             assertEquals(10 * playerCount, moves, "seed " + seed);
             assertEquals(2026 + 10 * 2, game.year(), "seed " + seed);
             assertTrue(actionsTaken > 0, "seed " + seed);
+            assertTrue(cards > 0, "seed " + seed + ": no quiz or choice card came up");
         }
     }
 

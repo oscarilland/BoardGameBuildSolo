@@ -35,7 +35,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [FR-07 Convert square](requirements/fr-07-convert-square.md) - must, agreed
 - [FR-08 Resilience](requirements/fr-08-resilience.md) - should, agreed
 - [FR-09 Glider](requirements/fr-09-glider.md) - should, built
-- [FR-10 Climate cards](requirements/fr-10-climate-cards.md) - must, draft
+- [FR-10 Climate cards](requirements/fr-10-climate-cards.md) - must, built
 - [FR-11 End-of-round order](requirements/fr-11-end-of-round-order.md) - must, draft
 - [FR-12 Disasters](requirements/fr-12-disasters.md) - must, draft
 - [FR-13 Bankruptcy](requirements/fr-13-bankruptcy.md) - should, draft
@@ -52,7 +52,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [NFR-07 Data-driven balance](requirements/nfr-07-data-driven-balance.md) - must, agreed
 - [NFR-08 Privacy and security](requirements/nfr-08-privacy-and-security.md) - must, draft
 - [NFR-09 Portability](requirements/nfr-09-portability.md) - should, draft
-- [NFR-10 Fact accuracy](requirements/nfr-10-fact-accuracy.md) - should, draft
+- [NFR-10 Fact accuracy](requirements/nfr-10-fact-accuracy.md) - should, agreed
 - [NFR-11 Energy efficiency](requirements/nfr-11-energy-efficiency.md) - could, draft
 
 ## Architecture
@@ -84,6 +84,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [Plan 001 Walking skeleton](../plans/001-walking-skeleton.md) - done: Maven, data loading and validation, seeded dice, coverage rule, runnable jar, empty window
 - [Plan 002 Players, characters and movement](../plans/002-players-characters-and-movement.md) - done: FR-01 to FR-03 headless; turn phases, junctions, two-way City Centre route
 - [Plan 003 Square actions](../plans/003-square-actions.md) - done: FR-04 to FR-09; square classes, offered actions, character abilities
+- [Plan 004 Climate cards](../plans/004-climate-cards.md) - done: FR-10, NFR-10; deck, quiz/choice/event, the meter starts, the bankruptcy trigger
 
 See [build progress](operations/build-progress.md) for the proposed order of later plans.
 

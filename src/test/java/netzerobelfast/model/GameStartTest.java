@@ -160,7 +160,7 @@ class GameStartTest {
     @Test
     void fr02_ac4_turnsFollowSeatOrderAndWrap() {
         // Seat 2 (Chloe) goes first: Chloe, Dev, Aoife, Ben, then round 2 starts with Chloe again.
-        Game game = Games.start(new ScriptedRandom().firstPlayer(2).rolls(2, 2, 2, 2, 2), Games.FOUR);
+        Game game = Games.start(new ScriptedRandom().firstPlayer(2).rolls(3, 3, 3, 3, 3), Games.FOUR);
         List<String> order = new ArrayList<>();
         for (int turn = 0; turn < 4; turn++) {
             order.add(game.currentPlayer().name());

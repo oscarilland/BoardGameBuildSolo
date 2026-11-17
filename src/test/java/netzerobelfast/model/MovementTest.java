@@ -85,8 +85,8 @@ class MovementTest {
 
     @Test
     void fr03_ac5_q05_landingOnAJunctionAsksAtTheStartOfTheNextMove() {
-        // Aoife lands exactly on 12 with her roll of 4; the others roll 2; then Aoife rolls 3.
-        Game game = Games.scripted(4, 2, 2, 2, 3);
+        // Aoife lands exactly on 12 with her roll of 4; the others roll 3; then Aoife rolls 3.
+        Game game = Games.scripted(4, 3, 3, 3, 3);
         Games.place(game, 8, null);
 
         game.roll();
@@ -117,7 +117,7 @@ class MovementTest {
     @Test
     void q05_endingOnTheFarJunctionAsksNextTurn() {
         // AC-7 only covers the same move. Stopping exactly on 27 is "landing on a junction".
-        Game game = Games.scripted(2, 2, 2, 2, 2);
+        Game game = Games.scripted(2, 3, 3, 3, 2);
         Games.place(game, 31, Heading.TOWARDS_WEST);
 
         game.roll();
@@ -185,6 +185,8 @@ class MovementTest {
                 case AWAITING_ROLL -> game.roll();
                 case AWAITING_ROUTE -> game.chooseRoute(Route.CITY_CENTRE);
                 case AWAITING_DIRECTION -> game.chooseDirection(Heading.TOWARDS_EAST);
+                case AWAITING_QUIZ_ANSWER -> game.answerQuiz(0);
+                case AWAITING_CHOICE -> game.chooseOption(game.affordableOptions().get(0));
                 case MOVE_DONE -> game.endTurn();
             }
         }

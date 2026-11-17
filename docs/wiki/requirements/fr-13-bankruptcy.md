@@ -38,6 +38,10 @@ Eliminating bankrupt players.
 1. Automatic return at the second turn after bankruptcy; at most one missed turn ([Q-14](../rules/open-questions.md)).
 2. Choice card options can't bankrupt; unaffordable ones are disabled ([Q-12](../rules/open-questions.md)).
 
+## Build status
+
+The trigger is built for Event cards in [plan 004](../../plans/004-climate-cards.md): AC-1 and AC-2 (`EventCardTest`), and AC-8 for Choice cards. Everything else, and agreeing this page, is plan 005.
+
 ## Related
 
 - [FR-14 Legacy Score and winner](fr-14-legacy-score-and-winner.md)

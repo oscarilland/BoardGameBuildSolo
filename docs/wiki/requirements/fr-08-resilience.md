@@ -39,7 +39,7 @@ Shared or district Resilience (the v3 rule).
 
 ## Build status
 
-Built in [plan 003](../../plans/003-square-actions.md): AC-1 to AC-4, and the cut and rounding (AC-5, AC-7) in `Player.disasterCost`, tested in `ResilienceTest`. AC-6 (what Resilience doesn't cover) needs Event cards and disasters: plans 004-005.
+Built in [plan 003](../../plans/003-square-actions.md): AC-1 to AC-4, and the cut and rounding (AC-5, AC-7) in `Player.disasterCost`, tested in `ResilienceTest`. AC-6: Event card costs aren't reduced (`EventCardTest`, plan 004); the rest of AC-6 needs disasters, plan 005.
 
 ## Related
 
