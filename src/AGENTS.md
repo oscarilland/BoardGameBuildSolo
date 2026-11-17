@@ -2,19 +2,19 @@
 
 Read this before changing anything in `src/`. The root `AGENTS.md` gates still apply: no change here without an approved plan in `docs/plans/`.
 
-> **Current state:** no code yet. The stack choices below marked *(ADR pending)* are waiting for Oscar's decision. Plan 001 sets up the project once they're made.
+> **Current state:** no code yet. The stack choices below marked *(ADR pending)* are still waiting for Oscar's decision. Plan 001 sets up the project once they're made.
 
 ## Stack
 
-- Java. The target version and build tool are decided in [ADR-003](../docs/decisions/003-build-tool-and-java-version.md) *(ADR pending)*.
-- Desktop UI toolkit: [ADR-002](../docs/decisions/002-ui-toolkit.md) *(ADR pending)*.
+- **Java 21**, built with **Maven through the Maven Wrapper** (`mvnw`), so no Maven install is needed ([ADR-003](../docs/decisions/003-build-tool-and-java-version.md)). Standard Maven layout: `src/main/java`, `src/main/resources`, `src/test/java`.
+- Desktop UI: **Swing**, part of the JDK, with no UI library ([ADR-002](../docs/decisions/002-ui-toolkit.md)). Update the UI only on the event dispatch thread.
 - Reading the JSON data files: [ADR-004](../docs/decisions/004-reading-the-json-data-files.md) *(ADR pending)*.
-- Tests: JUnit 5, with line coverage measured for the game logic (NFR-06: at least 80%).
+- Tests: JUnit 5. JaCoCo measures line coverage, and the build fails if the game logic drops below 80% (NFR-06).
 - Offline only. No network calls, no telemetry, no personal data beyond display names (NFR-08).
 
 ## Layout
 
-The final paths depend on ADR-003. The split between packages doesn't.
+Packages live under `src/main/java`, with tests in matching packages under `src/test/java`. Plan 001 sets the base package name.
 
 | Package | Purpose | Rule |
 |---|---|---|

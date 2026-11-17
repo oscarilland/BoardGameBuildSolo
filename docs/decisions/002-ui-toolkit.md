@@ -2,12 +2,14 @@
 title: ADR-002 Desktop UI toolkit
 type: decision
 id: ADR-002
-status: proposed
+status: accepted
 sources: [../wiki/sources/handover.md, ../wiki/sources/design-diagrams.md]
 updated: 2026-11-17
 ---
 
 # ADR-002 - Desktop UI toolkit
+
+**Status:** accepted 17 November 2026 (proposed the same day). **Swing.**
 
 ## Context
 
@@ -48,12 +50,17 @@ Not part of the JDK since Java 11; added as a library.
 
 ## Decision
 
-*Oscar writes this section in his own words: what he chose and why. Until he does, the status stays `proposed`.*
+"Swing." - Oscar, 17 November 2026.
+
+Oscar chose the recommended option and didn't add reasons of his own, so the reasons are the recommendation's: NFR-09, no dependency, no per-platform packaging. Oscar may reword this section at any time.
 
 ## Consequences
 
-- With Swing: a `ui` package of `JFrame` and `JPanel` screens. Board squares are painted with a type label and an icon or pattern as well as colour (NFR-05). The meter graph is a custom `JPanel`.
-- With JavaFX: ADR-003 must cover per-platform packaging, and NFR-09's wording should be revisited.
+- A `ui` package of `JFrame` and `JPanel` screens. Board squares are painted with a type label and an icon or pattern as well as colour (NFR-05). The meter graph is a custom `JPanel`.
+- No UI dependency, so ADR-003's packaging is a single runnable jar.
+- Colours and fonts are defined once as named constants, so contrast can be checked by a test (NFR-05).
+- UI updates must happen on Swing's event dispatch thread. The model stays free of Swing classes.
+- High-DPI scaling needs checking on the target screens.
 
 ## How we'll know it worked
 

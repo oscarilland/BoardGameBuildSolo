@@ -27,7 +27,7 @@ The harness for working here is described in [ADR-001](../decisions/001-repo-str
 ## Constraints carried over from the team design
 
 - Java desktop app, hot-seat on one computer, offline.
-- Runs on Windows and macOS with only a Java runtime ([NFR-09](requirements/nfr-09-portability.md)), originally aimed at EEECS lab PCs.
+- Runs on Windows and macOS with only a Java runtime ([NFR-09](requirements/nfr-09-portability.md)). The team aimed at EEECS lab PCs; **this solo version targets Oscar's own laptop**, with Java 21 ([ADR-003](../decisions/003-build-tool-and-java-version.md)).
 - Game logic tested with JUnit, at least 80% line coverage ([NFR-06](requirements/nfr-06-reliability-and-test-coverage.md)).
 - Balance values and cards in data files ([NFR-07](requirements/nfr-07-data-driven-balance.md)).
 - Keep the analysis model's class and method names recognisable ([domain model](architecture/domain-model.md)).

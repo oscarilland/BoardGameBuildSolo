@@ -10,7 +10,7 @@ updated: 2026-11-17
 
 ## Summary
 
-A single Java desktop application with four parts: a **headless game model** holding every rule, a **config loader** for the three data files, a thin **UI** on top, and a **simulation driver** that plays the model with bots for testing and re-tuning. The design follows the handover's guidance: model separate from UI, all randomness through one injectable source, data loaded at start-up.
+A single Java 21 desktop application, built with Maven, with four parts: a **headless game model** holding every rule, a **config loader** for the three data files, a thin **UI** on top, and a **simulation driver** that plays the model with bots for testing and re-tuning. The design follows the handover's guidance: model separate from UI, all randomness through one injectable source, data loaded at start-up.
 
 ## Components
 
@@ -37,7 +37,7 @@ A single Java desktop application with four parts: a **headless game model** hol
 |---|---|---|
 | `model` | Every rule: turns, actions, end of round, meter, disasters, bankruptcy, cards, scoring | [Domain model](domain-model.md), [game flow](game-flow.md) |
 | `config` | Read and validate the data files; build the board, characters and deck | [Data files](data-files.md) |
-| `ui` | Screens and pop-ups ([ADR-002](../../decisions/002-ui-toolkit.md)) | [Screens and layout](../ux/screens-and-layout.md) |
+| `ui` | Screens and pop-ups in Swing ([ADR-002](../../decisions/002-ui-toolkit.md)) | [Screens and layout](../ux/screens-and-layout.md) |
 | `sim` | Bots and a headless runner for NFR-06's 20 games and balance checks | [Balance and design history](../rules/balance-and-history.md) |
 
 ## Key design choices
@@ -52,8 +52,10 @@ A single Java desktop application with four parts: a **headless game model** hol
 
 | Library | Version | Licence | Why | Decision |
 |---|---|---|---|---|
+| Swing | Part of the JDK | JDK licence | The UI; no extra dependency | [ADR-002](../../decisions/002-ui-toolkit.md) (accepted) |
 | JUnit 5 | TBD | EPL 2.0 | Tests (test scope only) | Module requirement |
-| JaCoCo | TBD | EPL 2.0 | Coverage (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (proposed) |
+| Maven (through the wrapper) | TBD in plan 001 | Apache 2.0 | Build, test, package (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
+| JaCoCo | TBD | EPL 2.0 | Coverage (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
 | JSON library | TBD | TBD | Reading data files | [ADR-004](../../decisions/004-reading-the-json-data-files.md) (proposed) |
 
 ## Failure modes

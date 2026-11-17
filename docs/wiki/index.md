@@ -75,8 +75,8 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 ## Decisions
 
 - [ADR-001 Repo structure and build harness](../decisions/001-repo-structure-and-harness.md) - proposed
-- [ADR-002 Desktop UI toolkit](../decisions/002-ui-toolkit.md) - proposed (recommends Swing)
-- [ADR-003 Build tool and Java version](../decisions/003-build-tool-and-java-version.md) - proposed (recommends Maven wrapper, Java 17)
+- [ADR-002 Desktop UI toolkit](../decisions/002-ui-toolkit.md) - accepted: Swing
+- [ADR-003 Build tool and Java version](../decisions/003-build-tool-and-java-version.md) - accepted: Maven Wrapper, Java 21
 - [ADR-004 Reading the JSON data files](../decisions/004-reading-the-json-data-files.md) - proposed (recommends Gson)
 
 ## Plans

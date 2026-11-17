@@ -15,3 +15,11 @@ Recorded on ingest: the board drawing numbers squares from 1 but `board.json` fr
 ## [2026-11-17] decide | ADR-002 to ADR-004 proposed
 
 Drafted ADRs for the UI toolkit (recommends Swing, for NFR-09), the build tool and Java version (recommends the Maven Wrapper, targeting Java 17 until the lab PCs' version is known), and reading the JSON data files (recommends Gson with validation on load). Decisions are left for Oscar.
+
+## [2026-11-17] decide | ADR-002 accepted: Swing
+
+Oscar chose Swing for the UI, the recommended option. Recorded his decision in [ADR-002](../decisions/002-ui-toolkit.md) as he gave it, with the recommendation's reasons (NFR-09, no dependency, no per-platform packaging). Updated the consequences, `src/AGENTS.md`, the [system overview](architecture/system-overview.md), [screens and layout](ux/screens-and-layout.md), the [overview](overview.md), the index, [build progress](operations/build-progress.md) and the README.
+
+## [2026-11-17] decide | ADR-003 accepted: Maven Wrapper, Java 21
+
+Oscar chose Maven with the Maven Wrapper, targeting Java 21. The draft recommended Java 17 because the team's requirements target EEECS lab PCs; Oscar noted this solo version runs on his own laptop (JDK 21), so the recommendation was revised to 21 before he decided. Recorded in [ADR-003](../decisions/003-build-tool-and-java-version.md) with its consequences. Updated the root and `src/` `AGENTS.md` (stack and validation commands), the [system overview](architecture/system-overview.md), [local development](operations/local-development.md), [NFR-04](requirements/nfr-04-responsiveness.md) (reference PC: Oscar's laptop), [NFR-09](requirements/nfr-09-portability.md) (Java 21 or later), [project context](project-context.md), the [overview](overview.md), the index, [build progress](operations/build-progress.md) and the README.

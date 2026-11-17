@@ -16,13 +16,13 @@ updated: 2026-11-17
 
 ## Acceptance criteria
 
-- **AC-1** From launching the jar to the title screen takes 5 seconds or less on the reference PC.
+- **AC-1** From launching the jar to the title screen takes 5 seconds or less on the reference PC (Oscar's laptop for this solo version).
 - **AC-2** Every action (roll, buy, card choice, end turn, end of round) updates the screen within 1 second.
 - **AC-3** A headless end-of-round on a seeded 6-player game takes under 50 ms (a proxy test that can run in CI).
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. For the solo build, which PC is the reference, since EEECS lab PCs may not be available?
+1. **Reference PC:** Oscar's own laptop. The solo version isn't run on EEECS lab PCs ([ADR-003](../../decisions/003-build-tool-and-java-version.md)).
 
 ## Related
 

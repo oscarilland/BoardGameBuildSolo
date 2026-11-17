@@ -33,6 +33,7 @@ Four screens and two kinds of pop-up, from the team's [wireframe and screen flow
 3. **Show effects before a choice**, and the fact after (wireframe callout 4).
 4. **Plain language** for ages 13-16 ([NFR-03](../requirements/nfr-03-readability.md)).
 5. **Event-driven, no polling** ([NFR-11](../requirements/nfr-11-energy-efficiency.md)).
+6. **Built in Swing** ([ADR-002](../../decisions/002-ui-toolkit.md)). The board and the meter graph are custom-painted panels, so they follow these rules by design rather than by a theme.
 
 ## Conflicts or uncertainties
 

@@ -24,8 +24,8 @@ Plans below are a **proposed order**, not approved plans. Each becomes a numbere
 
 Needed before plan 001 can be approved.
 
-- [ ] Gate: decide [ADR-002](../../decisions/002-ui-toolkit.md) UI toolkit
-- [ ] Gate: decide [ADR-003](../../decisions/003-build-tool-and-java-version.md) build tool and Java version
+- [x] Gate: decide [ADR-002](../../decisions/002-ui-toolkit.md) UI toolkit: Swing (17 November 2026)
+- [x] Gate: decide [ADR-003](../../decisions/003-build-tool-and-java-version.md) build tool and Java version: Maven Wrapper, Java 21, target machine Oscar's laptop (17 November 2026)
 - [ ] Gate: decide [ADR-004](../../decisions/004-reading-the-json-data-files.md) JSON parsing
 - [ ] Gate: review FR-01 to FR-17 and NFR-01 to NFR-11 (`/spec`, a few at a time)
 

@@ -32,7 +32,7 @@ Five learning outcomes, from NI's legal targets to why delay is costly. See [lea
 
 ## How it will be built
 
-A Java desktop app. The game logic is a headless model that tests and bots can drive, with a separate UI on top. All balance values and card content are read from data files. See the [system overview](architecture/system-overview.md). The UI toolkit, build tool and JSON library are still to be decided ([ADR-002](../decisions/002-ui-toolkit.md), [ADR-003](../decisions/003-build-tool-and-java-version.md), [ADR-004](../decisions/004-reading-the-json-data-files.md)).
+A Java 21 desktop app with a Swing UI, built with Maven ([ADR-002](../decisions/002-ui-toolkit.md), [ADR-003](../decisions/003-build-tool-and-java-version.md)). The game logic is a headless model that tests and bots can drive, with a separate UI on top. All balance values and card content are read from data files. See the [system overview](architecture/system-overview.md). The JSON library is still to be decided ([ADR-004](../decisions/004-reading-the-json-data-files.md)).
 
 ## Status
 

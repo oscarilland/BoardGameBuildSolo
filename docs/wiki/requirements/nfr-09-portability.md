@@ -16,7 +16,7 @@ updated: 2026-11-17
 
 ## Acceptance criteria
 
-- **AC-1** One packaged artefact (a runnable jar) starts with `java -jar` on Windows and on macOS, with nothing else installed beyond a Java runtime of the targeted version.
+- **AC-1** One packaged artefact (a runnable jar) starts with `java -jar` on Windows and on macOS, with nothing else installed beyond a Java 21 or later runtime ([ADR-003](../../decisions/003-build-tool-and-java-version.md)).
 - **AC-2** The data files are inside the artefact, so the game runs from any folder.
 - **AC-3** No OS-specific paths or line-ending assumptions.
 

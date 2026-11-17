@@ -57,7 +57,7 @@ Use the smallest checks that cover the change while working:
 | Change | Check |
 |---|---|
 | Docs | `java scripts/WikiLint.java` and `git diff --check` |
-| Java source | Decided by [ADR-003](docs/decisions/003-build-tool-and-java-version.md). Until then there is no source to check |
+| Java source | `mvnw verify` (`.\mvnw.cmd verify` in PowerShell): compile, JUnit and the 80% coverage rule ([ADR-003](docs/decisions/003-build-tool-and-java-version.md)). Available once plan 001 adds the wrapper |
 | UI | The source checks, then launch the game and play at least one full round by hand |
 
 Run the full set once before a release, not after every edit. Never report a check as passed if it failed or wasn't run.

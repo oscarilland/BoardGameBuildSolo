@@ -2,12 +2,14 @@
 title: ADR-003 Build tool and Java version
 type: decision
 id: ADR-003
-status: proposed
+status: accepted
 sources: [../wiki/sources/handover.md, ../wiki/sources/module-handbook.md]
 updated: 2026-11-17
 ---
 
 # ADR-003 - Build tool and Java version
+
+**Status:** accepted 17 November 2026 (proposed the same day). **Maven with the Maven Wrapper, targeting Java 21.**
 
 ## Context
 
@@ -43,20 +45,28 @@ Facts on Oscar's machine (17 November 2026): Temurin JDK 21.0.8 is installed. Ma
 
 ## Recommendation
 
-**Maven with the wrapper, targeting Java 17**, until the lab PCs' Java version is confirmed. Then move to 21 if they have it. Maven's coverage rule turns NFR-06 into a check that fails the build, which is the strongest evidence for it.
+**Maven with the wrapper.** Maven's coverage rule turns NFR-06 into a check that fails the build, which is the strongest evidence for it.
+
+**Java version, revised during the discussion:** the first draft recommended Java 17, because the team's requirements target EEECS lab PCs whose Java version is unknown. Oscar pointed out that this solo version runs on his own laptop, which has JDK 21. With the lab PC constraint gone, the recommendation became **Java 21**: it matches the laptop, it's the current long-term-support release, and any new Java install is 21 or later.
 
 ## Decision
 
-*Oscar writes this section in his own words: what he chose and why. Until he does, the status stays `proposed`.*
+"Maven + Java 21." - Oscar, 17 November 2026, after noting: "I'm not on a lab PC, I'm on my own personal laptop."
+
+So the target machine for this solo version is Oscar's laptop, not an EEECS lab PC. Oscar may reword this section at any time.
 
 ## Consequences
 
-- The root `AGENTS.md` validation table gets the real commands (for example `./mvnw verify`), and CI gains a build and test step.
-- `src/` takes Maven's layout: `src/main/java`, `src/main/resources` (the working data files) and `src/test/java`. Plan 001 settles whether the Maven project sits at the repo root or in `src/`.
+- Plan 001 adds `pom.xml` and the Maven Wrapper (`mvnw`, `mvnw.cmd`, `.mvn/`), with `maven.compiler.release` set to 21, JUnit 5 through Surefire, JaCoCo with an 80% line rule on the game logic, and a plugin that builds one runnable jar.
+- The root `AGENTS.md` validation table gets the real commands (`mvnw verify` and so on), and CI gains a build and test step on Java 21.
+- `src/` takes Maven's layout: `src/main/java`, `src/main/resources` (the working data files) and `src/test/java`. Plan 001 settles whether `pom.xml` sits at the repo root (the usual choice, recommended) or in `src/`.
+- The game needs Java 21 or later to run. NFR-09 ("only a Java runtime") still holds, with "Java 21 or later" as the runtime.
+- NFR-04's timing targets are measured on Oscar's laptop instead of a lab PC.
+- The wrapper downloads Maven the first time it runs, so that run needs a network connection.
 
 ## How we'll know it worked
 
-`./mvnw verify` on a clean clone compiles, runs every test, enforces 80% coverage on the model and produces a jar that starts with `java -jar`.
+`mvnw verify` on a clean clone compiles, runs every test, enforces 80% coverage on the model and produces a jar that starts with `java -jar`.
 
 ## Questions a marker might ask
 

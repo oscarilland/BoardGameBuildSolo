@@ -25,11 +25,11 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 
 ## Status
 
-**Designing.** The handover is ingested into the wiki. The next steps are deciding ADR-002 to ADR-004 (UI toolkit, build tool and Java version, JSON parsing) and answering the open rules questions. Then comes plan 001.
+**Designing.** The handover is ingested into the wiki. The game will be Java 21 with a Swing UI, built with Maven (ADR-002, ADR-003). The next steps are deciding ADR-004 (JSON parsing) and answering the open rules questions. Then comes plan 001.
 
 ## Setting up
 
-1. Install a JDK, version 17 or later (Java 21 is on Oscar's machine). See [local development](docs/wiki/operations/local-development.md).
+1. Install a JDK, version 21 or later. Maven isn't needed: the project will use the Maven Wrapper. See [local development](docs/wiki/operations/local-development.md).
 2. Open this folder itself (not a parent folder) in VS Code with Claude Code, or in Codex.
 3. Run the check below, then read [Working with Claude and Codex](docs/wiki/operations/working-with-agents.md).
 
