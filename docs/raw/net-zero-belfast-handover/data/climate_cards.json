@@ -1,0 +1,660 @@
+{
+  "_note": "30-card starter deck (12 quiz, 9 choice, 9 event). Effects: money in £M, gp, meter change applied immediately. Facts checked Nov 2026; NISRA/DfE figures update yearly.",
+  "cards": [
+    {
+      "id": "Q01",
+      "type": "QUIZ",
+      "text": "What year does Northern Ireland's Climate Change Act set as the deadline for net zero?",
+      "answers": [
+        "2030",
+        "2040",
+        "2050",
+        "2060"
+      ],
+      "correctIndex": 2,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "The Climate Change Act (Northern Ireland) 2022 sets a target of net zero emissions by 2050.",
+      "sources": [
+        {
+          "title": "DAERA",
+          "url": "https://www.daera-ni.gov.uk/articles/climate-change-act-northern-ireland-2022-key-elements"
+        }
+      ]
+    },
+    {
+      "id": "Q02",
+      "type": "QUIZ",
+      "text": "By 2030, Northern Ireland's emissions must be at least how much lower than the baseline?",
+      "answers": [
+        "10%",
+        "25%",
+        "48%",
+        "90%"
+      ],
+      "correctIndex": 2,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "The Act's 2030 interim target is a cut of at least 48%. That's the game's 2030 checkpoint.",
+      "sources": [
+        {
+          "title": "DAERA",
+          "url": "https://www.daera-ni.gov.uk/articles/climate-change-act-northern-ireland-2022-key-elements"
+        }
+      ]
+    },
+    {
+      "id": "Q03",
+      "type": "QUIZ",
+      "text": "Which sector produces the most greenhouse gases in Northern Ireland?",
+      "answers": [
+        "Transport",
+        "Agriculture",
+        "Electricity",
+        "Waste"
+      ],
+      "correctIndex": 1,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "Agriculture produced 31.4% of Northern Ireland's emissions in 2024, the largest share of any sector.",
+      "sources": [
+        {
+          "title": "NISRA, GHG inventory 2024",
+          "url": "https://datavis.nisra.gov.uk/daera/northern-ireland-greenhouse-gas-inventory-1990-2024-statistical-bulletin.html"
+        }
+      ]
+    },
+    {
+      "id": "Q04",
+      "type": "QUIZ",
+      "text": "In 2025, about how much of Northern Ireland's electricity came from renewable sources?",
+      "answers": [
+        "12%",
+        "27%",
+        "47%",
+        "91%"
+      ],
+      "correctIndex": 2,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "47% of electricity came from renewables in the year to December 2025. The target is at least 80% by 2030.",
+      "sources": [
+        {
+          "title": "Dept for the Economy",
+          "url": "https://www.economy-ni.gov.uk/news/electricity-consumption-and-renewable-generation-northern-ireland-year-ending-december-2025"
+        }
+      ]
+    },
+    {
+      "id": "Q05",
+      "type": "QUIZ",
+      "text": "Which source makes most of Northern Ireland's renewable electricity?",
+      "answers": [
+        "Solar",
+        "Wind",
+        "Hydro",
+        "Tidal"
+      ],
+      "correctIndex": 1,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "Wind provided 72% of Northern Ireland's renewable electricity in 2025.",
+      "sources": [
+        {
+          "title": "Dept for the Economy",
+          "url": "https://www.economy-ni.gov.uk/news/electricity-consumption-and-renewable-generation-northern-ireland-year-ending-december-2025"
+        }
+      ]
+    },
+    {
+      "id": "Q06",
+      "type": "QUIZ",
+      "text": "What is the most common main heating in Northern Ireland homes?",
+      "answers": [
+        "Mains gas",
+        "Heating oil",
+        "Electric heaters",
+        "Heat pumps"
+      ],
+      "correctIndex": 1,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "61% of households used oil central heating as their main heating in 2024/25, down from 70% in 2015/16.",
+      "sources": [
+        {
+          "title": "NISRA",
+          "url": "https://www.nisra.gov.uk/news/oil-central-heating-remains-primary-heating-source-over-60-households"
+        }
+      ]
+    },
+    {
+      "id": "Q07",
+      "type": "QUIZ",
+      "text": "Roughly how much of Northern Ireland's land is peatland?",
+      "answers": [
+        "2%",
+        "18%",
+        "45%",
+        "70%"
+      ],
+      "correctIndex": 1,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "Peatland covers about 18% of Northern Ireland, around 242,600 hectares.",
+      "sources": [
+        {
+          "title": "Ulster Wildlife",
+          "url": "https://www.ulsterwildlife.org/node/2178"
+        }
+      ]
+    },
+    {
+      "id": "Q08",
+      "type": "QUIZ",
+      "text": "Why are damaged peat bogs bad for the climate?",
+      "answers": [
+        "They release carbon they have stored",
+        "They block wind turbines",
+        "They make rivers warmer",
+        "They use lots of electricity"
+      ],
+      "correctIndex": 0,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "About 80% of Northern Ireland's peatlands are damaged and releasing carbon. Healthy peat stores about 45 years' worth of NI's current emissions.",
+      "sources": [
+        {
+          "title": "Ulster Wildlife",
+          "url": "https://www.ulsterwildlife.org/node/2178"
+        }
+      ]
+    },
+    {
+      "id": "Q09",
+      "type": "QUIZ",
+      "text": "Lough Neagh supplies about how much of Northern Ireland's drinking water?",
+      "answers": [
+        "5%",
+        "20%",
+        "40%",
+        "90%"
+      ],
+      "correctIndex": 2,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "About 40%. In 2023 a huge algae bloom spread across the lough after record warm water and excess nutrients from farming and wastewater.",
+      "sources": [
+        {
+          "title": "The Water Report",
+          "url": "https://www.thewaterreport.co.uk/single-post/water-firm-tries-to-assure-customers-as-toxic-algae-grows-in-lake-supplying-40-of-northern-ireland"
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "type": "QUIZ",
+      "text": "What is Northern Ireland's highest recorded temperature?",
+      "answers": [
+        "26.1°C",
+        "28.4°C",
+        "31.3°C",
+        "35.0°C"
+      ],
+      "correctIndex": 2,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "31.3°C at Castlederg, Co Tyrone, on 21 July 2021.",
+      "sources": [
+        {
+          "title": "Met Office",
+          "url": "https://metoffice.gov.uk/public/weather/climate-extremes"
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "type": "QUIZ",
+      "text": "As well as being a park and cycle path, what does East Belfast's Connswater Community Greenway do?",
+      "answers": [
+        "Protects about 1,700 properties from flooding",
+        "Generates electricity",
+        "Stores landfill waste",
+        "Carries freight trains"
+      ],
+      "correctIndex": 0,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "The 9 km greenway follows three rivers and was completed in 2017. Its flood defences protect about 1,700 properties.",
+      "sources": [
+        {
+          "title": "Institution of Civil Engineers",
+          "url": "https://ice.org.uk/what-is-civil-engineering/infrastructure-projects/connswater-community-greenway"
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "type": "QUIZ",
+      "text": "In 2013, Belfast Harbour opened the first purpose-built facility in the UK or Ireland for what?",
+      "answers": [
+        "Cruise ships",
+        "Offshore wind turbines",
+        "Oil tankers",
+        "Container ships"
+      ],
+      "correctIndex": 1,
+      "reward": {
+        "gp": 2
+      },
+      "fact": "The £50m D1 terminal is used to assemble offshore wind turbines.",
+      "sources": [
+        {
+          "title": "ScottishPower",
+          "url": "https://www.scottishpower.com/w/50m_offshore_wind_terminal_completed_dong_energy_scottishpower_renewables_welcomed_to_northern_ireland"
+        }
+      ]
+    },
+    {
+      "id": "C01",
+      "type": "CHOICE",
+      "text": "A gas supplier offers your businesses a cheap long-term contract.",
+      "options": [
+        {
+          "label": "Take the deal",
+          "money": 6,
+          "gp": 0,
+          "meter": 2
+        },
+        {
+          "label": "Retrofit your offices to use less energy",
+          "money": -2,
+          "gp": 1,
+          "meter": 0
+        }
+      ],
+      "fact": "Northern Ireland must get at least 80% of its electricity from renewables by 2030.",
+      "sources": [
+        {
+          "title": "Dept for the Economy",
+          "url": "https://www.economy-ni.gov.uk/news/electricity-consumption-and-renewable-generation-northern-ireland-year-ending-december-2025"
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "type": "CHOICE",
+      "text": "An airline will add new routes from Belfast if you invest.",
+      "options": [
+        {
+          "label": "Back the new routes",
+          "money": 7,
+          "gp": 0,
+          "meter": 2
+        },
+        {
+          "label": "Fund a public transport link to the airport instead",
+          "money": -3,
+          "gp": 1,
+          "meter": -1
+        }
+      ],
+      "fact": "Transport produced 21.3% of Northern Ireland's emissions in 2024.",
+      "sources": [
+        {
+          "title": "NISRA, GHG inventory 2024",
+          "url": "https://datavis.nisra.gov.uk/daera/northern-ireland-greenhouse-gas-inventory-1990-2024-statistical-bulletin.html"
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "type": "CHOICE",
+      "text": "The old boilers in your buildings need replacing.",
+      "options": [
+        {
+          "label": "Fit cheap new oil boilers",
+          "money": 5,
+          "gp": 0,
+          "meter": 2
+        },
+        {
+          "label": "Install heat pumps",
+          "money": -3,
+          "gp": 2,
+          "meter": 0
+        }
+      ],
+      "fact": "61% of Northern Ireland households still rely on oil as their main heating.",
+      "sources": [
+        {
+          "title": "NISRA",
+          "url": "https://www.nisra.gov.uk/news/oil-central-heating-remains-primary-heating-source-over-60-households"
+        }
+      ]
+    },
+    {
+      "id": "C04",
+      "type": "CHOICE",
+      "text": "A developer wants to drain a peat bog you look after to build warehouses.",
+      "options": [
+        {
+          "label": "Sell the land",
+          "money": 6,
+          "gp": 0,
+          "meter": 2
+        },
+        {
+          "label": "Fund the bog's restoration instead",
+          "money": -2,
+          "gp": 1,
+          "meter": 0
+        }
+      ],
+      "fact": "About 80% of Northern Ireland's peatlands are damaged and releasing carbon. Restoring them locks it back in.",
+      "sources": [
+        {
+          "title": "Ulster Wildlife",
+          "url": "https://www.ulsterwildlife.org/node/2178"
+        }
+      ]
+    },
+    {
+      "id": "C05",
+      "type": "CHOICE",
+      "text": "Farmers ask you to back a big intensive livestock expansion near Lough Neagh.",
+      "options": [
+        {
+          "label": "Invest in the expansion",
+          "money": 6,
+          "gp": 0,
+          "meter": 2
+        },
+        {
+          "label": "Fund buffer strips and better slurry storage instead",
+          "money": -2,
+          "gp": 1,
+          "meter": 0
+        }
+      ],
+      "fact": "Agriculture is Northern Ireland's biggest source of emissions (31.4% in 2024), and farm nutrients helped feed the 2023 Lough Neagh algae bloom.",
+      "sources": [
+        {
+          "title": "NISRA",
+          "url": "https://datavis.nisra.gov.uk/daera/northern-ireland-greenhouse-gas-inventory-1990-2024-statistical-bulletin.html"
+        },
+        {
+          "title": "The Water Report",
+          "url": "https://www.thewaterreport.co.uk/single-post/water-firm-tries-to-assure-customers-as-toxic-algae-grows-in-lake-supplying-40-of-northern-ireland"
+        }
+      ]
+    },
+    {
+      "id": "C06",
+      "type": "CHOICE",
+      "text": "The council asks what should go on a city-centre site you own.",
+      "options": [
+        {
+          "label": "A multi-storey car park",
+          "money": 5,
+          "gp": 0,
+          "meter": 1
+        },
+        {
+          "label": "Protected cycle lanes and a Glider stop",
+          "money": -2,
+          "gp": 1,
+          "meter": 0
+        }
+      ],
+      "fact": "Belfast's Glider buses started in September 2018, linking East and West Belfast through the city centre.",
+      "sources": [
+        {
+          "title": "Wikipedia: Glider (Belfast)",
+          "url": "https://en.wikipedia.org/wiki/Glider_(Belfast)"
+        }
+      ]
+    },
+    {
+      "id": "C07",
+      "type": "CHOICE",
+      "text": "A new data centre you're backing needs a power supply.",
+      "options": [
+        {
+          "label": "Sign the cheapest supply",
+          "money": 6,
+          "gp": 0,
+          "meter": 2
+        },
+        {
+          "label": "Pay extra for a renewable contract",
+          "money": -2,
+          "gp": 1,
+          "meter": 0
+        }
+      ],
+      "fact": "47% of Northern Ireland's electricity came from renewables in 2025.",
+      "sources": [
+        {
+          "title": "Dept for the Economy",
+          "url": "https://www.economy-ni.gov.uk/news/electricity-consumption-and-renewable-generation-northern-ireland-year-ending-december-2025"
+        }
+      ]
+    },
+    {
+      "id": "C08",
+      "type": "CHOICE",
+      "text": "The 2030 target is close, and the council asks everyone to cut emissions now.",
+      "options": [
+        {
+          "label": "Wait and cut later",
+          "money": 4,
+          "gp": 0,
+          "meter": 2
+        },
+        {
+          "label": "Act now",
+          "money": -3,
+          "gp": 0,
+          "meter": -2
+        }
+      ],
+      "fact": "Targets have deadlines along the way: Northern Ireland must cut emissions by at least 48% by 2030, not just reach net zero by 2050.",
+      "sources": [
+        {
+          "title": "DAERA",
+          "url": "https://www.daera-ni.gov.uk/articles/climate-change-act-northern-ireland-2022-key-elements"
+        }
+      ]
+    },
+    {
+      "id": "C09",
+      "type": "CHOICE",
+      "text": "A developer wants to build homes on a floodplain beside the River Lagan.",
+      "options": [
+        {
+          "label": "Invest in the homes",
+          "money": 6,
+          "gp": 0,
+          "meter": 1
+        },
+        {
+          "label": "Fund nature-based flood defences instead",
+          "money": -2,
+          "gp": 1,
+          "meter": 0
+        }
+      ],
+      "fact": "Nature-based defences work: the Connswater Community Greenway protects about 1,700 East Belfast properties from flooding.",
+      "sources": [
+        {
+          "title": "Institution of Civil Engineers",
+          "url": "https://ice.org.uk/what-is-civil-engineering/infrastructure-projects/connswater-community-greenway"
+        }
+      ]
+    },
+    {
+      "id": "E01",
+      "type": "EVENT",
+      "text": "A red wind warning! Storms bring down power lines across your properties.",
+      "effect": {
+        "money": -3,
+        "gp": 0,
+        "meter": 0
+      },
+      "fact": "Storm Éowyn brought a rare red wind warning to Northern Ireland in January 2025, and about 285,000 customers lost power.",
+      "sources": [
+        {
+          "title": "Wikipedia: Storm Éowyn",
+          "url": "https://en.wikipedia.org/wiki/Storm_%C3%89owyn"
+        }
+      ]
+    },
+    {
+      "id": "E02",
+      "type": "EVENT",
+      "text": "A record heatwave pushes up cooling costs for your buildings.",
+      "effect": {
+        "money": -2,
+        "gp": 0,
+        "meter": 0
+      },
+      "fact": "Northern Ireland's record temperature is 31.3°C, set at Castlederg on 21 July 2021.",
+      "sources": [
+        {
+          "title": "Met Office",
+          "url": "https://metoffice.gov.uk/public/weather/climate-extremes"
+        }
+      ]
+    },
+    {
+      "id": "E03",
+      "type": "EVENT",
+      "text": "You win a contract supplying the new offshore wind industry.",
+      "effect": {
+        "money": 3,
+        "gp": 0,
+        "meter": 0
+      },
+      "fact": "Northern Ireland plans to start generating offshore renewable energy in its waters from 2030.",
+      "sources": [
+        {
+          "title": "Dept for the Economy",
+          "url": "https://www.economy-ni.gov.uk/articles/offshore-renewable-energy"
+        }
+      ]
+    },
+    {
+      "id": "E04",
+      "type": "EVENT",
+      "text": "An algae bloom on Lough Neagh hits businesses you've invested in.",
+      "effect": {
+        "money": -2,
+        "gp": 0,
+        "meter": 0
+      },
+      "fact": "Lough Neagh supplies about 40% of Northern Ireland's drinking water. Its 2023 bloom followed record water temperatures of 21°C.",
+      "sources": [
+        {
+          "title": "The Water Report",
+          "url": "https://www.thewaterreport.co.uk/single-post/water-firm-tries-to-assure-customers-as-toxic-algae-grows-in-lake-supplying-40-of-northern-ireland"
+        }
+      ]
+    },
+    {
+      "id": "E05",
+      "type": "EVENT",
+      "text": "The council launches a green investment grant.",
+      "effect": {
+        "money": 3,
+        "gp": 0,
+        "meter": 0
+      },
+      "fact": "Belfast City Council declared a climate emergency in 2019.",
+      "sources": [
+        {
+          "title": "4NI",
+          "url": "https://www.4ni.co.uk/northern-ireland-news/265213/belfast-city-council-declares-climate-emergency"
+        }
+      ]
+    },
+    {
+      "id": "E06",
+      "type": "EVENT",
+      "text": "Roadworks for a new Glider route disrupt your businesses.",
+      "effect": {
+        "money": -2,
+        "gp": 0,
+        "meter": 0
+      },
+      "fact": "The Glider's two routes link East and West Belfast and the city centre with the Titanic Quarter.",
+      "sources": [
+        {
+          "title": "Wikipedia: Glider (Belfast)",
+          "url": "https://en.wikipedia.org/wiki/Glider_(Belfast)"
+        }
+      ]
+    },
+    {
+      "id": "E07",
+      "type": "EVENT",
+      "text": "A very windy month brings cheap electricity.",
+      "effect": {
+        "money": 3,
+        "gp": 0,
+        "meter": 0
+      },
+      "fact": "Wind makes 72% of Northern Ireland's renewable electricity.",
+      "sources": [
+        {
+          "title": "Dept for the Economy",
+          "url": "https://www.economy-ni.gov.uk/news/electricity-consumption-and-renewable-generation-northern-ireland-year-ending-december-2025"
+        }
+      ]
+    },
+    {
+      "id": "E08",
+      "type": "EVENT",
+      "text": "New emissions figures are published, and investors reward early movers.",
+      "effect": {
+        "money": 2,
+        "gp": 0,
+        "meter": 0
+      },
+      "fact": "Northern Ireland's net emissions fell 29.4% between the 1990 baseline and 2024, from 26.0 to 18.4 million tonnes of CO₂e.",
+      "sources": [
+        {
+          "title": "NISRA, GHG inventory 2024",
+          "url": "https://datavis.nisra.gov.uk/daera/northern-ireland-greenhouse-gas-inventory-1990-2024-statistical-bulletin.html"
+        }
+      ]
+    },
+    {
+      "id": "E09",
+      "type": "EVENT",
+      "text": "Your draughty buildings run up big winter heating bills.",
+      "effect": {
+        "money": -2,
+        "gp": 0,
+        "meter": 0
+      },
+      "fact": "Buildings (homes, public and commercial) produced 15.5% of Northern Ireland's emissions in 2024.",
+      "sources": [
+        {
+          "title": "NISRA, GHG inventory 2024",
+          "url": "https://datavis.nisra.gov.uk/daera/northern-ireland-greenhouse-gas-inventory-1990-2024-statistical-bulletin.html"
+        }
+      ]
+    }
+  ]
+}

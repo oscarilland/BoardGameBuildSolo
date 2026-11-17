@@ -1,0 +1,35 @@
+sequenceDiagram
+  actor U as Player (user)
+  participant G as :Game
+  participant D as :Dice
+  participant B as :Board
+  participant P as p : Player
+  participant S as s : Square
+  U->>G: takeTurn()
+  opt p is bankrupt
+    G->>D: rollOne()
+    D-->>G: n
+    Note over G,P: n = 6 or 2 rounds passed: p.receive(10) as a loan, else the turn ends
+  end
+  G->>D: rollTwo()
+  D-->>G: steps
+  opt junction on the way
+    G-->>U: ask for route
+    U->>G: route
+  end
+  G->>B: move(p.position, steps, route)
+  B-->>G: newPos
+  G->>B: getSquare(newPos)
+  B-->>G: s
+  G->>S: landOn(p, g)
+  S-->>G: actions
+  G-->>U: show square and actions
+  opt player chooses an action
+    Note over U,S: extending use case runs (e.g. Buy Square, Draw Climate Card)
+  end
+  U->>G: endTurn()
+  alt last player in the round
+    G->>G: endRound()
+  else
+    G->>G: currentPlayer = next player
+  end

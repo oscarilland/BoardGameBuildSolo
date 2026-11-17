@@ -1,0 +1,323 @@
+{
+  "_note": "Draft v4 board (see design/board_layout.png). 36 squares: 10 polluting, 12 green (4 nature), 4 resilience, 3 Glider stops, 7 Climate Cards. Names and individual prices are placeholders within the v4 price ranges.",
+  "districts": {
+    "NORTH": "North Belfast",
+    "HARBOUR": "Harbour & Titanic Quarter",
+    "EAST": "East Belfast",
+    "SOUTH": "South Belfast",
+    "WEST": "West Belfast",
+    "CITY_CENTRE": "City Centre"
+  },
+  "loop": {
+    "squareIds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "direction": "clockwise (id ascending, 29 wraps to 0)"
+  },
+  "cityCentreRoute": {
+    "squareIds": [
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "connects": {
+      "westJunction": 27,
+      "eastJunction": 12
+    },
+    "order": "30 is next to the West junction (27), 35 next to the East junction (12)",
+    "direction": "TBD: two-way in the drawing; one-way may be simpler to code"
+  },
+  "junctions": [
+    12,
+    27
+  ],
+  "gliderStops": [
+    12,
+    27,
+    30
+  ],
+  "squares": [
+    {
+      "id": 0,
+      "name": "Cave Hill Woodland",
+      "type": "GREEN_PROJECT",
+      "district": "NORTH",
+      "price": 10,
+      "isNature": true
+    },
+    {
+      "id": 1,
+      "name": "Waste Incinerator",
+      "type": "POLLUTING",
+      "district": "NORTH",
+      "price": 5
+    },
+    {
+      "id": 2,
+      "name": "Climate Card",
+      "type": "CLIMATE_CARD",
+      "district": "NORTH"
+    },
+    {
+      "id": 3,
+      "name": "Milewater Flood Defence",
+      "type": "RESILIENCE",
+      "district": "NORTH"
+    },
+    {
+      "id": 4,
+      "name": "Motorway Expansion",
+      "type": "POLLUTING",
+      "district": "NORTH",
+      "price": 6
+    },
+    {
+      "id": 5,
+      "name": "Heat Pump Retrofit",
+      "type": "GREEN_PROJECT",
+      "district": "NORTH",
+      "price": 9,
+      "isNature": false
+    },
+    {
+      "id": 6,
+      "name": "Harbour Gas Plant",
+      "type": "POLLUTING",
+      "district": "HARBOUR",
+      "price": 7
+    },
+    {
+      "id": 7,
+      "name": "Offshore Wind Port",
+      "type": "GREEN_PROJECT",
+      "district": "HARBOUR",
+      "price": 11,
+      "isNature": false
+    },
+    {
+      "id": 8,
+      "name": "Freight Terminal",
+      "type": "POLLUTING",
+      "district": "HARBOUR",
+      "price": 4
+    },
+    {
+      "id": 9,
+      "name": "Climate Card",
+      "type": "CLIMATE_CARD",
+      "district": "HARBOUR"
+    },
+    {
+      "id": 10,
+      "name": "Harbour Flood Wall",
+      "type": "RESILIENCE",
+      "district": "HARBOUR"
+    },
+    {
+      "id": 11,
+      "name": "City Airport Expansion",
+      "type": "POLLUTING",
+      "district": "HARBOUR",
+      "price": 6
+    },
+    {
+      "id": 12,
+      "name": "Glider East",
+      "type": "GLIDER_STOP",
+      "district": "EAST"
+    },
+    {
+      "id": 13,
+      "name": "Housing Retrofit",
+      "type": "GREEN_PROJECT",
+      "district": "EAST",
+      "price": 12,
+      "isNature": false
+    },
+    {
+      "id": 14,
+      "name": "Connswater Greenway",
+      "type": "GREEN_PROJECT",
+      "district": "EAST",
+      "price": 10,
+      "isNature": true
+    },
+    {
+      "id": 15,
+      "name": "Retail Park Expansion",
+      "type": "POLLUTING",
+      "district": "EAST",
+      "price": 5
+    },
+    {
+      "id": 16,
+      "name": "Climate Card",
+      "type": "CLIMATE_CARD",
+      "district": "EAST"
+    },
+    {
+      "id": 17,
+      "name": "Rooftop Solar",
+      "type": "GREEN_PROJECT",
+      "district": "EAST",
+      "price": 9,
+      "isNature": false
+    },
+    {
+      "id": 18,
+      "name": "Heat Network",
+      "type": "GREEN_PROJECT",
+      "district": "SOUTH",
+      "price": 11,
+      "isNature": false
+    },
+    {
+      "id": 19,
+      "name": "Green Roofs",
+      "type": "RESILIENCE",
+      "district": "SOUTH"
+    },
+    {
+      "id": 20,
+      "name": "Ring Road Widening",
+      "type": "POLLUTING",
+      "district": "SOUTH",
+      "price": 7
+    },
+    {
+      "id": 21,
+      "name": "Climate Card",
+      "type": "CLIMATE_CARD",
+      "district": "SOUTH"
+    },
+    {
+      "id": 22,
+      "name": "University Retrofit",
+      "type": "GREEN_PROJECT",
+      "district": "SOUTH",
+      "price": 8,
+      "isNature": false
+    },
+    {
+      "id": 23,
+      "name": "Lagan Valley Woodland",
+      "type": "GREEN_PROJECT",
+      "district": "SOUTH",
+      "price": 12,
+      "isNature": true
+    },
+    {
+      "id": 24,
+      "name": "Climate Card",
+      "type": "CLIMATE_CARD",
+      "district": "WEST"
+    },
+    {
+      "id": 25,
+      "name": "Black Mountain Peatland",
+      "type": "GREEN_PROJECT",
+      "district": "WEST",
+      "price": 10,
+      "isNature": true
+    },
+    {
+      "id": 26,
+      "name": "Industrial Estate",
+      "type": "POLLUTING",
+      "district": "WEST",
+      "price": 5
+    },
+    {
+      "id": 27,
+      "name": "Glider West",
+      "type": "GLIDER_STOP",
+      "district": "WEST"
+    },
+    {
+      "id": 28,
+      "name": "Housing Retrofit (West)",
+      "type": "GREEN_PROJECT",
+      "district": "WEST",
+      "price": 9,
+      "isNature": false
+    },
+    {
+      "id": 29,
+      "name": "Climate Card",
+      "type": "CLIMATE_CARD",
+      "district": "WEST"
+    },
+    {
+      "id": 30,
+      "name": "Glider City Hall",
+      "type": "GLIDER_STOP",
+      "district": "CITY_CENTRE"
+    },
+    {
+      "id": 31,
+      "name": "Car Park Expansion",
+      "type": "POLLUTING",
+      "district": "CITY_CENTRE",
+      "price": 4
+    },
+    {
+      "id": 32,
+      "name": "Climate Card",
+      "type": "CLIMATE_CARD",
+      "district": "CITY_CENTRE"
+    },
+    {
+      "id": 33,
+      "name": "Sustainable Drainage",
+      "type": "RESILIENCE",
+      "district": "CITY_CENTRE"
+    },
+    {
+      "id": 34,
+      "name": "Office Retrofit",
+      "type": "GREEN_PROJECT",
+      "district": "CITY_CENTRE",
+      "price": 11,
+      "isNature": false
+    },
+    {
+      "id": 35,
+      "name": "Data Centre",
+      "type": "POLLUTING",
+      "district": "CITY_CENTRE",
+      "price": 6
+    }
+  ]
+}

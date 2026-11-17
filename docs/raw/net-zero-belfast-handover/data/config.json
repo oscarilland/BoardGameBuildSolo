@@ -1,0 +1,209 @@
+{
+  "_note": "All balance values from Net Zero Belfast rules v4. Money in £M. Tuned by simulation; re-tune after playtesting.",
+  "game": {
+    "minPlayers": 4,
+    "maxPlayers": 6,
+    "rounds": 12,
+    "startYear": 2026,
+    "yearsPerRound": 2,
+    "endYear": 2050,
+    "turnsPerRound": 1,
+    "firstPlayer": "random",
+    "dice": "2d6"
+  },
+  "characters": [
+    {
+      "id": "INDUSTRIALIST",
+      "name": "Industrialist",
+      "startMoney": 40,
+      "startGP": 8,
+      "ability": "Just transition: a polluting square they convert earns an extra £2M per round as a Green Project",
+      "params": {
+        "convertedBonusIncome": 2
+      }
+    },
+    {
+      "id": "TECH_ENTREPRENEUR",
+      "name": "Tech Entrepreneur",
+      "startMoney": 36,
+      "startGP": 10,
+      "ability": "Green Projects cost £3M less to buy",
+      "params": {
+        "greenProjectDiscount": 3
+      }
+    },
+    {
+      "id": "COUNCIL_PLANNER",
+      "name": "Council Planner",
+      "startMoney": 38,
+      "startGP": 12,
+      "ability": "Each Resilience level costs £2M less",
+      "params": {
+        "resilienceDiscount": 2
+      }
+    },
+    {
+      "id": "FARMER",
+      "name": "Farmer",
+      "startMoney": 36,
+      "startGP": 13,
+      "ability": "Nature projects earn +1 GP per round",
+      "params": {
+        "natureBonusGP": 1
+      }
+    },
+    {
+      "id": "STUDENT_COMMUTER",
+      "name": "Student Commuter",
+      "startMoney": 34,
+      "startGP": 16,
+      "ability": "Glider travel is free, and each Glider ride earns +1 GP",
+      "params": {
+        "gliderFare": 0,
+        "gliderRideGP": 1
+      }
+    },
+    {
+      "id": "COMMUNITY_ACTIVIST",
+      "name": "Community Activist",
+      "startMoney": 32,
+      "startGP": 18,
+      "ability": "Lobbying is free, and a lobbied square adds nothing to the Climate Meter that round",
+      "params": {
+        "lobbyCost": 0,
+        "lobbyCancelsMeter": true
+      }
+    }
+  ],
+  "squares": {
+    "polluting": {
+      "priceRange": [
+        4,
+        7
+      ],
+      "incomePerRound": 7,
+      "carbonTaxGPPerRound": 1,
+      "meterPerRound": 2
+    },
+    "greenProject": {
+      "priceRange": [
+        8,
+        12
+      ],
+      "incomePerRound": 2,
+      "gpPerRound": 2,
+      "meterPerRound": -1
+    },
+    "convert": {
+      "cost": 5,
+      "maxPerTurn": 1
+    },
+    "coFunding": {
+      "cost": 3,
+      "gpPerRoundEach": 1,
+      "maxActiveDealsPerPlayer": 1,
+      "allowedOn": "greenProject"
+    },
+    "lobbying": {
+      "cost": 2,
+      "effect": "polluting square earns no money at the end of this round"
+    },
+    "glider": {
+      "fare": 1
+    },
+    "resilience": {
+      "levelCosts": [
+        3,
+        5,
+        7
+      ],
+      "disasterCostCut": [
+        0.25,
+        0.5,
+        0.75
+      ],
+      "maxLevel": 3,
+      "appliesTo": "money paid for disasters only (not lost income, closures, droughts or Event cards)"
+    },
+    "climateCard": {
+      "quizCorrectGP": 2,
+      "choiceMeterChangeTiming": "immediate"
+    }
+  },
+  "climateMeter": {
+    "start": 50,
+    "basePerRound": 3,
+    "netZeroAtOrBelow": 0,
+    "interimTargets": [
+      {
+        "year": 2030,
+        "round": 3,
+        "maxMeter": 26,
+        "note": "48% cut from 50 (Climate Change Act (NI) 2022)"
+      },
+      {
+        "year": 2040,
+        "round": 8,
+        "maxMeter": 11,
+        "note": "assumes a 77% cut; CHECK the current official 2040 target"
+      }
+    ],
+    "interimMissPenaltyGPPerPolluting": 2,
+    "dangerBands": [
+      {
+        "band": 1,
+        "maxMeter": 10
+      },
+      {
+        "band": 2,
+        "maxMeter": 25
+      },
+      {
+        "band": 3,
+        "maxMeter": 40
+      },
+      {
+        "band": 4,
+        "maxMeter": null
+      }
+    ],
+    "belowZeroUsesBand": 1
+  },
+  "disasters": {
+    "roll": "1d6; disaster if roll <= band",
+    "typeChoice": "uniform random of the four",
+    "FLOOD": {
+      "target": "random district that has owned squares",
+      "costPerOwnedSquarePerBand": 1,
+      "lostIncomeRounds": 1
+    },
+    "STORM": {
+      "target": "random owned square",
+      "repairCostPerBand": 2,
+      "closedRounds": 1,
+      "repairMandatory": true
+    },
+    "HEATWAVE": {
+      "costPerPlayerPerBand": 1
+    },
+    "DROUGHT": {
+      "effect": "nature projects earn no GP next round"
+    }
+  },
+  "bankruptcy": {
+    "trigger": "a compulsory payment (disaster or Climate Card) would take money below 0",
+    "onTrigger": "money set to 0, remainder written off",
+    "noMoneyIncomeWhileBankrupt": true,
+    "escapeRoll": 6,
+    "maxRounds": 2,
+    "loanOnReturn": 10,
+    "repayAtEnd": 15
+  },
+  "scoring": {
+    "netZero": "GP + (money - loanRepayments) / 5",
+    "missedNetZero": "GP - 5 * pollutingSquaresOwned (money ignored)",
+    "missedPollutingPenaltyGP": 5,
+    "moneyDivisor": 5,
+    "tieBreak": "most Green Projects owned; further ties TBD"
+  }
+}

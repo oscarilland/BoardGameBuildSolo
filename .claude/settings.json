@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(java scripts/WikiLint.java:*)",
+      "Bash(java -version:*)",
+      "Bash(javac -version:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(gh workflow run:*)"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Edit(docs/raw/**)",
+      "Write(docs/raw/**)"
+    ]
+  }
+}

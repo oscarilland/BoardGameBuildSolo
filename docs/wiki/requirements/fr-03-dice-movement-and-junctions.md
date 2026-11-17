@@ -1,0 +1,45 @@
+---
+title: FR-03 Dice, movement and junctions
+type: requirement
+id: FR-03
+priority: must
+status: draft
+sources: [../sources/sub1a-report.md, ../sources/data-files.md]
+updated: 2026-11-17
+---
+
+# FR-03 Dice, movement and junctions
+
+## Summary
+
+> On each turn the system shall roll two dice and move the player clockwise; at a junction it shall let the player stay on the loop or take the City Centre route. *(SUB1a; verified by JUnit)*
+
+## Behaviour
+
+- The player chooses to roll. Two six-sided dice give 2-12 steps.
+- Movement is clockwise along the loop (ids ascending, 29 wraps to 0).
+- At junction 12 or 27 the player chooses to stay on the loop or take the City Centre route (30-35). How this works when passing a junction is open ([Q-05](../rules/open-questions.md)).
+
+See [board and squares](../rules/board-and-squares.md) and [turn and actions](../rules/turn-and-actions.md).
+
+## Acceptance criteria
+
+- **AC-1** With a fixed seed, `Dice.rollTwo()` returns the same sequence every time, and every value is between 2 and 12.
+- **AC-2** A player on square 28 who rolls 4 ends on square 2 (wrapping past 29).
+- **AC-3** A player whose move reaches junction 12 is offered the route choice; choosing "stay on the loop" continues to 13, 14 and so on.
+- **AC-4** Taking the City Centre route from junction 12 moves through the cut-through squares in the agreed order and rejoins the loop at junction 27 ([Q-05](../rules/open-questions.md)).
+- **AC-5** A move that doesn't reach a junction asks no question.
+- **AC-6** A bankrupt player doesn't move ([FR-13](fr-13-bankruptcy.md)).
+
+## Out of scope
+
+Animating the counter's move (UI polish, not logic).
+
+## Open questions for Oscar
+
+1. [Q-05](../rules/open-questions.md): one-way or two-way cut-through, and is the choice offered when passing a junction or only when landing on it?
+
+## Related
+
+- [Domain model: Board](../architecture/domain-model.md)
+- [Game flow: Take Turn](../architecture/game-flow.md)

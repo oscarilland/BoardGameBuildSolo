@@ -1,0 +1,57 @@
+digraph G {
+graph [rankdir=TB splines=ortho nodesep=0.22 ranksep=0.42 fontname="Arial" pad=0.2 bgcolor="white"];
+node [shape=plaintext fontname="Arial" fontsize=10];
+edge [fontname="Arial" fontsize=9 color="#222222" arrowsize=0.9];
+"Game" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>Game</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">round: int<BR/>year: int<BR/>currentPlayer: Player</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">startGame(players)<BR/>takeTurn()<BR/>endTurn()<BR/>endRound()<BR/>endGame(): Player</TD></TR></TABLE>>];
+"GameConfig" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>GameConfig</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">values: Map<BR/>cardFile: String</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">load(file)<BR/>get(key): int</TD></TR></TABLE>>];
+"Dice" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>Dice</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">rollTwo(): int<BR/>rollOne(): int</TD></TR></TABLE>>];
+"Board" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>Board</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">squares: Square[36]</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">move(from, steps, route): int<BR/>getSquare(i): Square</TD></TR></TABLE>>];
+"District" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>District</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">name: String</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Player" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>Player</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">name: String<BR/>money: int<BR/>greenPoints: int<BR/>position: int<BR/>resilienceLevel: int<BR/>bankruptRounds: int<BR/>loans: int</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">pay(amount)<BR/>receive(amount)<BR/>addGP(n)<BR/>payCarbonTax()<BR/>countPolluting(): int<BR/>legacyScore(netZero): int</TD></TR></TABLE>>];
+"Character" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B><I>Character</I></B><BR/><FONT POINT-SIZE="9">{abstract}</FONT></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">name: String<BR/>startMoney: int<BR/>startGP: int</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">priceFor(square): int<BR/>incomeBonus(square): int</TD></TR></TABLE>>];
+"Square" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B><I>Square</I></B><BR/><FONT POINT-SIZE="9">{abstract}</FONT></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">index: int<BR/>name: String</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">landOn(p, g): Action[]</TD></TR></TABLE>>];
+"OwnableSquare" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B><I>OwnableSquare</I></B><BR/><FONT POINT-SIZE="9">{abstract}</FONT></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">price: int<BR/>closed: boolean<BR/>lobbied: boolean</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">buy(p)<BR/>payOwner()</TD></TR></TABLE>>];
+"PollutingSquare" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>PollutingSquare</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">income: int = 7<BR/>meterEffect: int = +2</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">convert(): GreenProjectSquare</TD></TR></TABLE>>];
+"GreenProjectSquare" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>GreenProjectSquare</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">gp: int = 2<BR/>income: int = 2<BR/>isNature: boolean</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"ResilienceSquare" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>ResilienceSquare</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">buyLevel(p)</TD></TR></TABLE>>];
+"GliderStop" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>GliderStop</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">ride(p, to)</TD></TR></TABLE>>];
+"ClimateCardSquare" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>ClimateCardSquare</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"CoFundingDeal" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>CoFundingDeal</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">pay()</TD></TR></TABLE>>];
+"ClimateMeter" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>ClimateMeter</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">value: int = 50<BR/>history: int[]</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">update(polluting, green)<BR/>adjust(delta)<BR/>dangerBand(): int<BR/>meetsTarget(year): boolean</TD></TR></TABLE>>];
+"DisasterManager" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>DisasterManager</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">check(band): Disaster<BR/>apply(d, players, band)</TD></TR></TABLE>>];
+"CardDeck" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>CardDeck</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">drawPile: ClimateCard[]</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">draw(): ClimateCard<BR/>reshuffle()</TD></TR></TABLE>>];
+"ClimateCard" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B><I>ClimateCard</I></B><BR/><FONT POINT-SIZE="9">{abstract}</FONT></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">id: String<BR/>text: String<BR/>fact: String<BR/>source: String</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">resolve(p, g)</TD></TR></TABLE>>];
+"QuizCard" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>QuizCard</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">answers: String[4]<BR/>correct: int</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">checkAnswer(i): boolean</TD></TR></TABLE>>];
+"ChoiceCard" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>ChoiceCard</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">optionA: Effect<BR/>optionB: Effect</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">applyOption(choice)</TD></TR></TABLE>>];
+"EventCard" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6"><B>EventCard</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">effect: Effect</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT"> </TD></TR></TABLE>>];
+"Disaster" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#fffbe6">«enumeration»<BR/><B>Disaster</B></TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">FLOOD<BR/>STORM<BR/>HEATWAVE<BR/>DROUGHT</TD></TR></TABLE>>];
+"Game" -> "Board" [dir=back arrowtail=diamond headlabel="1" taillabel="1" xlabel=""];
+"Game" -> "ClimateMeter" [dir=back arrowtail=diamond headlabel="1" taillabel="1" xlabel=""];
+"Game" -> "CardDeck" [dir=back arrowtail=diamond headlabel="1" taillabel="1" xlabel=""];
+"Game" -> "Dice" [dir=back arrowtail=diamond headlabel="1" taillabel="1" xlabel=""];
+"Game" -> "DisasterManager" [dir=back arrowtail=diamond headlabel="1" taillabel="1" xlabel=""];
+"Game" -> "Player" [dir=back arrowtail=odiamond headlabel="4..6" xlabel=" plays"];
+"Game" -> "GameConfig" [style=dashed arrowhead=vee xlabel=" reads"];
+"Board" -> "Square" [dir=back arrowtail=diamond headlabel="36" taillabel="1" xlabel=""];
+"Board" -> "District" [dir=back arrowtail=diamond headlabel="6" taillabel="1" xlabel=""];
+"Square" -> "District" [arrowhead=none taillabel="6..*" headlabel="1" xlabel=" in"];
+"Player" -> "Character" [arrowhead=none taillabel="1" headlabel="1" xlabel=" plays as"];
+"Player":s -> "OwnableSquare":n [arrowhead=none taillabel="owner 0..1" headlabel="0..*" xlabel=""];
+"Player":e -> "CoFundingDeal":n [arrowhead=none taillabel="funder 1" headlabel="0..1" xlabel=""];
+"CoFundingDeal" -> "GreenProjectSquare" [arrowhead=none taillabel="0..*" headlabel="1" xlabel=" funds"];
+"CardDeck" -> "ClimateCard" [dir=back arrowtail=diamond headlabel="30" taillabel="1" xlabel=""];
+"DisasterManager" -> "Disaster" [style=dashed arrowhead=vee xlabel=" uses"];
+"Square" -> "OwnableSquare" [dir=back arrowtail=empty];
+"Square" -> "ResilienceSquare" [dir=back arrowtail=empty];
+"Square" -> "GliderStop" [dir=back arrowtail=empty];
+"Square" -> "ClimateCardSquare" [dir=back arrowtail=empty];
+"OwnableSquare" -> "PollutingSquare" [dir=back arrowtail=empty];
+"OwnableSquare" -> "GreenProjectSquare" [dir=back arrowtail=empty];
+"ClimateCard" -> "QuizCard" [dir=back arrowtail=empty];
+"ClimateCard" -> "ChoiceCard" [dir=back arrowtail=empty];
+"ClimateCard" -> "EventCard" [dir=back arrowtail=empty];
+"CharNote" [shape=note style=filled fillcolor="#f7f7f7" fontsize=9 label="Six subclasses override priceFor()\nand incomeBonus(): Industrialist,\nTechEntrepreneur, CouncilPlanner,\nFarmer, StudentCommuter,\nCommunityActivist"];
+"Character" -> "CharNote" [style=dashed arrowhead=none];
+{rank=same; Game; GameConfig;}
+{rank=same; Player; Board; ClimateMeter; CardDeck; DisasterManager; Dice;}
+}

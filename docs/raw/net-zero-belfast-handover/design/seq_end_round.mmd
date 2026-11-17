@@ -1,0 +1,41 @@
+sequenceDiagram
+  participant G as :Game
+  participant O as o : OwnableSquare
+  participant F as d : CoFundingDeal
+  participant P as p : Player
+  participant M as :ClimateMeter
+  participant X as :DisasterManager
+  G->>G: endRound()
+  loop each owned square o
+    G->>O: payOwner()
+    Note right of O: skipped if closed, flooded or lobbied
+  end
+  loop each co-funding deal d
+    G->>F: pay()
+  end
+  loop each player p
+    G->>P: payCarbonTax()
+  end
+  G->>M: update(polluting, green)
+  opt year is 2030 or 2040
+    G->>M: meetsTarget(year)
+    M-->>G: met
+    opt target missed
+      loop each player p
+        G->>P: addGP(-2 x countPolluting())
+      end
+    end
+  end
+  G->>M: dangerBand()
+  M-->>G: band
+  G->>X: check(band)
+  X-->>G: d : Disaster or none
+  opt a disaster happens
+    G->>X: apply(d, players, band)
+    X->>P: pay(cost x band, less Resilience cut)
+  end
+  alt year reaches 2050
+    G->>G: endGame()
+  else
+    G->>G: year += 2, round += 1
+  end

@@ -1,0 +1,35 @@
+# ─── Secrets - never commit ───
+.env
+.env.*
+*.pem
+*.key
+
+# ─── Personal agent settings ───
+.claude/settings.local.json
+CLAUDE.local.md
+
+# ─── Java build output ───
+target/
+build/
+out/
+bin/
+*.class
+.gradle/
+# Coverage and test reports are generated, never committed
+jacoco.exec
+
+# ─── IDE files ───
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# ─── Office lock files ───
+~$*
+*.tmp
+
+# ─── OS files ───
+.DS_Store
+Thumbs.db

@@ -1,0 +1,32 @@
+sequenceDiagram
+  actor U as Player (user)
+  participant G as :Game
+  participant S as :ClimateCardSquare
+  participant K as :CardDeck
+  participant C as c : ClimateCard
+  participant P as p : Player
+  participant M as :ClimateMeter
+  G->>S: landOn(p, g)
+  S->>K: draw()
+  opt draw pile empty
+    K->>K: reshuffle()
+  end
+  K-->>S: c
+  S->>C: resolve(p, g)
+  C-->>U: show card text
+  alt c is a QuizCard
+    U->>C: answer i
+    C->>C: checkAnswer(i)
+    opt answer correct
+      C->>P: addGP(2)
+    end
+  else c is a ChoiceCard
+    U->>C: choose A or B
+    C->>C: applyOption(choice)
+    C->>P: receive(m) / pay(m) / addGP(n)
+    C->>M: adjust(delta)
+  else c is an EventCard
+    C->>P: receive(m) / pay(m)
+  end
+  Note over P: pay() makes p bankrupt if money would go below 0
+  C-->>U: show fact and source
