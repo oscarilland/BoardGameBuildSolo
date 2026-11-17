@@ -53,10 +53,10 @@ A single Java 21 desktop application, built with Maven, with four parts: a **hea
 | Library | Version | Licence | Why | Decision |
 |---|---|---|---|---|
 | Swing | Part of the JDK | JDK licence | The UI; no extra dependency | [ADR-002](../../decisions/002-ui-toolkit.md) (accepted) |
-| JUnit 5 | TBD | EPL 2.0 | Tests (test scope only) | Module requirement |
-| Maven (through the wrapper) | TBD in plan 001 | Apache 2.0 | Build, test, package (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
-| JaCoCo | TBD | EPL 2.0 | Coverage (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
-| Gson | Pinned in plan 001 | Apache 2.0 | Reading the data files; the only runtime library, used only in `config` | [ADR-004](../../decisions/004-reading-the-json-data-files.md) (accepted) |
+| JUnit (Jupiter) | 6.1.3 | EPL 2.0 | Tests (test scope only) | Module requirement |
+| Maven (through Maven Wrapper 3.3.4) | 3.9.16 | Apache 2.0 | Build, test, package (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
+| JaCoCo | 0.8.16 | EPL 2.0 | Coverage (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
+| Gson | 2.15.0 | Apache 2.0 | Reading the data files; the only runtime library, used only in `config`. Its compile-time `error_prone_annotations` dependency is left out of the jar | [ADR-004](../../decisions/004-reading-the-json-data-files.md) (accepted) |
 
 ## Failure modes
 

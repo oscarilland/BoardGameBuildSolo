@@ -2,12 +2,14 @@
 title: ADR-001 Repo structure and build harness
 type: decision
 id: ADR-001
-status: proposed
+status: accepted
 sources: [../wiki/sources/handover.md, ../wiki/sources/module-handbook.md]
 updated: 2026-11-17
 ---
 
 # ADR-001 - Repo structure and build harness
+
+**Status:** accepted 17 November 2026 (proposed the same day). **Option A: FeedWatchBuild's harness, adapted for a Java game.**
 
 ## Context
 
@@ -54,7 +56,9 @@ Option A. The handover is unusually complete, so compiling it costs little, and 
 
 ## Decision
 
-*Oscar writes this section in his own words: what he chose and why. Until he does, the status stays `proposed`. His two answers above are recorded as context; this section confirms the structure as a whole.*
+"I confirm the repo structure." - Oscar, 17 November 2026.
+
+This confirms Option A as built, together with his two earlier answers (solo version only; harness plus a full ingest first). Oscar may reword this section at any time.
 
 ## Consequences
 

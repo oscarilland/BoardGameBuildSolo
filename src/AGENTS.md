@@ -2,7 +2,7 @@
 
 Read this before changing anything in `src/`. The root `AGENTS.md` gates still apply: no change here without an approved plan in `docs/plans/`.
 
-> **Current state:** no code yet. The stack below is decided (ADR-002 to ADR-004). Plan 001 sets up the project.
+> **Current state:** [plan 001](../docs/plans/001-walking-skeleton.md) is built: the Maven project, `GameConfig` loading and validating the data files, a seeded `Dice`, the coverage rule, a runnable jar with `--check`, and an empty window. No game rules yet. Base package: `netzerobelfast`.
 
 ## Stack
 
@@ -22,7 +22,8 @@ Packages live under `src/main/java`, with tests in matching packages under `src/
 | `config` | `GameConfig` and the loaders for `config.json`, `board.json` and `climate_cards.json` | The only place that reads files, and the only place that uses Gson. Validates every value and fails with a clear message. Hands the model plain records |
 | `ui` | Screens: title, setup, game, pop-ups, end-of-game report | Thin: shows state from `model`, offers only valid actions, passes the player's choices back |
 | `sim` | Headless game driver with simple bots | Used by tests (NFR-06: 20 full games without crashes) and for re-tuning balance |
-| resources | Working copies of the three data files | Copied from `docs/raw/` by plan 001. From then on, edit these copies, never the raw files |
+| `src/main/resources/data/` | Working copies of the three data files | Copied from `docs/raw/` by plan 001. Edit these copies, never the raw files, and record why in the log |
+| `src/test/java/.../config/TestData` | Copies the real data into a temp folder so a test can change one value | Use it for any data-driven test; don't add fixture copies of the data files |
 
 ## Code rules
 

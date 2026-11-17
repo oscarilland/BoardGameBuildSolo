@@ -59,6 +59,8 @@ Oscar chose the recommended option and didn't add reasons of his own, so the rea
 - `config` gets one record per file section, a `validate()` step, and a test for each validation rule, including deliberately broken files.
 - Keys starting with `_` (such as `_note`) are comments and are ignored.
 
+> **Correction found while building plan 001 (17 November 2026):** Gson 2.15.0 does have one dependency of its own, `com.google.errorprone:error_prone_annotations`, which the Context and Option A above didn't mention. It holds annotations used only by compilers and code checkers, so the jar leaves it out and Gson works without it. The decision stands. Also, Gson reads the files as a strict JSON tree that the `config` package maps to records itself, rather than filling records directly, so that every error names its key ([data files](../wiki/architecture/data-files.md)).
+
 ## How we'll know it worked
 
 Changing a price in the working `config.json` changes the game with no code change, and a deliberately broken data file stops start-up with a message naming the file and key.

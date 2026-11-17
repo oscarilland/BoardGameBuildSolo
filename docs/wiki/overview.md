@@ -36,7 +36,7 @@ A Java 21 desktop app with a Swing UI, built with Maven ([ADR-002](../decisions/
 
 ## Status
 
-**Designing.** The team handover is ingested. Nothing is built yet. See [build progress](operations/build-progress.md).
+**Building.** The design decisions are made, and [plan 001](../plans/001-walking-skeleton.md) (the walking skeleton) is built: the project, data loading and validation, seeded dice, and an empty window. No game rules yet. See [build progress](operations/build-progress.md).
 
 ## Scope boundaries
 

@@ -19,13 +19,14 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 |---|---|
 | `docs/raw/` | The team handover as received: rules, report draft, data files, diagrams, simulation |
 | `docs/` | The wiki: requirements and design, agreed before code |
-| `src/` | The game in Java (see [src/AGENTS.md](src/AGENTS.md)). Empty until plan 001 |
+| `src/` | The game in Java (see [src/AGENTS.md](src/AGENTS.md)) |
+| `pom.xml`, `mvnw` | The Maven build and its wrapper |
 | `scripts/` | Development tooling, such as the wiki lint |
 | `.claude/` | Claude Code settings and skills |
 
 ## Status
 
-**Designing.** The handover is ingested into the wiki. The stack is decided: Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). All 17 open rules questions are answered. Next: confirm ADR-001, then plan 001.
+**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plan 001, the walking skeleton, is built: the game loads and validates its data and opens an empty window. Next: plan 002 (players, characters and movement).
 
 ## Setting up
 
@@ -36,5 +37,9 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 ## Checks
 
 ```text
-java scripts/WikiLint.java
+.\mvnw.cmd verify                              # build, tests, 80% coverage rule
+java -jar target\net-zero-belfast.jar --check  # the data files load and validate
+java scripts/WikiLint.java                     # the wiki
 ```
+
+Run the game with `java -jar target\net-zero-belfast.jar` after a build.

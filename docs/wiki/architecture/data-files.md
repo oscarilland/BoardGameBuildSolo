@@ -1,7 +1,7 @@
 ---
 title: Data files
 type: architecture
-status: draft
+status: built
 sources: [../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -10,7 +10,13 @@ updated: 2026-11-17
 
 ## Summary
 
-Three JSON files hold every balance value, the board, and the card deck ([NFR-07](../requirements/nfr-07-data-driven-balance.md)). The handover's copies in `docs/raw/` stay as received. Plan 001 copies them into the game's resources, and from then on **only the working copies are edited**.
+Three JSON files hold every balance value, the board, and the card deck ([NFR-07](../requirements/nfr-07-data-driven-balance.md)). The handover's copies in `docs/raw/` stay as received. The game reads its **working copies in `src/main/resources/data/`**, packaged inside the jar ([plan 001](../../plans/001-walking-skeleton.md)). Only the working copies are edited.
+
+**Changes to the working copies so far:**
+
+| File | Key | Change | Why |
+|---|---|---|---|
+| `board.json` | `cityCentreRoute.direction` | "TBD: …" → "two-way (Q-05, decided by Oscar on 17 Nov 2026)" | [Q-05](../rules/open-questions.md) |
 
 ## Files
 
@@ -49,14 +55,21 @@ Three JSON files hold every balance value, the board, and the card deck ([NFR-07
 ## Key design choices
 
 - **Text keys are documentation, not rules.** Strings like `scoring.netZero` or `disasters.roll` describe a rule; the code implements the rule and reads only the numbers.
-- **Validate on load:** 36 squares with unique ids 0-35; the type counts (10, 12, 4, 3, 7); prices within `priceRange`; junctions and Glider stops exist; 6 distinct characters; 30 cards with unique ids, valid `correctIndex`, two options for Choice cards, and at least one source each; danger bands ascending.
-- **Parsed with Gson** into plain Java records, inside the `config` package only ([ADR-004](../../decisions/004-reading-the-json-data-files.md)). Gson fills missing fields with defaults silently, which is why the validation step above is required, not optional.
+- **Loading, as built** (`netzerobelfast.config`):
+  1. Gson reads each file into a JSON tree in **strict** mode: unquoted keys, comments and trailing text are errors.
+  2. `ConfigParser` maps the tree to records (`Rules`, `BoardDef`, `CardDef`) through `JsonNode`, which checks every key exists with the right type and knows its path. Keys starting with `_` are skipped.
+  3. `ConfigValidator` checks the values make sense together. The first problem stops loading with a `ConfigException` such as `board.json: squares[1].price is 99, expected 4-7 for POLLUTING`.
+- **Why not let Gson fill the records directly?** Gson puts 0 or null into a missing field without complaint, and its errors don't name the key ([ADR-004](../../decisions/004-reading-the-json-data-files.md)).
+- **Validation rules, as built:**
+  - **config.json:** players 1 or more and min ≤ max; rounds and years per round 1 or more, and they reach `endYear`; at least `maxPlayers` characters, unique ids, no negative starting money; price ranges low to high; Resilience costs and cuts match `maxLevel`, with cuts above 0 and at most 1; interim target rounds inside the game; danger bands numbered 1, 2, 3… with rising limits and only the top one open-ended; `belowZeroUsesBand` is a real band.
+  - **board.json:** squares listed in id order from 0; each district exists; Polluting and Green Project squares have a price inside their range, other squares have none; `isNature` only on Green Projects; every square on exactly one of the loop and the City Centre route; junctions on the loop, and both `connects` ends are junctions; Glider stops are `GLIDER_STOP` squares, every `GLIDER_STOP` square is listed, and there are at least 2.
+  - **climate_cards.json:** at least one card; unique ids; every card has text, a fact, and at least one source with a title and URL; quiz cards have at least 2 answers, a valid `correctIndex` and no negative reward; Choice cards have exactly 2 options, at least one with `money` of 0 or more (Q-12); Event cards have an effect.
+- **Counts are tested, not validated.** 36 squares, the 10/12/4/3/7 type split, 30 cards and 6 characters are design facts about the current data, so `GameConfigTest` asserts them rather than the validator enforcing them. Changing the board's size is then a data change plus a test update, not a code change (NFR-07).
 
 ## Known gaps
 
-- No disaster explanation text ([Q-11](../rules/open-questions.md)).
-- Quiz reward in two places ([Q-13](../rules/open-questions.md)).
-- `_note` keys hold comments; the loader should ignore keys starting with `_`.
+- No disaster explanation text yet; it's added in plan 005 once Oscar approves the lines ([Q-11](../rules/open-questions.md)).
+- Quiz reward in two places: `GameConfig.quizReward(card)` uses the card's value, falling back to `quizCorrectGP` ([Q-13](../rules/open-questions.md)).
 
 ## Failure modes
 

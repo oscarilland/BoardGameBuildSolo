@@ -1,7 +1,7 @@
 name: CI
 
-# Checks every push. Java build and test steps are added by plan 001, once
-# ADR-003 has chosen the build tool.
+# Checks every push: the game's build, tests and coverage rule (ADR-003),
+# a start-up check of the packaged jar, and the wiki lint.
 on:
   push:
   pull_request:
@@ -20,6 +20,12 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
+
+      - name: Build, test and check coverage
+        run: ./mvnw -B verify
+
+      - name: Packaged jar loads its data
+        run: java -jar target/net-zero-belfast.jar --check
 
       - name: Wiki lint
         run: java scripts/WikiLint.java

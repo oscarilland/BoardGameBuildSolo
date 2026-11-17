@@ -17,7 +17,7 @@ Plans below are a **proposed order**, not approved plans. Each becomes a numbere
 - [x] Harness created: `AGENTS.md` files, wiki schema, templates, skills, settings, `scripts/WikiLint.java`, CI (17 November 2026)
 - [x] Team handover filed in `docs/raw/` and ingested (17 November 2026)
 - [x] Wiki lint passes on Oscar's machine
-- [ ] Gate: Oscar confirms [ADR-001](../../decisions/001-repo-structure-and-harness.md) (repo structure and harness)
+- [x] Gate: Oscar confirms [ADR-001](../../decisions/001-repo-structure-and-harness.md) (repo structure and harness), 17 November 2026
 - [ ] Gate: Oscar answers the [project context](../project-context.md) questions (purpose, target date)
 
 ## Phase 1 - Design gate
@@ -40,11 +40,18 @@ Rules questions ([open questions](../rules/open-questions.md)):
 
 ### Plan 001 - Walking skeleton
 
-- [ ] Project set up per ADR-003; CI builds and tests
-- [ ] Working copies of the three data files in resources, recording the two-way cut-through in `board.json` (Q-05) and adding approved disaster explanations to `config.json` (Q-11)
-- [ ] `GameConfig` loads and validates them ([NFR-07](../requirements/nfr-07-data-driven-balance.md))
-- [ ] Seeded `Dice`; coverage rule in the build ([NFR-06](../requirements/nfr-06-reliability-and-test-coverage.md))
-- [ ] An empty window opens (proves the UI toolkit and packaging)
+- [x] Plan drafted ([plan 001](../../plans/001-walking-skeleton.md)), 17 November 2026
+- [x] Gate: plan 001 approved (jar `net-zero-belfast.jar`, package `netzerobelfast`), 17 November 2026
+- [x] Maven project and wrapper (ADR-003): Maven 3.9.16, checksum-pinned
+- [x] Working copies of the three data files in resources, recording the two-way cut-through in `board.json` (Q-05)
+- [x] `GameConfig` loads and validates them ([NFR-07](../requirements/nfr-07-data-driven-balance.md)): 78 config tests, 99.1% line coverage
+- [x] Seeded `Dice`; coverage rule in the build, proven to fail at 100% ([NFR-06](../requirements/nfr-06-reliability-and-test-coverage.md))
+- [x] Runnable jar with `--check`, works alone in an empty folder; the window opens
+- [x] CI workflow builds, tests and runs `--check`
+- [ ] Gate: Oscar opens the window himself and pushes; CI green on GitHub
+- [x] Plan 001 marked `done` (17 November 2026)
+
+Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines.
 
 ### Plan 002 - Players, characters and movement (FR-01, FR-02, FR-03)
 
@@ -74,6 +81,8 @@ Newest last. Each entry says what happened, its effect and what was done.
 | # | Date | Issue | Status |
 |---|---|---|---|
 | 1 | 2026-11-17 | The handbook PDF couldn't be read with the PDF page renderer (`pdftoppm` isn't installed). Text was extracted with Python's PyMuPDF instead; all 18 pages came through | Worked around. Install Poppler if page images are ever needed |
+| 2 | 2026-11-17 | **Gson 2.15.0 has a dependency, `error_prone_annotations`**, which ADR-004 said it didn't. The shaded jar warned about overlapping files | Excluded from the jar (compile-time annotations only); ADR-004 has a correction note. Clean build now has no warnings |
+| 3 | 2026-11-17 | Plan 001 asked the validator to enforce 36 squares, 10/12/4/3/7 types and 30 cards. That would hard-code the board's size, against NFR-07 | The validator checks structure only; the counts are asserted by `GameConfigTest`. Recorded in plan 001's Outcome |
 
 ## Related
 

@@ -60,7 +60,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [System overview](architecture/system-overview.md) - model, config, UI and sim; key choices; dependencies
 - [Domain model](architecture/domain-model.md) - the analysis classes, and gaps to settle in plan 001
 - [Game flow](architecture/game-flow.md) - use cases, the three sequences, choices without calling the UI
-- [Data files](architecture/data-files.md) - config, board and card schemas; validation
+- [Data files](architecture/data-files.md) - built: config, board and card schemas; loading and validation as built
 
 ## UX
 
@@ -74,14 +74,16 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 
 ## Decisions
 
-- [ADR-001 Repo structure and build harness](../decisions/001-repo-structure-and-harness.md) - proposed
+- [ADR-001 Repo structure and build harness](../decisions/001-repo-structure-and-harness.md) - accepted
 - [ADR-002 Desktop UI toolkit](../decisions/002-ui-toolkit.md) - accepted: Swing
 - [ADR-003 Build tool and Java version](../decisions/003-build-tool-and-java-version.md) - accepted: Maven Wrapper, Java 21
 - [ADR-004 Reading the JSON data files](../decisions/004-reading-the-json-data-files.md) - accepted: Gson
 
 ## Plans
 
-None yet. See [build progress](operations/build-progress.md) for the proposed order.
+- [Plan 001 Walking skeleton](../plans/001-walking-skeleton.md) - done: Maven, data loading and validation, seeded dice, coverage rule, runnable jar, empty window
+
+See [build progress](operations/build-progress.md) for the proposed order of later plans.
 
 ## Sources
 

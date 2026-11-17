@@ -61,7 +61,14 @@ These are places where the diagram can't be coded literally. Each is a design ch
 
 ## Changes from the analysis model
 
-*None yet. Record each change here when it's built, with the reason. The SUB2 class diagram is expected to differ from SUB1a's.*
+Record each change here when it's built, with the reason. The SUB2 class diagram is expected to differ from SUB1a's.
+
+| Class | Analysis model | As built | Why | Plan |
+|---|---|---|---|---|
+| `Dice` | `rollTwo()`, `rollOne()` | Same, plus a constructor taking a `java.util.Random`, and `random()` to share that source | One seeded source for every random choice, so tests and whole games can be replayed | [001](../../plans/001-walking-skeleton.md) |
+| `GameConfig` | `values: Map`, `cardFile`, `load(file)`, `get(key): int` | `load()` (from the jar) and `load(folder)`, returning typed records: `rules()`, `board()`, `cards()`, plus `quizReward(card)` and `summary()` | `get(key): int` can't return lists, text or nested sections (gap 7), and typed records let the compiler catch a misspelt key | [001](../../plans/001-walking-skeleton.md) |
+| (new) `Rules`, `BoardDef`, `CardDef` | Not in the diagram | Records holding the three data files' contents | They're the "data" side of `GameConfig`; the model classes in later plans are built from them | [001](../../plans/001-walking-skeleton.md) |
+| (new) `ConfigException` | Not in the diagram | The one error type for bad data, naming the file and key | NFR-07 AC-3 | [001](../../plans/001-walking-skeleton.md) |
 
 ## Explain it in 30 seconds
 

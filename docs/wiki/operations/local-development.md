@@ -14,7 +14,7 @@ updated: 2026-11-17
 |---|---|---|
 | JDK 21 or later | Temurin JDK 21.0.8 installed | The wiki lint now; the game targets Java 21 ([ADR-003](../../decisions/003-build-tool-and-java-version.md)) |
 | Git | Installed | Version control |
-| Maven | Not installed | Not needed: the Maven Wrapper (`mvnw`) downloads it on first run, which needs a network connection once |
+| Maven | Not installed | Not needed: the Maven Wrapper (`mvnw`) downloads Maven 3.9.16 on first run (checksum-verified) into `~/.m2/wrapper` |
 | Python 3 | Installed | Only to run the reference [balance simulation](../sources/balance-simulation.md) |
 
 ## Checks that run today
@@ -25,17 +25,21 @@ java scripts/WikiLint.java
 
 Run from the repo root. It runs as a single-file Java program, so it needs no build tool. Exit code 0 means clean. CI runs the same check on every push (`.github/workflows/ci.yml`).
 
-## Once plan 001 is built
+## Building and running the game
 
-Plan 001 adds the Maven Wrapper. Expected commands, from the repo root in PowerShell (use `./mvnw` in Git Bash or on macOS):
+From the repo root in PowerShell (use `./mvnw` in Git Bash or on macOS). The first run downloads Maven 3.9.16 and the libraries, so it needs a network connection.
 
 ```text
-.\mvnw.cmd verify     # compile, run all tests, enforce 80% coverage
-.\mvnw.cmd package    # build the runnable jar
-java -jar target\<name>.jar
+.\mvnw.cmd verify                              # compile, run all tests, enforce 80% coverage
+.\mvnw.cmd clean verify                        # the same, from scratch
+.\mvnw.cmd package -DskipTests                 # just rebuild the jar
+java -jar target\net-zero-belfast.jar          # open the game
+java -jar target\net-zero-belfast.jar --check  # load and validate the data only; exit 0 or 1
 ```
 
-Plan 001 confirms the exact jar name and records it here.
+The coverage report is at `target\site\jacoco\index.html`.
+
+To try a data change, edit the file in `src\main\resources\data\`, rebuild the jar and run `--check`. A bad value stops start-up with a message such as `board.json: squares[1].price is 99, expected 4-7 for POLLUTING`.
 
 The target machine for this solo version is Oscar's own laptop, not an EEECS lab PC.
 
