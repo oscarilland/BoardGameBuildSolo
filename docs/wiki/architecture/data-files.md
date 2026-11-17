@@ -50,7 +50,7 @@ Three JSON files hold every balance value, the board, and the card deck ([NFR-07
 
 - **Text keys are documentation, not rules.** Strings like `scoring.netZero` or `disasters.roll` describe a rule; the code implements the rule and reads only the numbers.
 - **Validate on load:** 36 squares with unique ids 0-35; the type counts (10, 12, 4, 3, 7); prices within `priceRange`; junctions and Glider stops exist; 6 distinct characters; 30 cards with unique ids, valid `correctIndex`, two options for Choice cards, and at least one source each; danger bands ascending.
-- How the JSON is parsed: [ADR-004](../../decisions/004-reading-the-json-data-files.md).
+- **Parsed with Gson** into plain Java records, inside the `config` package only ([ADR-004](../../decisions/004-reading-the-json-data-files.md)). Gson fills missing fields with defaults silently, which is why the validation step above is required, not optional.
 
 ## Known gaps
 

@@ -2,13 +2,13 @@
 
 Read this before changing anything in `src/`. The root `AGENTS.md` gates still apply: no change here without an approved plan in `docs/plans/`.
 
-> **Current state:** no code yet. The stack choices below marked *(ADR pending)* are still waiting for Oscar's decision. Plan 001 sets up the project once they're made.
+> **Current state:** no code yet. The stack below is decided (ADR-002 to ADR-004). Plan 001 sets up the project.
 
 ## Stack
 
 - **Java 21**, built with **Maven through the Maven Wrapper** (`mvnw`), so no Maven install is needed ([ADR-003](../docs/decisions/003-build-tool-and-java-version.md)). Standard Maven layout: `src/main/java`, `src/main/resources`, `src/test/java`.
 - Desktop UI: **Swing**, part of the JDK, with no UI library ([ADR-002](../docs/decisions/002-ui-toolkit.md)). Update the UI only on the event dispatch thread.
-- Reading the JSON data files: [ADR-004](../docs/decisions/004-reading-the-json-data-files.md) *(ADR pending)*.
+- Data files: **Gson**, used only inside `config`, with validation after loading ([ADR-004](../docs/decisions/004-reading-the-json-data-files.md)). It's the only runtime library.
 - Tests: JUnit 5. JaCoCo measures line coverage, and the build fails if the game logic drops below 80% (NFR-06).
 - Offline only. No network calls, no telemetry, no personal data beyond display names (NFR-08).
 
@@ -19,7 +19,7 @@ Packages live under `src/main/java`, with tests in matching packages under `src/
 | Package | Purpose | Rule |
 |---|---|---|
 | `model` | `Game`, `Board`, `Square` and subclasses, `Player`, `Character` and subclasses, `ClimateMeter`, `DisasterManager`, `CardDeck`, `ClimateCard` and subclasses, `CoFundingDeal`, `Dice` | Pure logic. No UI classes, no file access, no static state. Randomness comes in through `Dice` |
-| `config` | `GameConfig` and the loaders for `config.json`, `board.json` and `climate_cards.json` | The only place that reads files. Validates every value and fails with a clear message |
+| `config` | `GameConfig` and the loaders for `config.json`, `board.json` and `climate_cards.json` | The only place that reads files, and the only place that uses Gson. Validates every value and fails with a clear message. Hands the model plain records |
 | `ui` | Screens: title, setup, game, pop-ups, end-of-game report | Thin: shows state from `model`, offers only valid actions, passes the player's choices back |
 | `sim` | Headless game driver with simple bots | Used by tests (NFR-06: 20 full games without crashes) and for re-tuning balance |
 | resources | Working copies of the three data files | Copied from `docs/raw/` by plan 001. From then on, edit these copies, never the raw files |

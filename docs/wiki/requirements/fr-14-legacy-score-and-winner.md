@@ -24,17 +24,17 @@ See [scoring and end of game](../rules/scoring-and-end-of-game.md).
 - **AC-2** With the meter at 1, a player with 30 GP, £80M and 2 Polluting squares scores 30 − 10 = 20; money is ignored.
 - **AC-3** The end screen says whether Belfast reached net zero.
 - **AC-4** The highest Legacy Score wins. If two players tie, the one with more Green Projects wins.
-- **AC-5** Exactly one winner is declared in every game, using the agreed rule for further ties ([Q-01](../rules/open-questions.md)).
-- **AC-6** Scores are calculated with the agreed rounding ([Q-16](../rules/open-questions.md)).
+- **AC-5** If players are still tied on Green Projects, the one with fewer Polluting squares wins; if still tied, a seeded die roll-off between them decides, re-rolling ties. Exactly one winner is declared in every game ([Q-01](../rules/open-questions.md)).
+- **AC-6** Scores are exact: £23M after repayments adds 4.6, shown as one decimal place. A player on 36.4 beats one on 36.2; neither is rounded to 36 ([Q-16](../rules/open-questions.md)).
 
 ## Out of scope
 
 Shared wins; a cooperative "everyone wins" mode.
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. [Q-01](../rules/open-questions.md): the final tie-break.
-2. [Q-16](../rules/open-questions.md): whole-number or fractional scores.
+1. Final tie-break: fewer Polluting squares, then a die roll-off ([Q-01](../rules/open-questions.md)).
+2. Exact scores, shown to one decimal place ([Q-16](../rules/open-questions.md)).
 
 ## Related
 

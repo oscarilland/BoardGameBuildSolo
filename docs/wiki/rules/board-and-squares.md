@@ -15,7 +15,7 @@ updated: 2026-11-17
 ## Rules
 
 1. **Shape** (`board.json`): the loop is ids 0-29, clockwise by ascending id, with 29 wrapping to 0. The **City Centre** route is ids 30-35. Square 30 is next to the West junction (27) and 35 next to the East junction (12).
-2. **Junctions:** Glider East (12) and Glider West (27). At a junction the player chooses to stay on the loop or take the cut-through ([turn and actions](turn-and-actions.md)).
+2. **Junctions:** Glider East (12) and Glider West (27). The cut-through is **two-way**: from 12 it runs 35 → 30 and rejoins the loop at 27; from 27 it runs 30 → 35 and rejoins at 12. Either way, play then continues clockwise ([Q-05](open-questions.md); when the choice is made is on [turn and actions](turn-and-actions.md)).
 3. **Districts** (`districts`): North (0-5), Harbour & Titanic Quarter (6-11), East (12-17), South (18-23), West (24-29), City Centre (30-35). Six squares each.
 4. **Glider stops:** 12, 27 and 30 (`gliderStops`).
 5. **Square types:**
@@ -36,7 +36,7 @@ updated: 2026-11-17
 1. When landing on any Resilience square, a player may buy **their own next level**, one level per landing. Maximum level 3 (`maxLevel`).
 2. Level 1, 2 and 3 cost £3M, £5M and £7M (`levelCosts`), and cut **the money the player pays for disasters** by 25%, 50% and 75% (`disasterCostCut`).
 3. Resilience does **not** prevent lost income, closed squares, Droughts, or Event card costs.
-4. Reduced costs are rounded to whole £M; the rounding rule is open ([Q-08](open-questions.md)).
+4. Reduced costs are rounded **half up** to whole £M: a £2M payment at level 1 (£1.5M) costs £2M ([Q-08](open-questions.md)).
 
 ## Edge cases
 
@@ -47,8 +47,8 @@ updated: 2026-11-17
 ## Conflicts or uncertainties
 
 - **Numbering:** the [board drawing](../../raw/net-zero-belfast-handover/design/board_layout.png) numbers squares 1-30 and C1-C6. `board.json` uses 0-35. Same order; the data ids are authoritative.
-- Square names, prices within the ranges, and district assignments are placeholders ([Q-09](open-questions.md)).
-- The cut-through's direction is open: the drawing says either direction, `board.json` says TBD ([Q-05](open-questions.md)).
+- Square names, prices within the ranges, and district assignments are placeholders, kept for now ([Q-09](open-questions.md)).
+- `board.json` says the cut-through direction is TBD; it's now decided as two-way, matching the drawing ([Q-05](open-questions.md)). The raw file isn't changed; the working copy in plan 001 should record it.
 
 ## Related
 

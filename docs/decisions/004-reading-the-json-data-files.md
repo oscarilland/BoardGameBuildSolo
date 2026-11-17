@@ -2,12 +2,14 @@
 title: ADR-004 Reading the JSON data files
 type: decision
 id: ADR-004
-status: proposed
+status: accepted
 sources: [../wiki/sources/data-files.md]
 updated: 2026-11-17
 ---
 
 # ADR-004 - Reading the JSON data files
+
+**Status:** accepted 17 November 2026 (proposed the same day). **Gson, with validation on load.**
 
 ## Context
 
@@ -46,12 +48,16 @@ About 150-200 lines: a recursive-descent parser into `Map`, `List`, `String`, `L
 
 ## Decision
 
-*Oscar writes this section in his own words: what he chose and why. Until he does, the status stays `proposed`.*
+"I choose Gson." - Oscar, 17 November 2026.
+
+Oscar chose the recommended option and didn't add reasons of his own, so the reasons are the recommendation's: one small library with no dependencies of its own, the team's data files kept exactly as written, and a validation step to cover Gson's silent defaults. Oscar may reword this section at any time.
 
 ## Consequences
 
-- Gson is listed with its version and licence in the [system overview](../wiki/architecture/system-overview.md).
-- `config` gets one record per file section, and a validation test for each rule.
+- Gson is the game's only runtime library. Plan 001 adds it to `pom.xml` at a pinned version and records the version and licence (Apache 2.0) in the [system overview](../wiki/architecture/system-overview.md). Maven bundles it into the single runnable jar, so NFR-09 still holds.
+- Gson is used only inside the `config` package. The model sees plain Java records, never Gson types, so the library could be swapped without touching the rules.
+- `config` gets one record per file section, a `validate()` step, and a test for each validation rule, including deliberately broken files.
+- Keys starting with `_` (such as `_note`) are comments and are ignored.
 
 ## How we'll know it worked
 

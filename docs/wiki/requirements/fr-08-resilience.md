@@ -26,15 +26,15 @@ See [board and squares: Resilience](../rules/board-and-squares.md#resilience).
 - **AC-4** The Council Planner pays £1M, £3M and £5M.
 - **AC-5** With level 2, a Heatwave in band 4 (£4M) costs the player £2M.
 - **AC-6** Resilience doesn't reduce Event card costs, lost income, closures or Droughts.
-- **AC-7** Reduced costs that aren't whole numbers are rounded by the agreed rule ([Q-08](../rules/open-questions.md)); for example level 1 against a £2M Storm repair (£1.5M).
+- **AC-7** Reduced costs are rounded half up to whole £M: at level 1, a £2M Storm repair (£1.5M) costs £2M; at level 3, a £2M Heatwave (£0.5M) costs £1M; at level 2, a £3M Flood (£1.5M) costs £2M ([Q-08](../rules/open-questions.md)).
 
 ## Out of scope
 
 Shared or district Resilience (the v3 rule).
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. Rounding ([Q-08](../rules/open-questions.md)): round half up (£1.5M → £2M), as the handover suggests?
+1. **Rounding:** half up to whole £M ([Q-08](../rules/open-questions.md)).
 
 ## Related
 

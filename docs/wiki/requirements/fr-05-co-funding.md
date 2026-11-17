@@ -29,16 +29,16 @@ See [turn and actions](../rules/turn-and-actions.md).
 - **AC-2** Co-funding isn't offered on your own square, on any Polluting square, or with less than £3M.
 - **AC-3** At the end of the round, a deal gives +1 GP to the funder and +1 GP to the owner.
 - **AC-4** A player with a deal who co-funds a second square ends the first deal; only the new one pays.
-- **AC-5** In a round when the funded square is closed by a Storm, neither player gets the deal's GP.
+- **AC-5** In a round when the funded square is closed by a Storm or flooded, neither player gets the deal's GP ([Q-15](../rules/open-questions.md)).
 - **AC-6** If the owner is bankrupt, the deal still pays both players their GP.
 
 ## Out of scope
 
 Deals between more than two players; ending a deal without starting a new one.
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. Does a deal on a **flooded** square pay ([Q-15](../rules/open-questions.md))?
+1. A deal on a flooded square pays nothing, the same as a closed one ([Q-15](../rules/open-questions.md)).
 
 ## Related
 

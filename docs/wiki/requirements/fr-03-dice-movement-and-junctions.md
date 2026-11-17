@@ -18,7 +18,7 @@ updated: 2026-11-17
 
 - The player chooses to roll. Two six-sided dice give 2-12 steps.
 - Movement is clockwise along the loop (ids ascending, 29 wraps to 0).
-- At junction 12 or 27 the player chooses to stay on the loop or take the City Centre route (30-35). How this works when passing a junction is open ([Q-05](../rules/open-questions.md)).
+- Whenever a move reaches junction 12 or 27 with steps still to go, the player chooses to stay on the loop or take the two-way City Centre route (30-35). A player who lands exactly on a junction chooses at the start of their next move ([Q-05](../rules/open-questions.md)).
 
 See [board and squares](../rules/board-and-squares.md) and [turn and actions](../rules/turn-and-actions.md).
 
@@ -27,17 +27,18 @@ See [board and squares](../rules/board-and-squares.md) and [turn and actions](..
 - **AC-1** With a fixed seed, `Dice.rollTwo()` returns the same sequence every time, and every value is between 2 and 12.
 - **AC-2** A player on square 28 who rolls 4 ends on square 2 (wrapping past 29).
 - **AC-3** A player whose move reaches junction 12 is offered the route choice; choosing "stay on the loop" continues to 13, 14 and so on.
-- **AC-4** Taking the City Centre route from junction 12 moves through the cut-through squares in the agreed order and rejoins the loop at junction 27 ([Q-05](../rules/open-questions.md)).
-- **AC-5** A move that doesn't reach a junction asks no question.
+- **AC-4** A player on 11 who rolls 4 and takes the City Centre at 12 moves 12 → 35 → 34 → 33 and stops on 33. A player on 26 who rolls 9 and takes it at 27 moves 27 → 30 → … → 35 → 12 → 13 and stops on 13 (each square, including the junction, is one step).
+- **AC-5** A move that doesn't reach a junction with steps left asks no question. A player who lands exactly on 12 or 27 is asked at the start of their next move.
+- **AC-7** From the City Centre route, the player rejoins the loop at the far junction and carries on clockwise, without being asked again at that junction.
 - **AC-6** A bankrupt player doesn't move ([FR-13](fr-13-bankruptcy.md)).
 
 ## Out of scope
 
 Animating the counter's move (UI polish, not logic).
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. [Q-05](../rules/open-questions.md): one-way or two-way cut-through, and is the choice offered when passing a junction or only when landing on it?
+1. **Two-way cut-through, choice whenever a junction is reached** ([Q-05](../rules/open-questions.md)). AC-4, AC-5 and AC-7 spell out the step counting; AC-7 (no second question at the far junction) is the agent's reading of "rejoins at the other junction", for Oscar to confirm when agreeing FR-03.
 
 ## Related
 

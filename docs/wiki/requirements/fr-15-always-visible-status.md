@@ -29,7 +29,11 @@ The game screen's top bar shows "Round N of 12 · Year YYYY" and the Climate Met
 ## Open questions for Oscar
 
 1. Also show each player's Resilience level and co-funding deal for everyone, or only the current player (as in the wireframe)?
-2. The meter's display unit ([Q-03](../rules/open-questions.md)).
+
+
+## Decisions (Oscar, 17 November 2026)
+
+1. The meter has no unit; it's labelled "Climate Meter (2026 = 50)", and can show values below 0 ([Q-03](../rules/open-questions.md), [Q-02](../rules/open-questions.md)).
 
 ## Related
 

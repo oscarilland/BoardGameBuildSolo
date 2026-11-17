@@ -26,24 +26,22 @@ Needed before plan 001 can be approved.
 
 - [x] Gate: decide [ADR-002](../../decisions/002-ui-toolkit.md) UI toolkit: Swing (17 November 2026)
 - [x] Gate: decide [ADR-003](../../decisions/003-build-tool-and-java-version.md) build tool and Java version: Maven Wrapper, Java 21, target machine Oscar's laptop (17 November 2026)
-- [ ] Gate: decide [ADR-004](../../decisions/004-reading-the-json-data-files.md) JSON parsing
-- [ ] Gate: review FR-01 to FR-17 and NFR-01 to NFR-11 (`/spec`, a few at a time)
+- [x] Gate: decide [ADR-004](../../decisions/004-reading-the-json-data-files.md) JSON parsing: Gson (17 November 2026)
+- [x] NFR-06 and NFR-07 agreed, the two plan 001 rests on (17 November 2026)
+- [ ] Gate: review the other requirements with `/spec` before the plan that uses them
 
-Rules questions, needed before the plan that uses them ([open questions](../rules/open-questions.md)):
+Rules questions ([open questions](../rules/open-questions.md)):
 
-- [ ] Before plan 002: Q-05 (cut-through), Q-06 (starting positions)
-- [ ] Before plan 003: Q-07 (after a Glider ride), Q-08 (Resilience rounding)
-- [ ] Before plan 004: Q-12 (unaffordable Choice options), Q-13 (quiz reward)
-- [ ] Before plan 005: Q-02 (meter below 0), Q-11 (disaster explanations), Q-14 (bankruptcy return), Q-15 (closed and flooded squares), Q-17 (no owned squares)
-- [ ] Before plan 006: Q-01 (final tie-break), Q-16 (score rounding)
-- [ ] Any time (data only): Q-03, Q-04, Q-09, Q-10
+- [x] Q-01 to Q-17 answered: all recommended options (17 November 2026)
+- [x] Q-04 checked: the 77% 2040 target is in law (2024 regulations), so 11 stands
+- [ ] Gate: approve the four disaster explanation lines (Storm and Drought need a source check first), before plan 005
 
 ## Phase 2 - Build (proposed plans)
 
 ### Plan 001 - Walking skeleton
 
 - [ ] Project set up per ADR-003; CI builds and tests
-- [ ] Working copies of the three data files in resources
+- [ ] Working copies of the three data files in resources, recording the two-way cut-through in `board.json` (Q-05) and adding approved disaster explanations to `config.json` (Q-11)
 - [ ] `GameConfig` loads and validates them ([NFR-07](../requirements/nfr-07-data-driven-balance.md))
 - [ ] Seeded `Dice`; coverage rule in the build ([NFR-06](../requirements/nfr-06-reliability-and-test-coverage.md))
 - [ ] An empty window opens (proves the UI toolkit and packaging)

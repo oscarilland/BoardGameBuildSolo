@@ -28,9 +28,13 @@ The disaster pop-up shows what happened, who paid what (after Resilience), what 
 
 Different explanations for different bands.
 
+## Decisions (Oscar, 17 November 2026)
+
+1. The agent drafts the four lines with sources; Oscar approves them; they go in the working `config.json` as `disasters.<TYPE>.explanation` and `sources` ([Q-11](../rules/open-questions.md)).
+
 ## Open questions for Oscar
 
-1. [Q-11](../rules/open-questions.md): **the text doesn't exist yet.** Who writes the four lines and their sources, and in which file (a `disasters.*.explanation` key in `config.json`, or a new file)?
+1. Approve the [draft lines](../rules/climate-meter-and-disasters.md#disaster-explanations-draft-for-oscar-to-approve). The Storm and Drought lines still need a source check.
 
 ## Related
 

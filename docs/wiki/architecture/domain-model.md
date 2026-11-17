@@ -54,7 +54,7 @@ These are places where the diagram can't be coded literally. Each is a design ch
 4. **Converted-by tracking.** The Industrialist bonus needs the square to remember who converted it.
 5. **`PollutingSquare.convert()` returns a new object.** The `Board` must replace the square in place and keep owner, co-funding and position.
 6. **`ClimateCard.source` is one String** in the diagram; the data has a list of sources with titles and URLs.
-7. **`GameConfig.get(key): int`** can't return lists, strings or nested sections. Suggest typed accessors or records ([ADR-004](../../decisions/004-reading-the-json-data-files.md)).
+7. **`GameConfig.get(key): int`** can't return lists, strings or nested sections. Suggest typed records that Gson fills ([ADR-004](../../decisions/004-reading-the-json-data-files.md), accepted).
 8. **Floods, droughts and closures last one round.** Something must track "this round's" flags and clear them; the diagram only has `closed` and `lobbied` on squares.
 9. **Per-round history** of polluting ownership for the end-of-game report ([FR-16](../requirements/fr-16-end-of-game-report.md)).
 10. **`legacyScore(): int`** depends on [Q-16](../rules/open-questions.md).

@@ -17,7 +17,7 @@ On their turn a player rolls two dice, moves clockwise, chooses a route at junct
 ### The turn
 
 1. If the player is bankrupt, the [bankruptcy](bankruptcy.md) rules run first, and may end the turn.
-2. The player chooses to roll **two dice** (`game.dice: "2d6"`) and moves that many squares clockwise. At a junction they choose to stay on the loop or take the City Centre cut-through.
+2. The player chooses to roll **two dice** (`game.dice: "2d6"`) and moves that many squares clockwise. **Junctions** ([Q-05](open-questions.md)): whenever the move reaches junction 12 or 27 with steps still to go, the player chooses to stay on the loop or take the City Centre cut-through (see [board and squares](board-and-squares.md) for the route). A player who lands exactly on a junction makes the choice at the start of their next move. The junction square itself counts as one step.
 3. They may take **one** action on the square they land on:
 
 | Square | Action | Cost | Data key |
@@ -39,7 +39,7 @@ On their turn a player rolls two dice, moves clockwise, chooses a route at junct
 - **Co-fund:** pay £3M to the bank. From the next end of round, the funder and the owner each get +1 GP per round (`gpPerRoundEach`). **One active deal per player** (`maxActiveDealsPerPlayer`): starting a new deal ends the old one. A deal pays nothing in a round when its square is closed by a Storm, and continues if the owner is bankrupt. Polluting squares can't be co-funded (`allowedOn: "greenProject"`).
 - **Lobby:** the square earns **no money** at the end of **this** round. When the Community Activist lobbies, the square also adds nothing to the Climate Meter that round.
 - **Convert:** the owner turns a Polluting square into a Green Project. It keeps its owner. If the Industrialist converted it, it earns +£2M a round extra from then on.
-- **Glider:** the player moves to another Glider Stop. The Student Commuter rides free and gains +1 GP.
+- **Glider:** the player moves to another Glider Stop. The Student Commuter rides free and gains +1 GP. The ride is the landing action: there's no further action on the destination stop ([Q-07](open-questions.md)).
 
 ## Edge cases
 
@@ -50,8 +50,7 @@ On their turn a player rolls two dice, moves clockwise, chooses a route at junct
 
 ## Conflicts or uncertainties
 
-- Junction choice when **passing** a junction rather than landing on it, and the cut-through's direction ([Q-05](open-questions.md)).
-- Whether the player acts on the destination stop after a Glider ride ([Q-07](open-questions.md)).
+- Junctions and the Glider were open questions; both are now answered ([Q-05](open-questions.md), [Q-07](open-questions.md)).
 - Rules v4 lists "convert" as both a landing action and a separate step; HANDOVER clarifies the one-per-turn limit covers both.
 - Lobbying the same square twice in a round has no extra effect; whether the UI should offer it isn't stated.
 

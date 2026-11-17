@@ -10,7 +10,7 @@ updated: 2026-11-17
 
 Every requirement, its priority and its status. IDs and wording come from the team's SUB1a report (section 1.3) and are never changed or reused. Priorities are MoSCoW: Must, Should, Could. A requirement is `draft` until Oscar has reviewed it, `agreed` once he has, and `built` when the code matches it.
 
-The acceptance criteria on each page were written on ingest from the rules and data files. They need Oscar's review (`/spec`).
+The acceptance criteria on each page were written on ingest from the rules and data files, and updated with Oscar's answers to the open rules questions (17 November 2026). Pages still marked Draft need Oscar's review (`/spec`).
 
 ## Functional requirements
 
@@ -43,8 +43,8 @@ The acceptance criteria on each page were written on ingest from the rules and d
 | [NFR-03](nfr-03-readability.md) | Text scores 60+ on Flesch Reading Ease | Should | Tool check | Draft |
 | [NFR-04](nfr-04-responsiveness.md) | Opens within 5 s, responds within 1 s | Must | Timed test | Draft |
 | [NFR-05](nfr-05-accessibility.md) | WCAG 2.1 AA contrast; square types not by colour alone | Should | Inspection | Draft |
-| [NFR-06](nfr-06-reliability-and-test-coverage.md) | 80% line coverage of game logic; 20 games without crashes | Must | JUnit, coverage | Draft |
-| [NFR-07](nfr-07-data-driven-balance.md) | Balance values and cards in data files | Must | Inspection | Draft |
+| [NFR-06](nfr-06-reliability-and-test-coverage.md) | 80% line coverage of game logic; 20 games without crashes | Must | JUnit, coverage | Agreed |
+| [NFR-07](nfr-07-data-driven-balance.md) | Balance values and cards in data files | Must | Inspection | Agreed |
 | [NFR-08](nfr-08-privacy-and-security.md) | No personal data, no network, validate all input | Must | Inspection, test | Draft |
 | [NFR-09](nfr-09-portability.md) | Windows and macOS with only a Java runtime | Should | Manual | Draft |
 | [NFR-10](nfr-10-fact-accuracy.md) | Every fact stored with a source | Should | Inspection | Draft |

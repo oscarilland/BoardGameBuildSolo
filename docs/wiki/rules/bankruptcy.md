@@ -27,10 +27,10 @@ Only a compulsory payment can bankrupt a player. A bankrupt player sits out turn
 - If a Climate Card or disaster payment exactly equals their money, they reach £0 without going bankrupt.
 - The loan repayment can make final money negative. In a net zero game that lowers the Legacy Score; in a missed game money is ignored anyway.
 
-## Conflicts or uncertainties
+## Decisions (Oscar, 17 November 2026)
 
-- **When "after 2 rounds" ends** isn't defined ([Q-14](open-questions.md)). The simulation counts the round of bankruptcy as 1, so a player bankrupted at the end of round 5 rolls in round 6 and returns automatically in round 7.
-- Whether a Choice card option the player can't afford counts as compulsory ([Q-12](open-questions.md)).
+- **Automatic return** ([Q-14](open-questions.md)), as in the simulation: at their first turn after going bankrupt the player rolls one die; on a 6 they return. If not, they return automatically at their next turn. A player bankrupted at the end of round 5 rolls in round 6 and, if that fails, returns in round 7. So they miss at most one turn.
+- **Choice cards never bankrupt** ([Q-12](open-questions.md)): an option the player can't afford is disabled. Only Event cards and disasters are compulsory payments.
 
 ## Related
 

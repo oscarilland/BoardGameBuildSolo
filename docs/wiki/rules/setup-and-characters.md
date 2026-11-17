@@ -17,7 +17,7 @@ updated: 2026-11-17
 1. **Players:** 4 to 6 (`game.minPlayers`, `game.maxPlayers`). Each enters a display name and chooses a **different** character.
 2. **First player** is chosen at random (`game.firstPlayer: "random"`), then turns follow a fixed order.
 3. **Start state:** year 2026 (`game.startYear`), round 1, Climate Meter 50 (`climateMeter.start`).
-4. **Starting position:** not defined by the rules ([Q-06](open-questions.md)).
+4. **Starting position:** everyone starts on square 0 (Cave Hill Woodland), with no landing action at the start. The first roll moves them on ([Q-06](open-questions.md), Oscar, 17 November 2026).
 5. **Characters** (`characters[]`):
 
 | Character (`id`) | Money | GP | Ability | Parameters |
@@ -41,7 +41,7 @@ updated: 2026-11-17
 ## Conflicts or uncertainties
 
 - The class diagram gives `Character` only `priceFor(square)` and `incomeBonus(square)`. Several abilities need other hooks (Glider fare and GP, lobby cost and meter effect, nature GP, Resilience price). The handover allows "similar hooks as needed". See [domain model](../architecture/domain-model.md).
-- Balance: the Farmer wins 24% of simulated games against a fair share of about 20% ([Q-10](open-questions.md)).
+- Balance: the Farmer wins 24% of simulated games against a fair share of about 20%. Left as is until playtests ([Q-10](open-questions.md)).
 
 ## Related
 

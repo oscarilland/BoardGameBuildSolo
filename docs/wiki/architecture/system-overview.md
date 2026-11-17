@@ -56,7 +56,7 @@ A single Java 21 desktop application, built with Maven, with four parts: a **hea
 | JUnit 5 | TBD | EPL 2.0 | Tests (test scope only) | Module requirement |
 | Maven (through the wrapper) | TBD in plan 001 | Apache 2.0 | Build, test, package (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
 | JaCoCo | TBD | EPL 2.0 | Coverage (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
-| JSON library | TBD | TBD | Reading data files | [ADR-004](../../decisions/004-reading-the-json-data-files.md) (proposed) |
+| Gson | Pinned in plan 001 | Apache 2.0 | Reading the data files; the only runtime library, used only in `config` | [ADR-004](../../decisions/004-reading-the-json-data-files.md) (accepted) |
 
 ## Failure modes
 

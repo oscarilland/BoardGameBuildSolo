@@ -3,7 +3,7 @@ title: NFR-06 Reliability and test coverage
 type: requirement
 id: NFR-06
 priority: must
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md, ../sources/module-handbook.md]
 updated: 2026-11-17
 ---
@@ -25,6 +25,10 @@ The module handbook also asks for manual and automated testing "with clear evide
 ## Out of scope
 
 Coverage of UI classes (they're tested by hand).
+
+## Decisions (Oscar, 17 November 2026)
+
+1. **Agreed** as part of "all recommended". Coverage is enforced by JaCoCo in the Maven build ([ADR-003](../../decisions/003-build-tool-and-java-version.md)).
 
 ## Related
 

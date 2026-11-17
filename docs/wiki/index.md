@@ -8,7 +8,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [Project context](project-context.md) - why this solo repo exists, and its constraints
 - [Learning outcomes](learning-outcomes.md) - LO1-LO5 and where the game teaches them
 - [Requirements catalogue](requirements/catalogue.md) - every requirement, its priority and status
-- [Open rules questions](rules/open-questions.md) - Q-01 to Q-17, waiting for Oscar
+- [Open rules questions](rules/open-questions.md) - Q-01 to Q-17, all answered by Oscar
 - [Build progress](operations/build-progress.md) - the checklist and issues log
 
 ## Rules
@@ -21,7 +21,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [Bankruptcy](rules/bankruptcy.md) - trigger, sitting out, return and loan
 - [Climate cards](rules/climate-cards.md) - quiz, choice and event cards; the 30-card deck
 - [Scoring and end of game](rules/scoring-and-end-of-game.md) - Legacy Score, net zero, tie-break, report
-- [Open rules questions](rules/open-questions.md) - questions to answer before building
+- [Open rules questions](rules/open-questions.md) - Oscar's answers to Q-01 to Q-17
 - [Balance and design history](rules/balance-and-history.md) - simulation results and v3 → v4 changes
 
 ## Requirements
@@ -48,8 +48,8 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [NFR-03 Readability](requirements/nfr-03-readability.md) - should, draft
 - [NFR-04 Responsiveness](requirements/nfr-04-responsiveness.md) - must, draft
 - [NFR-05 Accessibility](requirements/nfr-05-accessibility.md) - should, draft
-- [NFR-06 Reliability and test coverage](requirements/nfr-06-reliability-and-test-coverage.md) - must, draft
-- [NFR-07 Data-driven balance](requirements/nfr-07-data-driven-balance.md) - must, draft
+- [NFR-06 Reliability and test coverage](requirements/nfr-06-reliability-and-test-coverage.md) - must, agreed
+- [NFR-07 Data-driven balance](requirements/nfr-07-data-driven-balance.md) - must, agreed
 - [NFR-08 Privacy and security](requirements/nfr-08-privacy-and-security.md) - must, draft
 - [NFR-09 Portability](requirements/nfr-09-portability.md) - should, draft
 - [NFR-10 Fact accuracy](requirements/nfr-10-fact-accuracy.md) - should, draft
@@ -77,7 +77,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [ADR-001 Repo structure and build harness](../decisions/001-repo-structure-and-harness.md) - proposed
 - [ADR-002 Desktop UI toolkit](../decisions/002-ui-toolkit.md) - accepted: Swing
 - [ADR-003 Build tool and Java version](../decisions/003-build-tool-and-java-version.md) - accepted: Maven Wrapper, Java 21
-- [ADR-004 Reading the JSON data files](../decisions/004-reading-the-json-data-files.md) - proposed (recommends Gson)
+- [ADR-004 Reading the JSON data files](../decisions/004-reading-the-json-data-files.md) - accepted: Gson
 
 ## Plans
 

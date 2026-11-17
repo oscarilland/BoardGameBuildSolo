@@ -25,7 +25,7 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 
 ## Status
 
-**Designing.** The handover is ingested into the wiki. The game will be Java 21 with a Swing UI, built with Maven (ADR-002, ADR-003). The next steps are deciding ADR-004 (JSON parsing) and answering the open rules questions. Then comes plan 001.
+**Designing.** The handover is ingested into the wiki. The stack is decided: Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). All 17 open rules questions are answered. Next: confirm ADR-001, then plan 001.
 
 ## Setting up
 

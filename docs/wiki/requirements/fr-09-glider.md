@@ -27,15 +27,15 @@ The SUB1a use case diagram leaves the Glider out for readability.
 - **AC-2** A player with £0 isn't offered the ride (except the Student Commuter).
 - **AC-3** The Student Commuter pays £0 and gains +1 GP for each ride.
 - **AC-4** Riding is optional.
-- **AC-5** After the ride, the player takes the agreed action on the destination ([Q-07](../rules/open-questions.md)).
+- **AC-5** After the ride, no further landing action is offered on the destination stop; the player may still convert (if they haven't) and end the turn ([Q-07](../rules/open-questions.md)).
 
 ## Out of scope
 
 Passing over a Glider Stop doesn't allow a ride; only landing does.
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. [Q-07](../rules/open-questions.md): no further action after a ride (as the simulation did)?
+1. No further action after a ride ([Q-07](../rules/open-questions.md)).
 
 ## Related
 

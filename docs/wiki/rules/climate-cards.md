@@ -15,8 +15,8 @@ Seven Climate Card squares draw from a deck of 30 cards: 12 quiz, 9 choice and 9
 ## Rules
 
 1. **Draw** a card at random. When the pile is empty, reshuffle the used cards.
-2. **Quiz** (Q01-Q12): four answers; correct (`correctIndex`) = +2 GP; wrong = nothing.
-3. **Choice** (C01-C09): the player sees both options' effects, picks A or B, and the option's `money`, `gp` and `meter` deltas apply. **Meter changes apply immediately.**
+2. **Quiz** (Q01-Q12): four answers; correct (`correctIndex`) = the card's `reward.gp` (+2 in every current card), or `squares.climateCard.quizCorrectGP` if a card has no reward ([Q-13](open-questions.md)); wrong = nothing.
+3. **Choice** (C01-C09): the player sees both options' effects, picks A or B, and the option's `money`, `gp` and `meter` deltas apply. **Meter changes apply immediately.** An option that costs more than the player's money is disabled, so Choice cards never cause bankruptcy ([Q-12](open-questions.md)). Every current card has an option that gains money, so there's always a choice.
 4. **Event** (E01-E09): the `effect` applies immediately. Resilience does **not** reduce Event costs. A payment that would go below £0 causes [bankruptcy](bankruptcy.md).
 5. **Always show the card's fact and source afterwards** (FR-10, NFR-10).
 
@@ -33,12 +33,12 @@ Sources include DAERA, NISRA, the Department for the Economy, the Met Office, Ul
 ## Edge cases
 
 - Event cards only change money in the current deck (`gp` and `meter` are 0), but the data format allows all three.
-- A Choice option with a cost: can a player pick it with less money than it costs ([Q-12](open-questions.md))?
+- A data change that gave a Choice card two costing options could leave a poor player with no option. `GameConfig` validation should require every Choice card to have at least one option with `money` of 0 or more.
 - With a seeded random source, the draw order must be reproducible in tests.
 
 ## Conflicts or uncertainties
 
-- The quiz reward is stored twice: `squares.climateCard.quizCorrectGP` in `config.json` and `reward.gp` on every quiz card ([Q-13](open-questions.md)).
+- The quiz reward is stored twice. Resolved: the card's value wins, and the config value is the default ([Q-13](open-questions.md)).
 - The class diagram gives `ClimateCard` one `source: String`; the data has a list of sources with titles and URLs (C05 has two).
 - The handover calls a "Climate Cards Sheet on claude.ai" the team-editable master. It isn't in the handover.
 

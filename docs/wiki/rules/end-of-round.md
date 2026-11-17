@@ -18,7 +18,7 @@ After the last player's turn, six steps run in a fixed order. **The order is a r
    - Polluting: +£7M to the owner (`polluting.incomePerRound`).
    - Green Project: +£2M and +2 GP to the owner (`greenProject.incomePerRound`, `gpPerRound`). Farmer: +1 GP more per nature project. Industrialist-converted: +£2M more.
    - Co-funding deal: +1 GP to the funder and +1 GP to the owner.
-   - **Skip** squares that are closed (Storm), flooded (Flood) or lobbied this round. Lobbying only removes money; see the edge cases.
+   - **Skip** squares that are closed (Storm) or flooded (Flood): they earn no money and no GP, and co-funding deals on them pay neither player ([Q-15](open-questions.md)). **Lobbied** squares only lose their money.
    - Nature projects get **no GP** in a Drought round.
    - **Bankrupt players receive no money, but still get GP.**
 2. **Carbon tax:** each owner loses 1 GP per Polluting square they own (`polluting.carbonTaxGPPerRound`).
@@ -32,12 +32,12 @@ After the last player's turn, six steps run in a fixed order. **The order is a r
 - **Lobbied squares** earn no money, but the rules say nothing about removing their carbon tax or (except for the Activist) their meter rise. Both still apply.
 - A Storm or Flood applied in this round's step 5 affects **next** round's step 1. Closures and floods from the previous round are cleared after this round's step 1 has used them.
 - A Drought rolled in step 5 affects next round's nature GP.
-- Co-funding on a closed square pays nothing that round. On a flooded square, the rules don't say ([Q-15](open-questions.md)).
-- Meter values below 0 are possible under the formula ([Q-02](open-questions.md)).
+- Closed and flooded squares still pay carbon tax and still count towards the meter: emissions don't stop when a square is shut ([Q-15](open-questions.md)).
+- The meter can go below 0; there's no floor ([Q-02](open-questions.md)).
 
 ## Conflicts or uncertainties
 
-- Whether closed or flooded Polluting squares still count towards the carbon tax and the meter. The rules only exempt them from income ([Q-15](open-questions.md)).
+- None left. Q-02 and Q-15 were answered by Oscar on 17 November 2026.
 
 ## Related
 

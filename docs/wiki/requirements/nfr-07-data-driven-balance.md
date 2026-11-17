@@ -3,7 +3,7 @@ title: NFR-07 Data-driven balance
 type: requirement
 id: NFR-07
 priority: must
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -21,10 +21,13 @@ updated: 2026-11-17
 - **AC-3** A missing or invalid value stops start-up with a message naming the file and key.
 - **AC-4** Game logic contains no balance numbers. Inspection: a search for numeric literals in `model` finds only 0, 1 and documented exceptions.
 
-## Open questions for Oscar
+- **AC-5** The disaster explanations live in the working `config.json` (`disasters.<TYPE>.explanation`), not in code ([Q-11](../rules/open-questions.md)).
 
-1. [Q-13](../rules/open-questions.md): the quiz reward is stored twice.
-2. [Q-11](../rules/open-questions.md): disaster explanations aren't in any data file yet.
+## Decisions (Oscar, 17 November 2026)
+
+1. Quiz reward: the card's `reward.gp`, with `quizCorrectGP` as the default ([Q-13](../rules/open-questions.md)).
+2. Disaster explanations go in the working `config.json` ([Q-11](../rules/open-questions.md)).
+3. **Agreed** as part of "all recommended", 17 November 2026.
 
 ## Related
 

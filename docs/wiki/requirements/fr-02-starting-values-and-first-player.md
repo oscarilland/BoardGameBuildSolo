@@ -29,15 +29,15 @@ See [setup and characters](../rules/setup-and-characters.md).
 - **AC-3** With a fixed seed the first player is always the same; across 600 seeded games with 6 players, each player position goes first between 70 and 130 times.
 - **AC-4** After the first player, turns follow a fixed order that doesn't change during the game.
 - **AC-5** A new game starts at year 2026, round 1, meter 50, read from `config.json`.
-- **AC-6** Every player starts on the agreed starting square ([Q-06](../rules/open-questions.md)).
+- **AC-6** Every player starts on square 0 and takes no landing action there at the start; their first roll moves them on ([Q-06](../rules/open-questions.md)).
 
 ## Out of scope
 
 Choosing the first player by a dice roll-off on screen.
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. Starting positions ([Q-06](../rules/open-questions.md)): one shared starting square (which?), or random?
+1. **Starting position:** everyone on square 0, with no landing action ([Q-06](../rules/open-questions.md)).
 
 ## Related
 

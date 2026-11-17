@@ -22,7 +22,9 @@ See [end of round](../rules/end-of-round.md) for each step's detail.
 
 - **AC-1** End of round runs after the last player's turn, and only then.
 - **AC-2** The six steps run in the stated order. A test with a seeded game records each step and checks the sequence.
-- **AC-3** Income: an owned Polluting square pays +£7M; a Green Project pays +£2M and +2 GP; closed, flooded and lobbied squares pay no money; bankrupt owners get GP but no money.
+- **AC-3** Income: an owned Polluting square pays +£7M; a Green Project pays +£2M and +2 GP; closed and flooded squares pay nothing (no money, no GP, no co-funding GP); lobbied squares pay no money; bankrupt owners get GP but no money.
+- **AC-9** Closed and flooded Polluting squares still cost their owner carbon tax and still count +2 towards the meter ([Q-15](../rules/open-questions.md)).
+- **AC-10** The meter can end a round below 0 (for example −3); it isn't floored ([Q-02](../rules/open-questions.md)).
 - **AC-4** Carbon tax: a player with 3 Polluting squares loses 3 GP.
 - **AC-5** Meter: with 4 owned Polluting squares (1 lobbied by the Activist) and 5 owned Green Projects, the meter changes by 3 + 2×3 − 5 = +4.
 - **AC-6** Interim target: in round 3 with the meter at 27, a player with 2 Polluting squares loses 4 GP; with the meter at 26, nothing happens. The same check runs in round 8 against 11, and in no other round.
@@ -33,10 +35,10 @@ See [end of round](../rules/end-of-round.md) for each step's detail.
 
 Animating each step (UI polish).
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. [Q-02](../rules/open-questions.md): can the meter go below 0?
-2. [Q-15](../rules/open-questions.md): do closed or flooded squares still pay carbon tax and move the meter?
+1. The meter can go below 0 ([Q-02](../rules/open-questions.md)).
+2. Closed and flooded squares still pay carbon tax and move the meter, but earn nothing ([Q-15](../rules/open-questions.md)).
 
 ## Related
 

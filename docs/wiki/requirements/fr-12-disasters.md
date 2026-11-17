@@ -29,15 +29,17 @@ See [Climate Meter and disasters](../rules/climate-meter-and-disasters.md).
 - **AC-7** Drought: nature projects earn no GP next round. No money is paid.
 - **AC-8** Disaster payments are compulsory and can cause bankruptcy ([FR-13](fr-13-bankruptcy.md)).
 - **AC-9** The disaster's explanation is shown ([FR-17](fr-17-disaster-explanation.md)).
+- **AC-10** If a Flood or Storm is chosen when no square is owned, nothing happens that round and no other type is chosen ([Q-17](../rules/open-questions.md)).
+- **AC-11** Resilience-reduced costs round half up ([Q-08](../rules/open-questions.md), examples on [FR-08](fr-08-resilience.md)).
 
 ## Out of scope
 
 More than one disaster per round.
 
-## Open questions for Oscar
+## Decisions (Oscar, 17 November 2026)
 
-1. [Q-17](../rules/open-questions.md): Flood or Storm with no owned squares.
-2. [Q-08](../rules/open-questions.md): rounding of Resilience-reduced costs.
+1. Flood or Storm with no owned squares is skipped ([Q-17](../rules/open-questions.md)).
+2. Resilience-reduced costs round half up ([Q-08](../rules/open-questions.md)).
 
 ## Related
 
