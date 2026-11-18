@@ -3,7 +3,7 @@ title: Balance and design history
 type: rules
 status: built
 sources: [../sources/handover.md, ../sources/rules-v4.md, ../sources/sub1a-report.md, ../sources/balance-simulation.md]
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 # Balance and design history
@@ -75,7 +75,7 @@ Earlier, v2 had an always-dead carbon tax, an off-by-one year count, and rich ch
 - **Pure polluting never wins.** When the city misses net zero, money is worthless and the carbon tax eats GP, so the lesson lands hard. Whether a mixed strategy, or polluting then converting late, can still win is worth testing with real players.
 - **Bankruptcy is rare** (3% of games), because income is paid before disasters each round (issue 4 in build progress).
 
-Computer players aren't people, so treat these as a guide for re-tuning `config.json` after playtests. The Python simulation's own simplifications are listed on its [receipt](../sources/balance-simulation.md).
+Computer players aren't people, so treat these as a guide for re-tuning `config.json` after playtests. **Oscar's decision, 18 November 2026: wait for playtests** ([Q-10](open-questions.md)). No values change now; the first things to watch in playtests are how often a mixed table reaches net zero, and whether the Farmer stays ahead. The Python simulation's own simplifications are listed on its [receipt](../sources/balance-simulation.md).
 
 ## Related
 

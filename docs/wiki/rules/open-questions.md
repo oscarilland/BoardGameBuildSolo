@@ -3,7 +3,7 @@ title: Open rules questions
 type: rules
 status: agreed
 sources: [../sources/handover.md, ../sources/rules-v4.md, ../sources/data-files.md, ../sources/balance-simulation.md, ../sources/design-diagrams.md]
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 # Open rules questions
@@ -27,7 +27,7 @@ Oscar accepted the recommended answer to Q-01 to Q-17 ("all recommended"), and a
 | Q-07 | Action after a Glider ride? | None. The ride ends the landing action | [Turn and actions](turn-and-actions.md), [FR-09](../requirements/fr-09-glider.md) |
 | Q-08 | Rounding of Resilience-reduced costs | Round half up to whole £M (£1.5M → £2M) | [Board and squares](board-and-squares.md), [FR-08](../requirements/fr-08-resilience.md), [FR-12](../requirements/fr-12-disasters.md) |
 | Q-09 | Final square names, prices, districts | Keep the placeholders in `board.json` for now. Data only, so code isn't blocked | [Board and squares](board-and-squares.md) |
-| Q-10 | Re-tune the Farmer? | Not now. Revisit after playtests | [Setup](setup-and-characters.md), [balance](balance-and-history.md) |
+| Q-10 | Re-tune the Farmer? | Not now. Revisit after playtests. **Confirmed 18 November 2026** after reading plan 006's simulation results (characters 18-22%, net zero in 19% of mixed games): no values change until real players have tried the game | [Setup](setup-and-characters.md), [balance](balance-and-history.md) |
 | Q-11 | Disaster explanation text | The agent drafts four lines with sources; Oscar approves them; plan 005 adds them to the working `config.json` as `disasters.<TYPE>.explanation` and `sources`. **Approved 17 November 2026**, with checked Met Office sources: see [disaster explanations](climate-meter-and-disasters.md#disaster-explanations) | [FR-17](../requirements/fr-17-disaster-explanation.md), [NFR-07](../requirements/nfr-07-data-driven-balance.md), [NFR-10](../requirements/nfr-10-fact-accuracy.md) |
 | Q-12 | Unaffordable Choice card options | Disabled: a player can't choose an option that costs more than their money. Every card in the deck has an option that gains money, so there's always a choice. Choice cards never bankrupt; only Event cards and disasters can | [Climate cards](climate-cards.md), [bankruptcy](bankruptcy.md), [FR-10](../requirements/fr-10-climate-cards.md), [FR-13](../requirements/fr-13-bankruptcy.md) |
 | Q-13 | Which quiz reward value? | The card's own `reward.gp`; `squares.climateCard.quizCorrectGP` is the default for a card with no reward | [Climate cards](climate-cards.md), [FR-10](../requirements/fr-10-climate-cards.md), [NFR-07](../requirements/nfr-07-data-driven-balance.md) |

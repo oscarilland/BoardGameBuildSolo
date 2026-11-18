@@ -113,7 +113,7 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 - [x] `sim` package: three strategies, `Simulator`, `BalanceReport`; `--simulate`
 - [x] 20-game test (NFR-06 AC-2, AC-3); balance results recorded; issue 4 answered: 295 tests; all four bugs caught
 - [x] Plan 006 marked `done` (18 November 2026). **The rules engine is complete.**
-- [ ] Gate: Oscar reads the [balance results](../rules/balance-and-history.md#java-simulation-plan-006) and decides whether anything needs re-tuning now or after playtests (Q-10)
+- [x] Gate: Oscar reads the [balance results](../rules/balance-and-history.md#java-simulation-plan-006) and decides: wait for playtests, no values changed (Q-10), 18 November 2026
 
 ### Plan 007 - Game UI: setup, board, panel, actions, pop-ups (FR-01, FR-15, NFR-02, NFR-04, NFR-05, NFR-11)
 
@@ -136,7 +136,7 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 
 - [ ] Gate: decide whether the solo build gets its own playtests (NFR-01, NFR-02)
 - [ ] Gate: before any demo, re-check every card's fact and source, and update the working `climate_cards.json` where a figure has changed ([NFR-10](../requirements/nfr-10-fact-accuracy.md) AC-4)
-- [ ] Re-tune `config.json` from results ([Q-10](../rules/open-questions.md))
+- [ ] Re-tune `config.json` from results ([Q-10](../rules/open-questions.md)): watch how often mixed tables reach net zero (19% in simulation) and the Farmer's win rate (22%)
 
 ## Issues log
 
