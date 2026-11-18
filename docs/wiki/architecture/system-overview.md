@@ -3,7 +3,7 @@ title: System overview
 type: architecture
 status: draft
 sources: [../sources/handover.md, ../sources/sub1a-report.md]
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 # System overview
@@ -37,7 +37,7 @@ A single Java 21 desktop application, built with Maven, with four parts: a **hea
 |---|---|---|
 | `model` | Every rule: turns, actions, end of round, meter, disasters, bankruptcy, cards, scoring | [Domain model](domain-model.md), [game flow](game-flow.md) |
 | `config` | Read and validate the data files; build the board, characters and deck | [Data files](data-files.md) |
-| `ui` | Screens and pop-ups in Swing ([ADR-002](../../decisions/002-ui-toolkit.md)) | [Screens and layout](../ux/screens-and-layout.md) |
+| `ui` | Built in [plan 007](../../plans/007-game-screens.md): the title, How to play, setup, game and final-scores screens in Swing ([ADR-002](../../decisions/002-ui-toolkit.md)). `GameController` is the only class that calls the model; presenter classes (`StatusText`, `ActionOptions`, `BoardLayout`, `HowToPlay`, `SetupRules`, `Palette`) hold the testable logic with no Swing in them | [Screens and layout](../ux/screens-and-layout.md) |
 | `sim` | Built in [plan 006](../../plans/006-scoring-and-balance-simulation.md): three computer-player strategies, `Simulator` (one seeded game) and `BalanceReport` (`--simulate`), for NFR-06's 20 games and balance checks | [Balance and design history](../rules/balance-and-history.md) |
 
 ## Key design choices
@@ -46,7 +46,8 @@ A single Java 21 desktop application, built with Maven, with four parts: a **hea
 2. **One seeded random source**, injected into `Dice` and used for every random choice (first player, dice, disaster roll and type, flood district, storm square, card shuffle). A seed replays a whole game exactly.
 3. **Data, not code, for balance** ([NFR-07](../requirements/nfr-07-data-driven-balance.md)). Validated on load so a bad edit fails loudly.
 4. **The model returns choices instead of waiting for them** ([game flow](game-flow.md)), so it never blocks on input (NFR-11).
-5. **Keep the analysis model's names** so the code can be traced to the SUB1a report ([domain model](domain-model.md)).
+5. **A thin UI with one door into the model.** Every press goes through `GameController.perform`, which makes one `Game` call, redraws once, and opens whatever pop-up that call started. The screens never apply a rule or decide what is affordable; the buttons come from `availableActions()` ([plan 007](../../plans/007-game-screens.md)).
+6. **Keep the analysis model's names** so the code can be traced to the SUB1a report ([domain model](domain-model.md)).
 
 ## Dependencies
 

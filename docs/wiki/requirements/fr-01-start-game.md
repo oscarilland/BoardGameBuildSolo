@@ -3,9 +3,9 @@ title: FR-01 Start game
 type: requirement
 id: FR-01
 priority: must
-status: agreed
+status: built
 sources: [../sources/sub1a-report.md]
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 # FR-01 Start game
@@ -41,7 +41,7 @@ Saving player profiles between games.
 
 ## Build status
 
-The rules are built in `Game.start` ([plan 002](../../plans/002-players-characters-and-movement.md)): AC-1 to AC-4 tested in `GameStartTest`. The setup screen ("manual" verification) comes in plan 007, so the page stays `agreed` until then.
+The rules are built in `Game.start` ([plan 002](../../plans/002-players-characters-and-movement.md)): AC-1 to AC-4 tested in `GameStartTest`. The setup screen is built in [plan 007](../../plans/007-game-screens.md): a player count from 4 to 6 (from the data), a name field limited to 20 characters, and a character list showing each character's start and ability. Start is enabled only when the form is complete (`SetupRules`, tested in `LayoutAndTutorialTest`), and `Game.start` makes the final check, with its message shown on the screen. Oscar's hand check of the screen is a gate in [build progress](../operations/build-progress.md).
 
 ## Related
 

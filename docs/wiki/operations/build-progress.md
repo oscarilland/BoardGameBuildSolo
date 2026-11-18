@@ -3,7 +3,7 @@ title: Build progress
 type: operation
 status: draft
 sources: [../requirements/catalogue.md, ../rules/open-questions.md]
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 # Build progress
@@ -117,6 +117,17 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 
 ### Plan 007 - Game UI: setup, board, panel, actions, pop-ups (FR-01, FR-15, NFR-02, NFR-04, NFR-05, NFR-11)
 
+- [x] FR-15, NFR-02, NFR-04, NFR-05, NFR-11 agreed (every player's Resilience and deal shown; a 4-5 screen tutorial; keyboard-only play kept), 18 November 2026
+- [x] Plan drafted ([plan 007](../../plans/007-game-screens.md)), 18 November 2026
+- [x] Gate: plan 007 approved, minimum window 1280×720, 18 November 2026
+- [x] Palette and contrast test; title, How to play and setup screens
+- [x] Game screen: top bar and meter, board, player panel, action bar; controller
+- [x] Route choices, card, round-report and return-roll pop-ups; final-scores screen
+- [x] Keyboard-only play; `--seed`
+- [x] Tests, screens rendered and checked as images, deliberate-bug check: 351 tests; all four bugs caught; window opens in 1.1 s
+- [ ] Gate: Oscar plays a full round by hand at the minimum size and maximised
+- [ ] Plan 007 marked `done`
+
 ### Plan 008 - End-of-game report (FR-16)
 
 ### Plan 009 - Packaging and release (NFR-09), readability check (NFR-03)
@@ -137,6 +148,7 @@ Newest last. Each entry says what happened, its effect and what was done.
 | 2 | 2026-11-17 | **Gson 2.15.0 has a dependency, `error_prone_annotations`**, which ADR-004 said it didn't. The shaded jar warned about overlapping files | Excluded from the jar (compile-time annotations only); ADR-004 has a correction note. Clean build now has no warnings |
 | 3 | 2026-11-17 | Plan 001 asked the validator to enforce 36 squares, 10/12/4/3/7 types and 30 cards. That would hard-code the board's size, against NFR-07 | The validator checks structure only; the counts are asserted by `GameConfigTest`. Recorded in plan 001's Outcome |
 | 4 | 2026-11-18 | **Bankruptcy almost never happens.** In 60 complete headless games (random players, and players who took every action they could afford), nobody went bankrupt: each end of round pays income before the disaster step, so money is topped up before a disaster can take it. The rules work (tested directly in `BankruptcyTest`); this is a balance question | Measured by plan 006's `--simulate`: bankruptcy happens in about 3% of games (0.03 per game, 5,000 games). Rare but real. Open for Oscar to decide whether that's right ([Q-10](../rules/open-questions.md)) |
+| 5 | 2026-11-18 | **The game screen crashed on Start** (found while rendering screens to images during plan 007, before anyone ran it): a custom-painted `JComponent` has no accessibility context, so setting its name threw. Unit tests didn't build Swing panels, so they missed it | Fixed: the painted panels extend `JPanel`, and `ScreensTest` now builds and paints every screen headless through a whole game |
 
 ## Related
 

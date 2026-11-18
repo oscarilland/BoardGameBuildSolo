@@ -3,7 +3,7 @@ title: Local development
 type: operation
 status: draft
 sources: [../../decisions/003-build-tool-and-java-version.md]
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 # Local development
@@ -35,6 +35,7 @@ From the repo root in PowerShell (use `./mvnw` in Git Bash or on macOS). The fir
 .\mvnw.cmd package -DskipTests                 # just rebuild the jar
 java -jar target\net-zero-belfast.jar          # open the game
 java -jar target\net-zero-belfast.jar --check  # load and validate the data only; exit 0 or 1
+java -jar target\net-zero-belfast.jar --seed 2026  # open the game with a fixed seed, to replay a game while testing
 java -jar target\net-zero-belfast.jar --simulate 1000  # balance report from 1,000 computer-played games
 ```
 

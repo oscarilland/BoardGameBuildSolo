@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 import java.awt.GraphicsEnvironment;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Starts Net Zero Belfast.
@@ -21,6 +22,8 @@ import java.util.List;
  *       what it found and exits: 0 if the data is fine, 1 if not. No window, so it works in CI.</li>
  *   <li>{@code java -jar net-zero-belfast.jar --simulate [games]} plays that many games (1,000 by
  *       default) with computer players and prints a balance report. No window.</li>
+ *   <li>{@code java -jar net-zero-belfast.jar --seed N} opens the window with the game's random
+ *       source seeded, so a game played by hand can be replayed exactly while testing.</li>
  * </ul>
  */
 public final class App {
@@ -71,7 +74,21 @@ public final class App {
             System.out.printf("(%.1f s)%n", (System.nanoTime() - started) / 1e9);
             return;
         }
-        SwingUtilities.invokeLater(() -> MainWindow.show(config));
+        // The game's one random source (src/AGENTS.md rule 3), seeded only when testing by hand.
+        Random random;
+        int seed = List.of(args).indexOf("--seed");
+        if (seed >= 0) {
+            try {
+                random = new Random(Long.parseLong(args[seed + 1]));
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.err.println("--seed takes a number, for example --seed 2026");
+                System.exit(1);
+                return;
+            }
+        } else {
+            random = new Random();
+        }
+        SwingUtilities.invokeLater(() -> MainWindow.show(config, random));
     }
 
     /** Shows a start-up error in a dialog, on the event dispatch thread, and waits until it's closed. */

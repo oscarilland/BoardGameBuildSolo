@@ -26,7 +26,7 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 
 ## Status
 
-**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plans 001 to 006 are built: **the whole rules engine works headlessly**, from starting a game through 12 rounds to the scores and a single winner, and `--simulate` plays thousands of games with computer players to check the balance. Next: the screens (plans 007-008).
+**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plans 001 to 007 are built: **the game can be played** on one computer, from the title screen and a short How to play through setup, 12 rounds on the board with cards, disasters and round reports, to the final scores. `--simulate` plays thousands of games with computer players to check the balance. Next: the end-of-game report (plan 008).
 
 ## Setting up
 
@@ -43,4 +43,4 @@ java -jar target\net-zero-belfast.jar --simulate 1000  # balance report
 java scripts/WikiLint.java                     # the wiki
 ```
 
-Run the game with `java -jar target\net-zero-belfast.jar` after a build.
+Run the game with `java -jar target\net-zero-belfast.jar` after a build (add `--seed 2026` to replay the same game while testing).

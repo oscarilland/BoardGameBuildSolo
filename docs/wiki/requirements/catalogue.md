@@ -16,7 +16,7 @@ The acceptance criteria on each page were written on ingest from the rules and d
 
 | ID | Requirement | Priority | Verified by | Status |
 |---|---|---|---|---|
-| [FR-01](fr-01-start-game.md) | Start a game with 4-6 players and distinct characters | Must | JUnit, manual | Agreed (rules built; screen in plan 007) |
+| [FR-01](fr-01-start-game.md) | Start a game with 4-6 players and distinct characters | Must | JUnit, manual | Built |
 | [FR-02](fr-02-starting-values-and-first-player.md) | Starting values and a random first player | Must | JUnit | Built |
 | [FR-03](fr-03-dice-movement-and-junctions.md) | Two dice, clockwise movement, junction choice | Must | JUnit | Built |
 | [FR-04](fr-04-buy-square.md) | Buy an unowned square; no buying if unaffordable | Must | JUnit | Built |
@@ -30,7 +30,7 @@ The acceptance criteria on each page were written on ingest from the rules and d
 | [FR-12](fr-12-disasters.md) | Disasters by danger band, cut by Resilience | Must | JUnit | Built |
 | [FR-13](fr-13-bankruptcy.md) | Bankruptcy | Should | JUnit | Built |
 | [FR-14](fr-14-legacy-score-and-winner.md) | Legacy Score and one winner | Must | JUnit | Built |
-| [FR-15](fr-15-always-visible-status.md) | Year, round, meter, band and every player's status always visible | Must | Manual | Draft |
+| [FR-15](fr-15-always-visible-status.md) | Year, round, meter, band and every player's status always visible | Must | Manual | Built |
 | [FR-16](fr-16-end-of-game-report.md) | End-of-game report | Must | Manual | Agreed (data built; drawing in plan 008) |
 | [FR-17](fr-17-disaster-explanation.md) | One-line explanation for each disaster | Should | Manual | Agreed |
 
@@ -39,16 +39,16 @@ The acceptance criteria on each page were written on ingest from the rules and d
 | ID | Requirement | Priority | Verified by | Status |
 |---|---|---|---|---|
 | [NFR-01](nfr-01-session-length.md) | A 4-player game within 60 minutes | Must | Playtest | Draft |
-| [NFR-02](nfr-02-learnability.md) | 4 in 5 first-time players complete a turn unaided | Must | User test | Draft |
+| [NFR-02](nfr-02-learnability.md) | 4 in 5 first-time players complete a turn unaided | Must | User test | Agreed (AC-1, AC-2 built; user test pending) |
 | [NFR-03](nfr-03-readability.md) | Text scores 60+ on Flesch Reading Ease | Should | Tool check | Draft |
-| [NFR-04](nfr-04-responsiveness.md) | Opens within 5 s, responds within 1 s | Must | Timed test | Draft |
-| [NFR-05](nfr-05-accessibility.md) | WCAG 2.1 AA contrast; square types not by colour alone | Should | Inspection | Draft |
+| [NFR-04](nfr-04-responsiveness.md) | Opens within 5 s, responds within 1 s | Must | Timed test | Agreed (AC-1, AC-3 built; hand check pending) |
+| [NFR-05](nfr-05-accessibility.md) | WCAG 2.1 AA contrast; square types not by colour alone | Should | Inspection | Built |
 | [NFR-06](nfr-06-reliability-and-test-coverage.md) | 80% line coverage of game logic; 20 games without crashes | Must | JUnit, coverage | Built |
 | [NFR-07](nfr-07-data-driven-balance.md) | Balance values and cards in data files | Must | Inspection | Agreed |
 | [NFR-08](nfr-08-privacy-and-security.md) | No personal data, no network, validate all input | Must | Inspection, test | Draft |
 | [NFR-09](nfr-09-portability.md) | Windows and macOS with only a Java runtime | Should | Manual | Draft |
 | [NFR-10](nfr-10-fact-accuracy.md) | Every fact stored with a source | Should | Inspection | Agreed |
-| [NFR-11](nfr-11-energy-efficiency.md) | Under 5% CPU while idle | Could | Profiling | Draft |
+| [NFR-11](nfr-11-energy-efficiency.md) | Under 5% CPU while idle | Could | Profiling | Built |
 
 ## Stretch ideas
 

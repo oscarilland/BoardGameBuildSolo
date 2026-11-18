@@ -3,9 +3,9 @@ title: NFR-04 Responsiveness
 type: requirement
 id: NFR-04
 priority: must
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md]
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 # NFR-04 Responsiveness
@@ -23,6 +23,11 @@ updated: 2026-11-17
 ## Decisions (Oscar, 17 November 2026)
 
 1. **Reference PC:** Oscar's own laptop. The solo version isn't run on EEECS lab PCs ([ADR-003](../../decisions/003-build-tool-and-java-version.md)).
+2. **Agreed** (18 November 2026).
+
+## Build status
+
+[plan 007](../../plans/007-game-screens.md): AC-3 is tested by `ResponsivenessTest` (the fastest of six ends of round on a full six-player board must be under 50 ms). AC-1 was timed on Oscar's laptop on 18 November 2026: the window opened 1.1 seconds after launch. AC-2 is checked by hand in Oscar's play-through, so the page stays `agreed`.
 
 ## Related
 

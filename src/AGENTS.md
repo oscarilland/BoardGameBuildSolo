@@ -2,9 +2,11 @@
 
 Read this before changing anything in `src/`. The root `AGENTS.md` gates still apply: no change here without an approved plan in `docs/plans/`.
 
-> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) to [006](../docs/plans/006-scoring-and-balance-simulation.md) are built. **The rules engine is complete**: `model` holds every rule including scoring (`Game.result()` after `GAME_OVER`), and `sim` holds computer players and the `--simulate` balance report. Next are the screens (plans 007-008).
+> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) to [007](../docs/plans/007-game-screens.md) are built. **The game is playable**: `model` holds every rule including scoring (`Game.result()` after `GAME_OVER`), `sim` holds computer players and the `--simulate` balance report, and `ui` has the title, How to play, setup, game and final-scores screens. Next is the end-of-game report (plan 008).
 >
-> The model has the characters (with ability hooks), players, squares, the board, the Climate Card deck, the `ClimateMeter`, the `DisasterManager`, and a `Game` that runs turns as a phase machine: bankrupt players' return rolls, rolling and moving (with junction choices), drawing and resolving cards, and the actions after moving. After the last player of each round it runs the six end-of-round steps; after round 12 it stops in `GAME_OVER` and scores. The window is still empty. Base package: `netzerobelfast`.
+> The model has the characters (with ability hooks), players, squares, the board, the Climate Card deck, the `ClimateMeter`, the `DisasterManager`, and a `Game` that runs turns as a phase machine: bankrupt players' return rolls, rolling and moving (with junction choices), drawing and resolving cards, and the actions after moving. After the last player of each round it runs the six end-of-round steps; after round 12 it stops in `GAME_OVER` and scores. Base package: `netzerobelfast`.
+>
+> **UI:** `GameController.perform` is the only door from the screens into the model. Logic worth testing goes in a presenter class with no Swing (`StatusText`, `ActionOptions`, `BoardLayout`, `HowToPlay`, `SetupRules`), and every colour in `Palette`, with each new text/background pair added to `Palette.TEXT_PAIRS`. Custom-painted parts extend `JPanel`, not `JComponent` (a bare component has no accessibility context, and crashes). `ScreensTest` builds and paints every screen headless; UI tests outside `model` set up games through `model.TestGames`. No timers or sleeps in `ui` (a test enforces it).
 >
 > **Computer players:** anything in `sim` may only choose from what `Game` offers (`availableActions()`, `affordableOptions()`), never change the model directly.
 >

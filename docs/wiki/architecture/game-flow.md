@@ -3,7 +3,7 @@ title: Game flow
 type: architecture
 status: draft
 sources: [../sources/design-diagrams.md, ../sources/sub1a-report.md]
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 # Game flow
@@ -58,6 +58,8 @@ In the diagrams, model objects talk to the human directly ("ask for route", "sho
 **Climate Cards, built in [plan 004](../../plans/004-climate-cards.md):** arriving on a Climate Card square draws a card at once (it's compulsory, so it isn't an `Action`). A quiz waits in `AWAITING_QUIZ_ANSWER` for `answerQuiz(i)`; a choice waits in `AWAITING_CHOICE` for `chooseOption(i)` from `affordableOptions()`; an event applies straight away. Then the game is back in `MOVE_DONE` with `lastCard()` holding the result, fact and sources. This is the Draw Climate Card sequence with its "show card text" and "answer" arrows turned into a phase and a method call.
 
 The approach: the model works as a small state machine. Each step either completes or returns a **pending decision** (choose route, choose landing action, answer quiz, choose option A or B, convert or not, end turn) with its legal options. The UI, or a bot, calls back with the choice, and the model validates it and continues. The sequence diagrams stay true as a description of the order of calls; only the "ask the user" arrows become a returned decision.
+
+**The screens, built in [plan 007](../../plans/007-game-screens.md):** `GameController` turns each button into one call (`roll`, `take`, `chooseRoute`, `answerQuiz` and so on), then looks at what changed. A new `lastCard()` opens the card result with its fact and source; a new `lastRound()` opens the round report; a new `lastReturn()` shows the return roll; `AWAITING_QUIZ_ANSWER` and `AWAITING_CHOICE` open the card's question; `GAME_OVER` opens the final scores. Route and direction choices are buttons on the action bar.
 
 - **For:** one code path for players, bots and tests; the model never blocks (NFR-11); every action is validated (NFR-08).
 - **Against:** a little more structure than direct method calls. The SUB2 sequence diagrams should show it.
