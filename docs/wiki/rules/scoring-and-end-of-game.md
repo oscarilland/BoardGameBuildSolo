@@ -1,7 +1,7 @@
 ---
 title: Scoring and end of game
 type: rules
-status: draft
+status: built
 sources: [../sources/handover.md, ../sources/rules-v4.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -11,6 +11,8 @@ updated: 2026-11-17
 ## Summary
 
 After round 12 the city has either reached net zero or not, and that decides whether money counts. There is always exactly one winner.
+
+> **Build status:** built in `Scoring` and `GameResult` ([plan 006](../../plans/006-scoring-and-balance-simulation.md)). The end-of-game screen is plan 008.
 
 ## Rules
 

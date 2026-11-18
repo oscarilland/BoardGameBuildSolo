@@ -26,7 +26,7 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 
 ## Status
 
-**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plans 001 to 005 are built: the game loads and validates its data, and every rule except scoring works headlessly, from starting a game through 12 rounds of moves, actions, Climate Cards, end-of-round payouts, disasters and bankruptcy. Next: plan 006 (scoring, the winner and the 20-game check).
+**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plans 001 to 006 are built: **the whole rules engine works headlessly**, from starting a game through 12 rounds to the scores and a single winner, and `--simulate` plays thousands of games with computer players to check the balance. Next: the screens (plans 007-008).
 
 ## Setting up
 
@@ -39,6 +39,7 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 ```text
 .\mvnw.cmd verify                              # build, tests, 80% coverage rule
 java -jar target\net-zero-belfast.jar --check  # the data files load and validate
+java -jar target\net-zero-belfast.jar --simulate 1000  # balance report
 java scripts/WikiLint.java                     # the wiki
 ```
 

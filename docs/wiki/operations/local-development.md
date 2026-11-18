@@ -35,7 +35,10 @@ From the repo root in PowerShell (use `./mvnw` in Git Bash or on macOS). The fir
 .\mvnw.cmd package -DskipTests                 # just rebuild the jar
 java -jar target\net-zero-belfast.jar          # open the game
 java -jar target\net-zero-belfast.jar --check  # load and validate the data only; exit 0 or 1
+java -jar target\net-zero-belfast.jar --simulate 1000  # balance report from 1,000 computer-played games
 ```
+
+`--simulate` uses a fixed seed, so the same data always gives the same report; change a value in `src\main\resources\data\config.json`, rebuild, and run it again to see the effect. 1,000 games take under a second.
 
 The coverage report is at `target\site\jacoco\index.html`.
 

@@ -38,7 +38,7 @@ A single Java 21 desktop application, built with Maven, with four parts: a **hea
 | `model` | Every rule: turns, actions, end of round, meter, disasters, bankruptcy, cards, scoring | [Domain model](domain-model.md), [game flow](game-flow.md) |
 | `config` | Read and validate the data files; build the board, characters and deck | [Data files](data-files.md) |
 | `ui` | Screens and pop-ups in Swing ([ADR-002](../../decisions/002-ui-toolkit.md)) | [Screens and layout](../ux/screens-and-layout.md) |
-| `sim` | Bots and a headless runner for NFR-06's 20 games and balance checks | [Balance and design history](../rules/balance-and-history.md) |
+| `sim` | Built in [plan 006](../../plans/006-scoring-and-balance-simulation.md): three computer-player strategies, `Simulator` (one seeded game) and `BalanceReport` (`--simulate`), for NFR-06's 20 games and balance checks | [Balance and design history](../rules/balance-and-history.md) |
 
 ## Key design choices
 

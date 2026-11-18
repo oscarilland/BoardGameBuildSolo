@@ -32,7 +32,8 @@ import java.util.stream.Collectors;
  * moving (FR-04 to FR-09, plan 003): {@link #availableActions()} lists what the player can do and
  * {@link #take(Action)} does it; Climate Cards (FR-10, plan 004), drawn on arrival; and the end
  * of each round, disasters and bankruptcy (FR-11 to FR-13, FR-17, plan 005). After the last
- * round the game is in {@code GAME_OVER}; scoring is plan 006.
+ * round the game is in {@code GAME_OVER} and {@link #result()} holds the scores and winner
+ * (FR-14, FR-16, plan 006).
  */
 public final class Game {
 
@@ -102,6 +103,9 @@ public final class Game {
     // End of round and bankruptcy (plan 005).
     private RoundReport lastRound;
     private ReturnAttempt lastReturn;
+
+    // The end of the game (plan 006).
+    private GameResult result;
 
     private Game(Rules rules, Board board, Dice dice, List<ClimateCard> cards, List<Player> players, int firstPlayer) {
         this.rules = rules;
@@ -242,9 +246,23 @@ public final class Game {
         return Optional.ofNullable(lastReturn);
     }
 
+    /** The scores, the winner and the end-of-game report data, once the game is over (FR-14, FR-16). */
+    public Optional<GameResult> result() {
+        return Optional.ofNullable(result);
+    }
+
+    Dice dice() {
+        return dice;
+    }
+
     /** The last finished move, if any player has moved yet. */
     public Optional<Move> lastMove() {
         return Optional.ofNullable(lastMove);
+    }
+
+    /** True if the current player has already used this turn's one conversion (FR-07 AC-2). */
+    public boolean hasConvertedThisTurn() {
+        return convertedThisTurn;
     }
 
     /** Steps still to go in a move that's paused for a choice; 0 otherwise. */
@@ -364,10 +382,12 @@ public final class Game {
         steps.add(RoundReport.Step.INCOME);
 
         // Step 2: carbon tax, on every owned Polluting square, whatever its state (Q-15).
+        // The same count feeds each player's share of the city's pollution (FR-16 AC-2).
         int tax = rules.polluting().carbonTaxGP();
         for (Square square : board.squares()) {
             if (square instanceof PollutingSquare polluting && polluting.owner() != null) {
                 polluting.owner().addGP(-tax);
+                polluting.owner().addPollutingSquareRounds(1);
             }
         }
         steps.add(RoundReport.Step.CARBON_TAX);
@@ -419,6 +439,8 @@ public final class Game {
         year += yearsPerRound;
         if (round > rules.game().rounds()) {
             phase = Phase.GAME_OVER;
+            // The analysis model's endGame(): score everyone and choose one winner (FR-14).
+            result = Scoring.score(this);
         }
     }
 

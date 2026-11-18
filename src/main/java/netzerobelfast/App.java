@@ -3,6 +3,7 @@ package netzerobelfast;
 import netzerobelfast.config.ConfigException;
 import netzerobelfast.config.GameConfig;
 import netzerobelfast.model.Character;
+import netzerobelfast.sim.BalanceReport;
 import netzerobelfast.ui.MainWindow;
 
 import javax.swing.JOptionPane;
@@ -18,9 +19,17 @@ import java.util.List;
  *   <li>{@code java -jar net-zero-belfast.jar} loads the data and opens the window.</li>
  *   <li>{@code java -jar net-zero-belfast.jar --check} loads and validates the data, prints
  *       what it found and exits: 0 if the data is fine, 1 if not. No window, so it works in CI.</li>
+ *   <li>{@code java -jar net-zero-belfast.jar --simulate [games]} plays that many games (1,000 by
+ *       default) with computer players and prints a balance report. No window.</li>
  * </ul>
  */
 public final class App {
+
+    /** Games played by {@code --simulate} when no number is given. */
+    private static final int DEFAULT_SIMULATED_GAMES = 1000;
+
+    /** A fixed seed, so the same {@code --simulate} command always prints the same report. */
+    private static final long SIMULATION_SEED = 2026;
 
     private App() {}
 
@@ -43,6 +52,23 @@ public final class App {
 
         if (checkOnly) {
             System.out.println(config.summary());
+            return;
+        }
+        int simulate = List.of(args).indexOf("--simulate");
+        if (simulate >= 0) {
+            int games = DEFAULT_SIMULATED_GAMES;
+            if (simulate + 1 < args.length) {
+                try {
+                    games = Integer.parseInt(args[simulate + 1]);
+                } catch (NumberFormatException e) {
+                    System.err.println("--simulate takes a number of games, for example --simulate 1000");
+                    System.exit(1);
+                    return;
+                }
+            }
+            long started = System.nanoTime();
+            System.out.print(BalanceReport.run(config, games, SIMULATION_SEED).format());
+            System.out.printf("(%.1f s)%n", (System.nanoTime() - started) / 1e9);
             return;
         }
         SwingUtilities.invokeLater(() -> MainWindow.show(config));

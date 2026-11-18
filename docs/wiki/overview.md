@@ -36,7 +36,7 @@ A Java 21 desktop app with a Swing UI, built with Maven ([ADR-002](../decisions/
 
 ## Status
 
-**Building.** The design decisions are made, and [plan 001](../plans/001-walking-skeleton.md) (the walking skeleton) is built, and so are [plan 002](../plans/002-players-characters-and-movement.md) (starting a game and moving around the board) [plan 003](../plans/003-square-actions.md) (buying, co-funding, lobbying, converting, Resilience, the Glider and the character abilities) [plan 004](../plans/004-climate-cards.md) (Climate Cards) and [plan 005](../plans/005-end-of-round-disasters-and-bankruptcy.md) (the end of each round, disasters and bankruptcy). Every rule except scoring now works, with no screens yet. See [build progress](operations/build-progress.md).
+**Building.** The design decisions are made, and [plan 001](../plans/001-walking-skeleton.md) (the walking skeleton) is built, and so are [plan 002](../plans/002-players-characters-and-movement.md) (starting a game and moving around the board) [plan 003](../plans/003-square-actions.md) (buying, co-funding, lobbying, converting, Resilience, the Glider and the character abilities) [plan 004](../plans/004-climate-cards.md) (Climate Cards) [plan 005](../plans/005-end-of-round-disasters-and-bankruptcy.md) (the end of each round, disasters and bankruptcy) and [plan 006](../plans/006-scoring-and-balance-simulation.md) (scoring, the winner, and computer players for testing and balance). Every rule now works; the screens come next. See [build progress](operations/build-progress.md).
 
 ## Scope boundaries
 

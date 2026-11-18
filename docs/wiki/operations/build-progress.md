@@ -105,6 +105,16 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 
 ### Plan 006 - Scoring, end of game and the 20-game headless run (FR-14, NFR-06)
 
+- [x] FR-14 and FR-16 agreed (shares counted across the whole game; computer players also measure balance), 18 November 2026
+- [x] Plan drafted ([plan 006](../../plans/006-scoring-and-balance-simulation.md)), 18 November 2026
+- [x] Gate: plan 006 approved, 18 November 2026
+- [x] Scoring with exact scores and tie-breaks; `GameResult` on `GAME_OVER`
+- [x] End-of-game report data: meter history, target lines, polluting shares
+- [x] `sim` package: three strategies, `Simulator`, `BalanceReport`; `--simulate`
+- [x] 20-game test (NFR-06 AC-2, AC-3); balance results recorded; issue 4 answered: 295 tests; all four bugs caught
+- [x] Plan 006 marked `done` (18 November 2026). **The rules engine is complete.**
+- [ ] Gate: Oscar reads the [balance results](../rules/balance-and-history.md#java-simulation-plan-006) and decides whether anything needs re-tuning now or after playtests (Q-10)
+
 ### Plan 007 - Game UI: setup, board, panel, actions, pop-ups (FR-01, FR-15, NFR-02, NFR-04, NFR-05, NFR-11)
 
 ### Plan 008 - End-of-game report (FR-16)
@@ -126,7 +136,7 @@ Newest last. Each entry says what happened, its effect and what was done.
 | 1 | 2026-11-17 | The handbook PDF couldn't be read with the PDF page renderer (`pdftoppm` isn't installed). Text was extracted with Python's PyMuPDF instead; all 18 pages came through | Worked around. Install Poppler if page images are ever needed |
 | 2 | 2026-11-17 | **Gson 2.15.0 has a dependency, `error_prone_annotations`**, which ADR-004 said it didn't. The shaded jar warned about overlapping files | Excluded from the jar (compile-time annotations only); ADR-004 has a correction note. Clean build now has no warnings |
 | 3 | 2026-11-17 | Plan 001 asked the validator to enforce 36 squares, 10/12/4/3/7 types and 30 cards. That would hard-code the board's size, against NFR-07 | The validator checks structure only; the counts are asserted by `GameConfigTest`. Recorded in plan 001's Outcome |
-| 4 | 2026-11-18 | **Bankruptcy almost never happens.** In 60 complete headless games (random players, and players who took every action they could afford), nobody went bankrupt: each end of round pays income before the disaster step, so money is topped up before a disaster can take it. The rules work (tested directly in `BankruptcyTest`); this is a balance question | Open, for Oscar and playtests ([Q-10](../rules/open-questions.md) covers re-tuning). Plan 006's balance check can measure it with smarter bots |
+| 4 | 2026-11-18 | **Bankruptcy almost never happens.** In 60 complete headless games (random players, and players who took every action they could afford), nobody went bankrupt: each end of round pays income before the disaster step, so money is topped up before a disaster can take it. The rules work (tested directly in `BankruptcyTest`); this is a balance question | Measured by plan 006's `--simulate`: bankruptcy happens in about 3% of games (0.03 per game, 5,000 games). Rare but real. Open for Oscar to decide whether that's right ([Q-10](../rules/open-questions.md)) |
 
 ## Related
 

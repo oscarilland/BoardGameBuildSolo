@@ -53,6 +53,8 @@ In the diagrams, model objects talk to the human directly ("ask for route", "sho
 - on their first bankrupt turn, the phase is `AWAITING_RETURN_ROLL`, and `rollToReturn()` either brings them back (then `AWAITING_ROLL` for a normal turn) or ends their turn with no move and no actions;
 - on the turn after, they return automatically.
 
+**The end of the game, built in [plan 006](../../plans/006-scoring-and-balance-simulation.md):** on entering `GAME_OVER`, the game scores itself (the analysis model's `endGame()`), and `result()` returns the ranking, the single winner, how they were decided, and the end-of-game report data.
+
 **Climate Cards, built in [plan 004](../../plans/004-climate-cards.md):** arriving on a Climate Card square draws a card at once (it's compulsory, so it isn't an `Action`). A quiz waits in `AWAITING_QUIZ_ANSWER` for `answerQuiz(i)`; a choice waits in `AWAITING_CHOICE` for `chooseOption(i)` from `affordableOptions()`; an event applies straight away. Then the game is back in `MOVE_DONE` with `lastCard()` holding the result, fact and sources. This is the Draw Climate Card sequence with its "show card text" and "answer" arrows turned into a phase and a method call.
 
 The approach: the model works as a small state machine. Each step either completes or returns a **pending decision** (choose route, choose landing action, answer quiz, choose option A or B, convert or not, end turn) with its legal options. The UI, or a bot, calls back with the choice, and the model validates it and continues. The sequence diagrams stay true as a description of the order of calls; only the "ask the user" arrows become a returned decision.

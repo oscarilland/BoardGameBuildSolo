@@ -3,7 +3,7 @@ title: FR-16 End-of-game report
 type: requirement
 id: FR-16
 priority: must
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -29,9 +29,14 @@ After scoring, a report screen shows: a line graph of the meter for every round 
 
 "The decisions that moved the meter most", from rules v4's Learning section: stretch item S-02.
 
-## Open questions for Oscar
+## Decisions (Oscar, 18 November 2026)
 
-1. AC-2 assumes "share across the game" means polluting-square-rounds, as the simulation counted. Or should it be squares owned at the end?
+1. **Share across the whole game** (AC-2): polluting-square-rounds, as the balance simulation counted. Each round a player owns a Polluting square counts once, so converting late doesn't erase years of pollution (LO5).
+2. **Agreed.**
+
+## Build status
+
+The report's data is built in [plan 006](../../plans/006-scoring-and-balance-simulation.md): the 13 meter values with the target and net zero lines (AC-1), each player's share counted across the game (AC-2), and the scores and winner (AC-3), tested in `EndOfGameReportTest`. Drawing it (the graph, AC-4) is plan 008, so the page stays `agreed` until then.
 
 ## Related
 

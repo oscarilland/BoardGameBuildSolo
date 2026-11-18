@@ -1,7 +1,7 @@
 ---
 title: Balance and design history
 type: rules
-status: draft
+status: built
 sources: [../sources/handover.md, ../sources/rules-v4.md, ../sources/sub1a-report.md, ../sources/balance-simulation.md]
 updated: 2026-11-17
 ---
@@ -54,9 +54,28 @@ Rules v4's numbers were set by a Python simulation that played thousands of game
 
 Earlier, v2 had an always-dead carbon tax, an off-by-one year count, and rich characters winning over 80% of games.
 
-## Using this in the Java build
+## Java simulation (plan 006)
 
-The `sim` package ([system overview](../architecture/system-overview.md)) can replay the same bot strategies against the real rules, including junctions and the real board. That checks the Python numbers and supports re-tuning `config.json` after playtests ([Q-10](open-questions.md)). The Python simulation's own simplifications are listed on its [receipt](../sources/balance-simulation.md).
+`java -jar net-zero-belfast.jar --simulate 5000` plays the built game with computer players ([plan 006](../../plans/006-scoring-and-balance-simulation.md)): 4-6 players, random characters, and a random mix of three strategies. Those are random (leaning green or polluting), green (buys green, converts, co-funds) and polluter (buys polluting, never converts, takes the money option). Results on 18 November 2026, current data:
+
+| Measure | Java | Python (above) |
+|---|---|---|
+| Net zero: mostly green / mixed / mostly polluting | 58% / 19% / 0% | 73% / 54% / 13% |
+| Character win rates (fair about 20%) | Tech Entrepreneur 18%, Industrialist 19%, Activist 20%, Planner 20%, Student 21%, Farmer 22% | 17% to 24%; Farmer 24% |
+| Green strategy | 40% | 17% |
+| Polluting strategy | 0% (never converts) | 13% (converts at the end) |
+| Games with a bankruptcy | 3% (0.03 per game) | - |
+| Disasters per game | 7.2 | - |
+
+**Why the two differ.** The Java game is the real one: junctions and the City Centre route, the real board order, all 30 cards with their exact effects, the 2030 and 2040 penalties, and floods and storms that close squares for a round. The Python model simplified all of these. The bots differ too: Java's polluter never converts, and its green player is stricter.
+
+**What it suggests, for Oscar and playtesting:**
+- **Characters are balanced.** Every character wins 18-22%. The Farmer is still slightly strong ([Q-10](open-questions.md)).
+- **Net zero is harder than the Python model showed**, especially in mixed games (19% against 54%). Players who mostly pollute never reach it.
+- **Pure polluting never wins.** When the city misses net zero, money is worthless and the carbon tax eats GP, so the lesson lands hard. Whether a mixed strategy, or polluting then converting late, can still win is worth testing with real players.
+- **Bankruptcy is rare** (3% of games), because income is paid before disasters each round (issue 4 in build progress).
+
+Computer players aren't people, so treat these as a guide for re-tuning `config.json` after playtests. The Python simulation's own simplifications are listed on its [receipt](../sources/balance-simulation.md).
 
 ## Related
 

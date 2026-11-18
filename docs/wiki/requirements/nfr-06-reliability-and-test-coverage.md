@@ -3,7 +3,7 @@ title: NFR-06 Reliability and test coverage
 type: requirement
 id: NFR-06
 priority: must
-status: agreed
+status: built
 sources: [../sources/sub1a-report.md, ../sources/module-handbook.md]
 updated: 2026-11-17
 ---
@@ -29,6 +29,11 @@ Coverage of UI classes (they're tested by hand).
 ## Decisions (Oscar, 17 November 2026)
 
 1. **Agreed** as part of "all recommended". Coverage is enforced by JaCoCo in the Maven build ([ADR-003](../../decisions/003-build-tool-and-java-version.md)).
+2. **The computer players double as a balance tool** (Oscar, 18 November 2026): a `sim` package with several strategies plays the 20 games for AC-2, and `--simulate N` reports net zero rate, win rate by character and how often bankruptcy happens.
+
+## Build status
+
+**Built.** AC-1: JaCoCo fails the build below 80% line coverage of `model`, `config` and `sim` (plan 001, `sim` added in plan 006). AC-2 and AC-3: `SimulatorTest` plays 20 complete seeded games with 4-6 players and a mix of strategies, checking one winner each, no negative money before repayments and 13 meter values ([plan 006](../../plans/006-scoring-and-balance-simulation.md)).
 
 ## Related
 

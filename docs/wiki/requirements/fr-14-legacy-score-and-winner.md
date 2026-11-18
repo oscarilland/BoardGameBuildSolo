@@ -3,7 +3,7 @@ title: FR-14 Legacy Score and winner
 type: requirement
 id: FR-14
 priority: must
-status: draft
+status: built
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -35,6 +35,11 @@ Shared wins; a cooperative "everyone wins" mode.
 
 1. Final tie-break: fewer Polluting squares, then a die roll-off ([Q-01](../rules/open-questions.md)).
 2. Exact scores, shown to one decimal place ([Q-16](../rules/open-questions.md)).
+3. **Agreed** (18 November 2026).
+
+## Build status
+
+**Built** in [plan 006](../../plans/006-scoring-and-balance-simulation.md): AC-1 to AC-6, tested in `ScoringTest` and `EndOfGameReportTest`. The model says whether Belfast reached net zero (AC-3); the end screen that shows it is plan 008.
 
 ## Related
 

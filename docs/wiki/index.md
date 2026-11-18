@@ -39,16 +39,16 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [FR-11 End-of-round order](requirements/fr-11-end-of-round-order.md) - must, built
 - [FR-12 Disasters](requirements/fr-12-disasters.md) - must, built
 - [FR-13 Bankruptcy](requirements/fr-13-bankruptcy.md) - should, built
-- [FR-14 Legacy Score and winner](requirements/fr-14-legacy-score-and-winner.md) - must, draft
+- [FR-14 Legacy Score and winner](requirements/fr-14-legacy-score-and-winner.md) - must, built
 - [FR-15 Always-visible status](requirements/fr-15-always-visible-status.md) - must, draft
-- [FR-16 End-of-game report](requirements/fr-16-end-of-game-report.md) - must, draft
+- [FR-16 End-of-game report](requirements/fr-16-end-of-game-report.md) - must, agreed
 - [FR-17 Disaster explanation](requirements/fr-17-disaster-explanation.md) - should, agreed
 - [NFR-01 Session length](requirements/nfr-01-session-length.md) - must, draft
 - [NFR-02 Learnability](requirements/nfr-02-learnability.md) - must, draft
 - [NFR-03 Readability](requirements/nfr-03-readability.md) - should, draft
 - [NFR-04 Responsiveness](requirements/nfr-04-responsiveness.md) - must, draft
 - [NFR-05 Accessibility](requirements/nfr-05-accessibility.md) - should, draft
-- [NFR-06 Reliability and test coverage](requirements/nfr-06-reliability-and-test-coverage.md) - must, agreed
+- [NFR-06 Reliability and test coverage](requirements/nfr-06-reliability-and-test-coverage.md) - must, built
 - [NFR-07 Data-driven balance](requirements/nfr-07-data-driven-balance.md) - must, agreed
 - [NFR-08 Privacy and security](requirements/nfr-08-privacy-and-security.md) - must, draft
 - [NFR-09 Portability](requirements/nfr-09-portability.md) - should, draft
@@ -86,6 +86,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [Plan 003 Square actions](../plans/003-square-actions.md) - done: FR-04 to FR-09; square classes, offered actions, character abilities
 - [Plan 004 Climate cards](../plans/004-climate-cards.md) - done: FR-10, NFR-10; deck, quiz/choice/event, the meter starts, the bankruptcy trigger
 - [Plan 005 End of round, disasters and bankruptcy](../plans/005-end-of-round-disasters-and-bankruptcy.md) - done: FR-11, FR-12, FR-13, FR-17; the six steps, disasters, full bankruptcy, game over after round 12
+- [Plan 006 Scoring, end-of-game report and balance simulation](../plans/006-scoring-and-balance-simulation.md) - done: FR-14, FR-16, NFR-06; exact scores and tie-breaks, report data, computer players, `--simulate`
 
 See [build progress](operations/build-progress.md) for the proposed order of later plans.
 

@@ -26,6 +26,7 @@ public final class Player {
     private boolean bankrupt;
     private int turnsBankrupt;
     private int loanRepayments;
+    private int pollutingSquareRounds;
 
     Player(String name, Character character, int startPosition) {
         this.name = name;
@@ -91,6 +92,18 @@ public final class Player {
     /** £M to be deducted at the end of the game: £15M for each return from bankruptcy (FR-13 AC-6). */
     public int loanRepayments() {
         return loanRepayments;
+    }
+
+    /**
+     * Each round this player owned a Polluting square counts once per square: owning 2 for 6
+     * rounds counts 12. Their share of the city's total is shown in the end-of-game report (FR-16).
+     */
+    public int pollutingSquareRounds() {
+        return pollutingSquareRounds;
+    }
+
+    void addPollutingSquareRounds(int squares) {
+        pollutingSquareRounds += squares;
     }
 
     /**

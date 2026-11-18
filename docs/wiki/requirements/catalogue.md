@@ -29,9 +29,9 @@ The acceptance criteria on each page were written on ingest from the rules and d
 | [FR-11](fr-11-end-of-round-order.md) | End-of-round steps in a fixed order | Must | JUnit | Built |
 | [FR-12](fr-12-disasters.md) | Disasters by danger band, cut by Resilience | Must | JUnit | Built |
 | [FR-13](fr-13-bankruptcy.md) | Bankruptcy | Should | JUnit | Built |
-| [FR-14](fr-14-legacy-score-and-winner.md) | Legacy Score and one winner | Must | JUnit | Draft |
+| [FR-14](fr-14-legacy-score-and-winner.md) | Legacy Score and one winner | Must | JUnit | Built |
 | [FR-15](fr-15-always-visible-status.md) | Year, round, meter, band and every player's status always visible | Must | Manual | Draft |
-| [FR-16](fr-16-end-of-game-report.md) | End-of-game report | Must | Manual | Draft |
+| [FR-16](fr-16-end-of-game-report.md) | End-of-game report | Must | Manual | Agreed (data built; drawing in plan 008) |
 | [FR-17](fr-17-disaster-explanation.md) | One-line explanation for each disaster | Should | Manual | Agreed |
 
 ## Non-functional requirements
@@ -43,7 +43,7 @@ The acceptance criteria on each page were written on ingest from the rules and d
 | [NFR-03](nfr-03-readability.md) | Text scores 60+ on Flesch Reading Ease | Should | Tool check | Draft |
 | [NFR-04](nfr-04-responsiveness.md) | Opens within 5 s, responds within 1 s | Must | Timed test | Draft |
 | [NFR-05](nfr-05-accessibility.md) | WCAG 2.1 AA contrast; square types not by colour alone | Should | Inspection | Draft |
-| [NFR-06](nfr-06-reliability-and-test-coverage.md) | 80% line coverage of game logic; 20 games without crashes | Must | JUnit, coverage | Agreed |
+| [NFR-06](nfr-06-reliability-and-test-coverage.md) | 80% line coverage of game logic; 20 games without crashes | Must | JUnit, coverage | Built |
 | [NFR-07](nfr-07-data-driven-balance.md) | Balance values and cards in data files | Must | Inspection | Agreed |
 | [NFR-08](nfr-08-privacy-and-security.md) | No personal data, no network, validate all input | Must | Inspection, test | Draft |
 | [NFR-09](nfr-09-portability.md) | Windows and macOS with only a Java runtime | Should | Manual | Draft |

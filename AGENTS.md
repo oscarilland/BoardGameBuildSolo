@@ -59,6 +59,7 @@ Use the smallest checks that cover the change while working:
 | Docs | `java scripts/WikiLint.java` and `git diff --check` |
 | Java source | `.\mvnw.cmd verify` in PowerShell (`./mvnw verify` in Git Bash or macOS): compile, JUnit and the 80% coverage rule ([ADR-003](docs/decisions/003-build-tool-and-java-version.md)) |
 | Data files | `java -jar target/net-zero-belfast.jar --check` after a build: loads and validates the data, exit 0 or 1 |
+| Balance values | `java -jar target/net-zero-belfast.jar --simulate 1000` before and after changing a value in `config.json`; record the change and its effect on [balance and design history](docs/wiki/rules/balance-and-history.md) |
 | UI | The source checks, then launch the game and play at least one full round by hand |
 
 Run the full set once before a release, not after every edit. Never report a check as passed if it failed or wasn't run.

@@ -2,7 +2,11 @@
 
 Read this before changing anything in `src/`. The root `AGENTS.md` gates still apply: no change here without an approved plan in `docs/plans/`.
 
-> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) to [005](../docs/plans/005-end-of-round-disasters-and-bankruptcy.md) are built: data loading and validation, seeded `Dice`, and in `model` every rule except scoring. That covers the characters (with ability hooks), players, squares, the board, the Climate Card deck, the `ClimateMeter`, the `DisasterManager`, and a `Game` that runs turns as a phase machine: bankrupt players' return rolls, rolling and moving (with junction choices), drawing and resolving cards, and the actions after moving. After the last player of each round it runs the six end-of-round steps; after round 12 it stops in `GAME_OVER`. Scoring is plan 006; the window is still empty. Base package: `netzerobelfast`.
+> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) to [006](../docs/plans/006-scoring-and-balance-simulation.md) are built. **The rules engine is complete**: `model` holds every rule including scoring (`Game.result()` after `GAME_OVER`), and `sim` holds computer players and the `--simulate` balance report. Next are the screens (plans 007-008).
+>
+> The model has the characters (with ability hooks), players, squares, the board, the Climate Card deck, the `ClimateMeter`, the `DisasterManager`, and a `Game` that runs turns as a phase machine: bankrupt players' return rolls, rolling and moving (with junction choices), drawing and resolving cards, and the actions after moving. After the last player of each round it runs the six end-of-round steps; after round 12 it stops in `GAME_OVER` and scores. The window is still empty. Base package: `netzerobelfast`.
+>
+> **Computer players:** anything in `sim` may only choose from what `Game` offers (`availableActions()`, `affordableOptions()`), never change the model directly.
 >
 > **Rounds in tests:** ending a round rolls the disaster die. When a test plays a full round with `ScriptedRandom`, add `.noDisaster()` where the round ends, or script the die and the disaster. `Game.endRound()` is package-private, so a test can also run it directly.
 >
