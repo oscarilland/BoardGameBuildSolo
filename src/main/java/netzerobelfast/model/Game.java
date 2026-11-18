@@ -30,14 +30,16 @@ import java.util.stream.Collectors;
  *
  * <p>Built so far: starting a game (FR-01, FR-02), moving (FR-03, plan 002), the actions after
  * moving (FR-04 to FR-09, plan 003): {@link #availableActions()} lists what the player can do and
- * {@link #take(Action)} does it; and Climate Cards (FR-10, plan 004), drawn on arrival. The
- * end-of-round steps come in plan 005; for now the end of a round advances the year and clears
- * lobbying.
+ * {@link #take(Action)} does it; Climate Cards (FR-10, plan 004), drawn on arrival; and the end
+ * of each round, disasters and bankruptcy (FR-11 to FR-13, FR-17, plan 005). After the last
+ * round the game is in {@code GAME_OVER}; scoring is plan 006.
  */
 public final class Game {
 
     /** What the game is waiting for. */
     public enum Phase {
+        /** A bankrupt player rolls one die to see if they're back in the game (FR-13 AC-4). */
+        AWAITING_RETURN_ROLL,
         /** The current player rolls the dice. */
         AWAITING_ROLL,
         /** The move has reached a junction with steps left: stay on the loop or take the City Centre? */
@@ -49,8 +51,16 @@ public final class Game {
         /** A choice card was drawn: option A or B? See {@link #affordableOptions()}. */
         AWAITING_CHOICE,
         /** The move is finished: the player may take the actions in {@link #availableActions()}, then ends their turn. */
-        MOVE_DONE
+        MOVE_DONE,
+        /** The last round has ended. Nothing more can happen; scoring is plan 006. */
+        GAME_OVER
     }
+
+    /**
+     * A bankrupt player's turn: the die rolled to return (0 if they returned automatically), and
+     * whether they're back.
+     */
+    public record ReturnAttempt(int roll, boolean returned) {}
 
     /** One player as entered on the setup screen. */
     public record PlayerSetup(String name, String characterId) {}
@@ -63,6 +73,7 @@ public final class Game {
     private final Dice dice;
     private final CardDeck deck;
     private final ClimateMeter meter;
+    private final DisasterManager disasters;
     private final List<Player> players;
     private final int firstPlayer;
     private final int yearsPerRound;
@@ -88,13 +99,18 @@ public final class Game {
     private ClimateCard pendingCard;
     private CardResult lastCard;
 
+    // End of round and bankruptcy (plan 005).
+    private RoundReport lastRound;
+    private ReturnAttempt lastReturn;
+
     private Game(Rules rules, Board board, Dice dice, List<ClimateCard> cards, List<Player> players, int firstPlayer) {
         this.rules = rules;
         this.board = board;
         this.dice = dice;
         // The deck gets its own Random, seeded from the game's, so one seed still replays the whole game.
         this.deck = new CardDeck(cards, new Random(dice.random().nextLong()));
-        this.meter = new ClimateMeter(rules.meter().start());
+        this.meter = new ClimateMeter(rules);
+        this.disasters = new DisasterManager(rules, dice);
         this.players = List.copyOf(players);
         this.firstPlayer = firstPlayer;
         this.current = firstPlayer;
@@ -211,6 +227,21 @@ public final class Game {
         return deck;
     }
 
+    /** The lasting disaster effects (flooded districts, closed squares, Drought) in force. */
+    public DisasterManager disasters() {
+        return disasters;
+    }
+
+    /** What happened at the end of the last round, if a round has ended. */
+    public Optional<RoundReport> lastRound() {
+        return Optional.ofNullable(lastRound);
+    }
+
+    /** The current player's attempt to return from bankruptcy this turn, if they were bankrupt at its start. */
+    public Optional<ReturnAttempt> lastReturn() {
+        return Optional.ofNullable(lastReturn);
+    }
+
     /** The last finished move, if any player has moved yet. */
     public Optional<Move> lastMove() {
         return Optional.ofNullable(lastMove);
@@ -257,18 +288,178 @@ public final class Game {
         continueMove();
     }
 
-    /** Ends the current player's turn. After the last player, the next round starts. */
+    /**
+     * Ends the current player's turn. After the last player in the round, the end of the round
+     * runs (FR-11 AC-1); after the last round, the game is over.
+     */
     public void endTurn() {
         require(Phase.MOVE_DONE, "end the turn");
         current = (current + 1) % players.size();
         if (current == firstPlayer) {
-            // FR-11 step 6. Steps 1-5 of the end of the round arrive in plan 005;
-            // until then the only effect that must end with the round is lobbying (FR-06 AC-2).
-            board.clearLobbying();
-            round++;
-            year += yearsPerRound;
+            endRound();
         }
-        phase = Phase.AWAITING_ROLL;
+        if (phase != Phase.GAME_OVER) {
+            startTurn();
+        }
+    }
+
+    // ---- Bankruptcy (FR-13, plan 005) -------------------------------------------
+
+    /**
+     * Sets up the new current player's turn. A bankrupt player first rolls to return, unless
+     * they've already sat out long enough to return automatically (Q-14).
+     */
+    private void startTurn() {
+        Player player = currentPlayer();
+        lastReturn = null;
+        if (!player.bankrupt()) {
+            phase = Phase.AWAITING_ROLL;
+        } else if (player.turnsBankrupt() >= rules.bankruptcy().maxRounds()) {
+            returnFromBankruptcy(player);
+            lastReturn = new ReturnAttempt(0, true);
+            phase = Phase.AWAITING_ROLL;
+        } else {
+            phase = Phase.AWAITING_RETURN_ROLL;
+        }
+    }
+
+    /**
+     * Answers {@code AWAITING_RETURN_ROLL} (FR-13 AC-4): roll one die. On the escape roll (6) the
+     * player is back with a loan and takes a normal roll this turn; otherwise they sit this turn out,
+     * with no move and no actions.
+     */
+    public void rollToReturn() {
+        require(Phase.AWAITING_RETURN_ROLL, "roll to return");
+        Player player = currentPlayer();
+        int roll = dice.rollOne();
+        if (roll == rules.bankruptcy().escapeRoll()) {
+            returnFromBankruptcy(player);
+            lastReturn = new ReturnAttempt(roll, true);
+            phase = Phase.AWAITING_ROLL;
+        } else {
+            player.missTurn();
+            lastReturn = new ReturnAttempt(roll, false);
+            lastMove = null;
+            lastCard = null;
+            phase = Phase.MOVE_DONE;
+        }
+    }
+
+    private void returnFromBankruptcy(Player player) {
+        player.returnFromBankruptcy(rules.bankruptcy().loanOnReturn(), rules.bankruptcy().repayAtEnd());
+    }
+
+    // ---- End of round (FR-11, plan 005) ----------------------------------------
+
+    /**
+     * The end of the round: the six steps in the order FR-11 requires (End Round sequence diagram).
+     * Package-private so tests can run it directly.
+     */
+    void endRound() {
+        List<RoundReport.Step> steps = new ArrayList<>();
+
+        // Step 1: income and GP from squares and co-funding deals.
+        payIncome();
+        disasters.endOfIncome();
+        steps.add(RoundReport.Step.INCOME);
+
+        // Step 2: carbon tax, on every owned Polluting square, whatever its state (Q-15).
+        int tax = rules.polluting().carbonTaxGP();
+        for (Square square : board.squares()) {
+            if (square instanceof PollutingSquare polluting && polluting.owner() != null) {
+                polluting.owner().addGP(-tax);
+            }
+        }
+        steps.add(RoundReport.Step.CARBON_TAX);
+
+        // Step 3: the Climate Meter. Closed and flooded squares still count (Q-15);
+        // a square the Activist lobbied this round doesn't (FR-06 AC-5).
+        int meterBefore = meter.value();
+        int polluting = 0;
+        int green = 0;
+        for (Square square : board.squares()) {
+            if (square instanceof PollutingSquare p && p.owner() != null && !p.meterRiseCancelled()) {
+                polluting++;
+            } else if (square instanceof GreenProjectSquare g && g.owner() != null) {
+                green++;
+            }
+        }
+        meter.update(polluting, green);
+        steps.add(RoundReport.Step.METER);
+
+        // Step 4: the interim target, only in its round (2030 and 2040).
+        Rules.InterimTarget target = meter.targetFor(round).orElse(null);
+        boolean targetMet = false;
+        if (target != null) {
+            targetMet = meter.meetsTarget(target);
+            if (!targetMet) {
+                int penalty = rules.meter().interimMissPenaltyGP();
+                for (Square square : board.squares()) {
+                    if (square instanceof PollutingSquare p && p.owner() != null) {
+                        p.owner().addGP(-penalty);
+                    }
+                }
+            }
+            steps.add(RoundReport.Step.INTERIM_TARGET);
+        }
+
+        // Step 5: the disaster check, using the band of the updated meter.
+        int band = meter.dangerBand();
+        DisasterManager.Check check = disasters.check(band);
+        DisasterResult disaster = check.disaster() == null ? null
+                : disasters.apply(check.disaster(), band, board, players);
+        steps.add(RoundReport.Step.DISASTER_CHECK);
+
+        // Step 6: lobbying ends, and the year and round advance.
+        board.clearLobbying();
+        steps.add(RoundReport.Step.ADVANCE);
+        lastRound = new RoundReport(round, year, meterBefore, meter.value(), band, target, targetMet,
+                check.roll(), disaster, List.copyOf(steps));
+        round++;
+        year += yearsPerRound;
+        if (round > rules.game().rounds()) {
+            phase = Phase.GAME_OVER;
+        }
+    }
+
+    /**
+     * Step 1 (FR-11 AC-3). Squares that are storm-closed or in a flooded district earn nothing,
+     * and nor do co-funding deals on them (Q-15). Lobbied squares earn no money. Bankrupt owners
+     * get the GP but no money (FR-13 AC-7). Nature projects get no GP in a Drought.
+     */
+    private void payIncome() {
+        for (Square square : board.squares()) {
+            if (!(square instanceof OwnableSquare ownable) || ownable.owner() == null || disasters.shut(square)) {
+                continue;
+            }
+            Player owner = ownable.owner();
+            if (square instanceof PollutingSquare polluting) {
+                if (!polluting.lobbiedThisRound() && !owner.bankrupt()) {
+                    owner.receive(rules.polluting().incomePerRound());
+                }
+            } else if (square instanceof GreenProjectSquare greenProject) {
+                if (!owner.bankrupt()) {
+                    owner.receive(rules.green().incomePerRound() + owner.character().incomeBonus(greenProject, owner));
+                }
+                if (!(greenProject.nature() && disasters.drought())) {
+                    int gp = rules.green().gpPerRound() + (greenProject.nature() ? owner.character().natureBonusGP() : 0);
+                    owner.addGP(gp);
+                }
+            }
+        }
+
+        int dealGP = rules.actions().coFundGPEach();
+        for (Player funder : players) {
+            CoFundingDeal deal = funder.coFundingDeal();
+            if (deal == null) {
+                continue;
+            }
+            Square square = board.square(deal.square());
+            if (square instanceof GreenProjectSquare funded && funded.owner() != null && !disasters.shut(square)) {
+                funder.addGP(dealGP);
+                funded.owner().addGP(dealGP);
+            }
+        }
     }
 
     // ---- Actions after moving (plan 003) ------------------------------------
@@ -280,10 +471,11 @@ public final class Game {
      * the move is done.
      */
     public List<Action> availableActions() {
-        if (phase != Phase.MOVE_DONE) {
+        Player player = currentPlayer();
+        // A bankrupt player takes no actions, including converting (FR-07 AC-6, FR-13 AC-3).
+        if (phase != Phase.MOVE_DONE || player.bankrupt()) {
             return List.of();
         }
-        Player player = currentPlayer();
         List<Action> actions = new ArrayList<>();
         if (!landingActionUsed) {
             actions.addAll(board.square(player.position()).landOn(player, this));
@@ -495,6 +687,8 @@ public final class Game {
 
     private static String describe(Phase phase) {
         return switch (phase) {
+            case AWAITING_RETURN_ROLL -> "a roll to return from bankruptcy";
+            case GAME_OVER -> "nothing: the game is over";
             case AWAITING_ROLL -> "a dice roll";
             case AWAITING_ROUTE -> "a route choice";
             case AWAITING_DIRECTION -> "a direction choice";

@@ -1,7 +1,7 @@
 ---
 title: End of round
 type: rules
-status: draft
+status: built
 sources: [../sources/handover.md, ../sources/sub1a-report.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -11,6 +11,8 @@ updated: 2026-11-17
 ## Summary
 
 After the last player's turn, six steps run in a fixed order. **The order is a requirement** ([FR-11](../requirements/fr-11-end-of-round-order.md)), because each step changes what the next one sees.
+
+> **Build status:** built in `Game.endRound()` ([plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md)). The end-of-round screen comes in plan 007.
 
 ## Rules
 

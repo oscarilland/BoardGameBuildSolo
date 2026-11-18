@@ -52,6 +52,36 @@ final class Games {
         game.arriveForTest(square);
     }
 
+    /** A four-player game, Aoife first, with the random values after that scripted (dice, disasters). */
+    static Game withScript(ScriptedRandom afterFirstPlayer) {
+        return start(afterFirstPlayer, FOUR);
+    }
+
+    /** A four-player game, Aoife first, whose first end of round has no disaster. */
+    static Game quietRound() {
+        return start(new ScriptedRandom().firstPlayer(0).noDisaster(), FOUR);
+    }
+
+    /** Marks a Polluting square as lobbied this round by {@code by}. */
+    static void lobby(Game game, int square, Player by) {
+        ((PollutingSquare) game.board().square(square)).lobby(by);
+    }
+
+    /** Converts a Polluting square as if {@code by} had converted it (no payment). */
+    static void convert(Game game, int square, Player by) {
+        game.board().replace(((PollutingSquare) game.board().square(square)).convert(by));
+    }
+
+    /** Starts a co-funding deal for {@code funder} on a Green Project (no payment). */
+    static void deal(Player funder, int square) {
+        funder.startDeal(new CoFundingDeal(funder, square));
+    }
+
+    /** Makes a player bankrupt by a compulsory payment they can't cover. */
+    static void bankrupt(Player player) {
+        player.payCompulsory(player.money() + 1);
+    }
+
     /** Makes the card with this id (such as "Q01") the next one drawn. */
     static void nextCard(Game game, String id) {
         game.deck().putOnTop(id);

@@ -21,4 +21,10 @@ public final class Industrialist extends Character {
     public int convertedBonusIncome() {
         return convertedBonusIncome;
     }
+
+    /** "Just transition": a Green Project they converted from Polluting earns extra (FR-07 AC-5). */
+    @Override
+    public int incomeBonus(GreenProjectSquare square, Player owner) {
+        return square.convertedBy() == owner ? convertedBonusIncome : 0;
+    }
 }

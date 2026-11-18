@@ -7,6 +7,7 @@ import netzerobelfast.config.CardDef.Option;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static netzerobelfast.config.GameConfig.BOARD_FILE;
@@ -76,6 +77,15 @@ final class ConfigValidator {
                     "is " + round + ", expected 1-" + game.rounds());
         }
         validateBands(meter);
+
+        Rules.Disasters disasters = rules.disasters();
+        check(disasters.floodLostIncomeRounds() >= 1, CONFIG_FILE, "disasters.FLOOD.lostIncomeRounds", "should be at least 1");
+        check(disasters.stormClosedRounds() >= 1, CONFIG_FILE, "disasters.STORM.closedRounds", "should be at least 1");
+        check(disasters.droughtLostGPRounds() >= 1, CONFIG_FILE, "disasters.DROUGHT.lostGPRounds", "should be at least 1");
+        for (Map.Entry<String, Rules.Explanation> entry : disasters.explanations().entrySet()) {
+            check(!entry.getValue().sources().isEmpty(), CONFIG_FILE, "disasters." + entry.getKey() + ".sources",
+                    "is empty; every explanation needs a source (NFR-10)");
+        }
     }
 
     private static void validateBands(Rules.Meter meter) {

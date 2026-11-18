@@ -12,7 +12,7 @@ updated: 2026-11-17
 
 36 squares in six Belfast districts: a clockwise loop of 30 squares, plus a 6-square City Centre cut-through between two junctions. Five square types, each with a different action.
 
-> **Build status:** the board's shape, both junctions and the two-way City Centre route are built in `Board` ([plan 002](../../plans/002-players-characters-and-movement.md)). Every square type and Resilience levels are built ([plan 003](../../plans/003-square-actions.md)). What squares earn each round, and the disasters Resilience protects against, are plan 005.
+> **Build status:** the board's shape, both junctions and the two-way City Centre route are built in `Board` ([plan 002](../../plans/002-players-characters-and-movement.md)). Every square type and Resilience levels are built ([plan 003](../../plans/003-square-actions.md)). What squares earn each round, and the disasters Resilience protects against, are built in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md).
 
 ## Rules
 

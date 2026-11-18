@@ -3,7 +3,7 @@ title: FR-17 Disaster explanation
 type: requirement
 id: FR-17
 priority: should
-status: draft
+status: agreed
 sources: [../sources/sub1a-report.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -32,9 +32,12 @@ Different explanations for different bands.
 
 1. The agent drafts the four lines with sources; Oscar approves them; they go in the working `config.json` as `disasters.<TYPE>.explanation` and `sources` ([Q-11](../rules/open-questions.md)).
 
-## Open questions for Oscar
+2. **The four lines are approved** with checked Met Office sources: see [disaster explanations](../rules/climate-meter-and-disasters.md#disaster-explanations).
+3. **Agreed.**
 
-1. Approve the [draft lines](../rules/climate-meter-and-disasters.md#disaster-explanations-draft-for-oscar-to-approve). The Storm and Drought lines still need a source check.
+## Build status
+
+AC-1 and AC-2 are built in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md): the approved lines and sources are in the working `config.json`, validated on load, and attached to each `DisasterResult`. AC-3 (readability) is plan 009; the pop-up is plan 007.
 
 ## Related
 

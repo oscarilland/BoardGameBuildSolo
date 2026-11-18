@@ -100,7 +100,9 @@ final class ConfigParser {
                         disasters.get("FLOOD").get("lostIncomeRounds").asInt(),
                         disasters.get("STORM").get("repairCostPerBand").asInt(),
                         disasters.get("STORM").get("closedRounds").asInt(),
-                        disasters.get("HEATWAVE").get("costPerPlayerPerBand").asInt()),
+                        disasters.get("HEATWAVE").get("costPerPlayerPerBand").asInt(),
+                        disasters.get("DROUGHT").get("lostGPRounds").asInt(),
+                        explanations(disasters)),
                 new Rules.Bankruptcy(
                         bankruptcy.get("escapeRoll").asInt(),
                         bankruptcy.get("maxRounds").asInt(),
@@ -131,6 +133,25 @@ final class ConfigParser {
                 node.get("ability").asText(),
                 Map.copyOf(numbers),
                 Map.copyOf(flags));
+    }
+
+    /** Each disaster's explanation and sources (FR-17). */
+    private static Map<String, Rules.Explanation> explanations(JsonNode disasters) {
+        Map<String, Rules.Explanation> explanations = new LinkedHashMap<>();
+        for (String type : new String[] {"FLOOD", "STORM", "HEATWAVE", "DROUGHT"}) {
+            JsonNode disaster = disasters.get(type);
+            explanations.put(type, new Rules.Explanation(disaster.get("explanation").asText(), sources(disaster)));
+        }
+        return Map.copyOf(explanations);
+    }
+
+    /** A {@code sources} list: each entry has a title and a web address. */
+    private static List<Source> sources(JsonNode parent) {
+        List<Source> sources = new ArrayList<>();
+        for (JsonNode source : parent.get("sources").list()) {
+            sources.add(new Source(source.get("title").asText(), source.get("url").asText()));
+        }
+        return List.copyOf(sources);
     }
 
     private static List<Integer> priceRange(JsonNode section) {
@@ -228,10 +249,7 @@ final class ConfigParser {
             case EVENT -> effect = effect(node.get("effect"));
         }
 
-        List<Source> sources = new ArrayList<>();
-        for (JsonNode source : node.get("sources").list()) {
-            sources.add(new Source(source.get("title").asText(), source.get("url").asText()));
-        }
+        List<Source> sources = sources(node);
 
         return new CardDef(
                 node.get("id").asText(),
@@ -243,7 +261,7 @@ final class ConfigParser {
                 options,
                 effect,
                 node.get("fact").asText(),
-                List.copyOf(sources));
+                sources);
     }
 
     private static Effect effect(JsonNode node) {

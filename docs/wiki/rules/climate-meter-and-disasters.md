@@ -1,7 +1,7 @@
 ---
 title: Climate Meter and disasters
 type: rules
-status: draft
+status: built
 sources: [../sources/handover.md, ../sources/rules-v4.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -11,6 +11,8 @@ updated: 2026-11-17
 ## Summary
 
 A single shared meter tracks the city's emissions. It starts at 50, must reach 0 or below by the end for net zero, and its danger band sets both the chance and the cost of disasters.
+
+> **Build status:** built in `ClimateMeter` and `DisasterManager` ([plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md)); the explanations are in the working `config.json`. The meter bar and disaster pop-up come in plan 007.
 
 ## Rules
 
@@ -52,20 +54,20 @@ When the die roll is ≤ the band, one of four types is chosen uniformly at rand
 - A Heatwave charges bankrupt players too, but their money is already £0 and can't go lower, so it has no effect on them.
 - Choice cards move the meter immediately, so the band can change mid-round. Only the end-of-round band matters for disasters.
 
-## Disaster explanations (draft for Oscar to approve)
+## Disaster explanations
 
-FR-17 needs one line per disaster. No data file had them, so these are drafts ([Q-11](open-questions.md)). Once Oscar approves them, plan 001 adds them to the working `config.json` as `disasters.<TYPE>.explanation` with `sources`. The wording avoids claiming more than the sources say.
+FR-17 needs one line per disaster. No data file had them ([Q-11](open-questions.md)), so they were drafted, sourced and **approved by Oscar on 17 November 2026**. Plan 005 adds them to the working `config.json` as `disasters.<TYPE>.explanation` with `sources`. The wording claims no more than the sources say: the Met Office notes the UK isn't measurably windier yet, so the Storm line is about rain and projections.
 
-| Disaster | Draft line | Source | Checked? |
-|---|---|---|---|
-| Flood | "As the climate warms, the UK is getting wetter, so heavy rain and floods are more likely." | Met Office, [annual climate stocktake](https://metoffice.gov.uk/about-us/news-and-media/media-centre/weather-and-climate-news/2025/annual-climate-stocktake-shows-weather-records-and-extremes-now-the-norm-in-uk-climate) ("As the UK's climate warms, it is also becoming wetter.") | Yes, 17 November 2026 |
-| Storm | "The UK isn't clearly getting stormier, but climate change is making severe weather worse, and warmer air means storms bring more rain." | Same Met Office page ("more severe weather events in the UK due to climate change"; "observations do not currently suggest that the UK is becoming windier or stormier") | Partly: the rain point needs its own source, or cut the line after "worse" |
-| Heatwave | "Greenhouse gases are warming the air, so heatwaves like Northern Ireland's record 31.3°C are becoming more likely." | Met Office stocktake ("human emissions of greenhouse gasses are warming the atmosphere"), and the Met Office [climate extremes](https://metoffice.gov.uk/public/weather/climate-extremes) page already used by card Q10 | Yes, 17 November 2026 |
-| Drought | "Summers are expected to get hotter and drier, which dries out peat bogs and woodland." | Proposed: Met Office UK climate projections (UKCP18) | **No.** The Met Office is cautious about drought trends; find a source for "drier summers" before approving |
+| Disaster | Line | Source (checked 17 November 2026) |
+|---|---|---|
+| Flood | "As the climate warms, the UK is getting wetter, so heavy rain and floods are more likely." | Met Office, [annual climate stocktake](https://metoffice.gov.uk/about-us/news-and-media/media-centre/weather-and-climate-news/2025/annual-climate-stocktake-shows-weather-records-and-extremes-now-the-norm-in-uk-climate): "As the UK's climate warms, it is also becoming wetter." |
+| Storm | "Warmer air holds more water, so storms bring heavier rain, and UK winter storms are expected to get slightly stronger." | Met Office, [The influence of climate change on severe weather](https://www.metoffice.gov.uk/blog/2024/the-influence-of-climate-change-on-severe-weather) (18 January 2024): about 7% more moisture per degree, "when it does rain it can be more intense"; winter windstorms "will increase slightly in number and intensity" |
+| Heatwave | "Greenhouse gases are warming the air, so heatwaves like Northern Ireland's record 31.3°C are becoming more likely." | Met Office stocktake: "human emissions of greenhouse gasses are warming the atmosphere"; Met Office [climate extremes](https://metoffice.gov.uk/public/weather/climate-extremes) (also used by card Q10) |
+| Drought | "Scientists expect droughts in the UK to happen more often and last longer as the climate warms." | Met Office, [The influence of climate change on severe weather](https://www.metoffice.gov.uk/blog/2024/the-influence-of-climate-change-on-severe-weather): studies point "towards general increases in frequency and length of meteorological drought for the UK" |
 
 ## Conflicts or uncertainties
 
-- The Storm and Drought explanation lines need a source check before Oscar approves them (table above).
+- None left. The explanation lines are approved and sourced.
 
 ## Related
 

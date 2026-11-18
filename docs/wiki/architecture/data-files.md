@@ -18,6 +18,8 @@ Three JSON files hold every balance value, the board, and the card deck ([NFR-07
 |---|---|---|---|
 | `board.json` | `cityCentreRoute.direction` | "TBD: …" → "two-way (Q-05, decided by Oscar on 17 Nov 2026)" | [Q-05](../rules/open-questions.md) |
 | `config.json` | `game.maxNameLength` | Added: 20 | Oscar's FR-01 answer; a limit belongs in data, not code ([plan 002](../../plans/002-players-characters-and-movement.md)) |
+| `config.json` | `disasters.<TYPE>.explanation` and `sources` | Added: the four approved lines, each with Met Office sources | FR-17, NFR-10 AC-2, [Q-11](../rules/open-questions.md) ([plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md)) |
+| `config.json` | `disasters.DROUGHT.lostGPRounds` | Added: 1 | The rules say "next round"; the other disasters already had a duration in the data ([plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md)) |
 
 ## Files
 
@@ -69,7 +71,7 @@ Three JSON files hold every balance value, the board, and the card deck ([NFR-07
 
 ## Known gaps
 
-- No disaster explanation text yet; it's added in plan 005 once Oscar approves the lines ([Q-11](../rules/open-questions.md)).
+- Disaster explanations: added and validated in plan 005 ([Q-11](../rules/open-questions.md)). Each disaster's effects last the number of rounds in the data (`lostIncomeRounds`, `closedRounds`, `lostGPRounds`), each at least 1.
 - Quiz reward in two places: `GameConfig.quizReward(card)` uses the card's value, falling back to `quizCorrectGP` ([Q-13](../rules/open-questions.md)).
 
 ## Failure modes

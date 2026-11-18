@@ -24,6 +24,8 @@ public final class Player {
     private int resilienceLevel;
     private CoFundingDeal coFundingDeal;
     private boolean bankrupt;
+    private int turnsBankrupt;
+    private int loanRepayments;
 
     Player(String name, Character character, int startPosition) {
         this.name = name;
@@ -71,11 +73,24 @@ public final class Player {
     }
 
     /**
-     * True once a compulsory payment has taken more than the player had (FR-13 AC-1). What
-     * bankruptcy then does (sitting out, returning with a loan) arrives in plan 005.
+     * True from when a compulsory payment takes more than the player had (FR-13 AC-1) until they
+     * return. While bankrupt they don't move or act, and their squares earn GP but no money.
      */
     public boolean bankrupt() {
         return bankrupt;
+    }
+
+    /**
+     * How long they've been bankrupt, counted as the balance simulation did (Q-14): 1 when they go
+     * bankrupt, +1 for each turn they sit out. At the data's {@code maxRounds} they return automatically.
+     */
+    public int turnsBankrupt() {
+        return turnsBankrupt;
+    }
+
+    /** £M to be deducted at the end of the game: £15M for each return from bankruptcy (FR-13 AC-6). */
+    public int loanRepayments() {
+        return loanRepayments;
     }
 
     /**
@@ -121,8 +136,24 @@ public final class Player {
         }
         int paid = money;
         money = 0;
-        bankrupt = true;
+        if (!bankrupt) {
+            bankrupt = true;
+            turnsBankrupt = 1;
+        }
         return paid;
+    }
+
+    /** A turn spent bankrupt without returning. */
+    void missTurn() {
+        turnsBankrupt++;
+    }
+
+    /** Back in the game with a loan, which costs {@code repayment} at the end (FR-13 AC-6). */
+    void returnFromBankruptcy(int loan, int repayment) {
+        bankrupt = false;
+        turnsBankrupt = 0;
+        money += loan;
+        loanRepayments += repayment;
     }
 
     void receive(int amount) {

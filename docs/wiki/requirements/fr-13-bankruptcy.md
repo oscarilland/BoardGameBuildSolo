@@ -3,7 +3,7 @@ title: FR-13 Bankruptcy
 type: requirement
 id: FR-13
 priority: should
-status: draft
+status: built
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -37,10 +37,12 @@ Eliminating bankrupt players.
 
 1. Automatic return at the second turn after bankruptcy; at most one missed turn ([Q-14](../rules/open-questions.md)).
 2. Choice card options can't bankrupt; unaffordable ones are disabled ([Q-12](../rules/open-questions.md)).
+3. **A bankrupt player's turn has two steps** (AC-4, AC-6): "Roll to return" (one die); if they're back, they receive the loan and then take a normal two-dice roll in the same turn, as the Take Turn sequence diagram shows. If not, the turn ends.
+4. **Agreed.**
 
 ## Build status
 
-The trigger is built for Event cards in [plan 004](../../plans/004-climate-cards.md): AC-1 and AC-2 (`EventCardTest`), and AC-8 for Choice cards. Everything else, and agreeing this page, is plan 005.
+**Built.** The trigger for Event cards in [plan 004](../../plans/004-climate-cards.md) (AC-1, AC-2, AC-8); disaster payments, sitting out, the return roll, the automatic return and the loan in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md) (AC-3 to AC-7), tested in `BankruptcyTest`, `IncomeTest` and `DisasterTest`. The repayment is deducted at scoring (plan 006).
 
 ## Related
 

@@ -3,7 +3,7 @@ title: FR-05 Co-funding
 type: requirement
 id: FR-05
 priority: must
-status: agreed
+status: built
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -45,7 +45,7 @@ Deals between more than two players; ending a deal without starting a new one.
 
 ## Build status
 
-Built in [plan 003](../../plans/003-square-actions.md): AC-1, AC-2, AC-4 and AC-7, tested in `CoFundTest`. The deal's GP (AC-3, AC-5, AC-6) is paid at the end of the round, in plan 005.
+Built in [plan 003](../../plans/003-square-actions.md): AC-1, AC-2, AC-4 and AC-7, tested in `CoFundTest`. The deal's GP (AC-3, AC-5, AC-6) was built in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md), tested in `IncomeTest`.
 
 ## Related
 

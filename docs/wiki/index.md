@@ -28,21 +28,21 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 
 - [FR-01 Start game](requirements/fr-01-start-game.md) - must, agreed
 - [FR-02 Starting values and first player](requirements/fr-02-starting-values-and-first-player.md) - must, built
-- [FR-03 Dice, movement and junctions](requirements/fr-03-dice-movement-and-junctions.md) - must, agreed
+- [FR-03 Dice, movement and junctions](requirements/fr-03-dice-movement-and-junctions.md) - must, built
 - [FR-04 Buy square](requirements/fr-04-buy-square.md) - must, built
-- [FR-05 Co-funding](requirements/fr-05-co-funding.md) - must, agreed
-- [FR-06 Lobbying](requirements/fr-06-lobbying.md) - should, agreed
-- [FR-07 Convert square](requirements/fr-07-convert-square.md) - must, agreed
-- [FR-08 Resilience](requirements/fr-08-resilience.md) - should, agreed
+- [FR-05 Co-funding](requirements/fr-05-co-funding.md) - must, built
+- [FR-06 Lobbying](requirements/fr-06-lobbying.md) - should, built
+- [FR-07 Convert square](requirements/fr-07-convert-square.md) - must, built
+- [FR-08 Resilience](requirements/fr-08-resilience.md) - should, built
 - [FR-09 Glider](requirements/fr-09-glider.md) - should, built
 - [FR-10 Climate cards](requirements/fr-10-climate-cards.md) - must, built
-- [FR-11 End-of-round order](requirements/fr-11-end-of-round-order.md) - must, draft
-- [FR-12 Disasters](requirements/fr-12-disasters.md) - must, draft
-- [FR-13 Bankruptcy](requirements/fr-13-bankruptcy.md) - should, draft
+- [FR-11 End-of-round order](requirements/fr-11-end-of-round-order.md) - must, built
+- [FR-12 Disasters](requirements/fr-12-disasters.md) - must, built
+- [FR-13 Bankruptcy](requirements/fr-13-bankruptcy.md) - should, built
 - [FR-14 Legacy Score and winner](requirements/fr-14-legacy-score-and-winner.md) - must, draft
 - [FR-15 Always-visible status](requirements/fr-15-always-visible-status.md) - must, draft
 - [FR-16 End-of-game report](requirements/fr-16-end-of-game-report.md) - must, draft
-- [FR-17 Disaster explanation](requirements/fr-17-disaster-explanation.md) - should, draft
+- [FR-17 Disaster explanation](requirements/fr-17-disaster-explanation.md) - should, agreed
 - [NFR-01 Session length](requirements/nfr-01-session-length.md) - must, draft
 - [NFR-02 Learnability](requirements/nfr-02-learnability.md) - must, draft
 - [NFR-03 Readability](requirements/nfr-03-readability.md) - should, draft
@@ -85,6 +85,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [Plan 002 Players, characters and movement](../plans/002-players-characters-and-movement.md) - done: FR-01 to FR-03 headless; turn phases, junctions, two-way City Centre route
 - [Plan 003 Square actions](../plans/003-square-actions.md) - done: FR-04 to FR-09; square classes, offered actions, character abilities
 - [Plan 004 Climate cards](../plans/004-climate-cards.md) - done: FR-10, NFR-10; deck, quiz/choice/event, the meter starts, the bankruptcy trigger
+- [Plan 005 End of round, disasters and bankruptcy](../plans/005-end-of-round-disasters-and-bankruptcy.md) - done: FR-11, FR-12, FR-13, FR-17; the six steps, disasters, full bankruptcy, game over after round 12
 
 See [build progress](operations/build-progress.md) for the proposed order of later plans.
 

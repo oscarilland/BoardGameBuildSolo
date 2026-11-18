@@ -3,7 +3,7 @@ title: FR-08 Resilience
 type: requirement
 id: FR-08
 priority: should
-status: agreed
+status: built
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -39,7 +39,7 @@ Shared or district Resilience (the v3 rule).
 
 ## Build status
 
-Built in [plan 003](../../plans/003-square-actions.md): AC-1 to AC-4, and the cut and rounding (AC-5, AC-7) in `Player.disasterCost`, tested in `ResilienceTest`. AC-6: Event card costs aren't reduced (`EventCardTest`, plan 004); the rest of AC-6 needs disasters, plan 005.
+Built in [plan 003](../../plans/003-square-actions.md): AC-1 to AC-4, and the cut and rounding (AC-5, AC-7) in `Player.disasterCost`, tested in `ResilienceTest`. AC-6: Event card costs aren't reduced (`EventCardTest`, plan 004); the rest of AC-6 (no protection from lost income, closures or Droughts) was built in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md), tested in `IncomeTest` and `DisasterTest`.
 
 ## Related
 

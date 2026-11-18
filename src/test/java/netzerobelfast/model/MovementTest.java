@@ -86,7 +86,7 @@ class MovementTest {
     @Test
     void fr03_ac5_q05_landingOnAJunctionAsksAtTheStartOfTheNextMove() {
         // Aoife lands exactly on 12 with her roll of 4; the others roll 3; then Aoife rolls 3.
-        Game game = Games.scripted(4, 3, 3, 3, 3);
+        Game game = Games.start(new ScriptedRandom().firstPlayer(0).rolls(4, 3, 3, 3).noDisaster().rolls(3), Games.FOUR);
         Games.place(game, 8, null);
 
         game.roll();
@@ -117,7 +117,7 @@ class MovementTest {
     @Test
     void q05_endingOnTheFarJunctionAsksNextTurn() {
         // AC-7 only covers the same move. Stopping exactly on 27 is "landing on a junction".
-        Game game = Games.scripted(2, 3, 3, 3, 2);
+        Game game = Games.start(new ScriptedRandom().firstPlayer(0).rolls(2, 3, 3, 3).noDisaster().rolls(2), Games.FOUR);
         Games.place(game, 31, Heading.TOWARDS_WEST);
 
         game.roll();
@@ -187,6 +187,8 @@ class MovementTest {
                 case AWAITING_DIRECTION -> game.chooseDirection(Heading.TOWARDS_EAST);
                 case AWAITING_QUIZ_ANSWER -> game.answerQuiz(0);
                 case AWAITING_CHOICE -> game.chooseOption(game.affordableOptions().get(0));
+                case AWAITING_RETURN_ROLL -> game.rollToReturn();
+                case GAME_OVER -> throw new AssertionError("the game ended early");
                 case MOVE_DONE -> game.endTurn();
             }
         }

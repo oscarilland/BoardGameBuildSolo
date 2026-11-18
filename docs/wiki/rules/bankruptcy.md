@@ -1,7 +1,7 @@
 ---
 title: Bankruptcy
 type: rules
-status: draft
+status: built
 sources: [../sources/handover.md, ../sources/rules-v4.md, ../sources/data-files.md, ../sources/design-diagrams.md]
 updated: 2026-11-17
 ---
@@ -12,7 +12,7 @@ updated: 2026-11-17
 
 Only a compulsory payment can bankrupt a player. A bankrupt player sits out turns and earns no money, then returns with a loan that costs £15M at the end.
 
-> **Build status:** only the trigger is built, for Event cards ([plan 004](../../plans/004-climate-cards.md)): money drops to £0, the rest is written off, and the player is marked bankrupt. Rules 3 to 5 (sitting out, returning, the loan) and disaster payments arrive in plan 005. Until then a bankrupt player keeps playing normally.
+> **Build status:** built. The trigger came in [plan 004](../../plans/004-climate-cards.md); sitting out, the return roll, the automatic return and the loan in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md). The loan repayment is deducted at scoring (plan 006).
 
 ## Rules
 

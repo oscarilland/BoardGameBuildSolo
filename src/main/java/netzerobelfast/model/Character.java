@@ -135,6 +135,19 @@ public abstract class Character {
         return false;
     }
 
+    /**
+     * Extra £M per round this character's Green Project earns (analysis model: {@code incomeBonus}).
+     * Industrialist: on squares they converted themselves.
+     */
+    public int incomeBonus(GreenProjectSquare square, Player owner) {
+        return 0;
+    }
+
+    /** Extra GP per round for each nature project this character owns. Farmer: some. */
+    public int natureBonusGP() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         return name();

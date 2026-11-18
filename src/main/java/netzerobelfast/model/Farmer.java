@@ -14,6 +14,7 @@ public final class Farmer extends Character {
     }
 
     /** Extra GP per round for each nature project this player owns. */
+    @Override
     public int natureBonusGP() {
         return natureBonusGP;
     }

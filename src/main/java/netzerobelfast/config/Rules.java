@@ -80,13 +80,22 @@ public record Rules(
     /** A danger band and the highest meter value in it; {@code maxMeter} is null for the top band. */
     public record DangerBand(int band, Integer maxMeter) {}
 
-    /** The numbers in {@code disasters}; each cost is multiplied by the danger band. */
+    /**
+     * The numbers in {@code disasters}; each cost is multiplied by the danger band. Each disaster
+     * also has a one-line climate explanation with sources (FR-17, NFR-10 AC-2), keyed by the
+     * disaster's name ({@code FLOOD}, {@code STORM}, {@code HEATWAVE}, {@code DROUGHT}).
+     */
     public record Disasters(
             int floodCostPerSquarePerBand,
             int floodLostIncomeRounds,
             int stormRepairCostPerBand,
             int stormClosedRounds,
-            int heatwaveCostPerPlayerPerBand) {}
+            int heatwaveCostPerPlayerPerBand,
+            int droughtLostGPRounds,
+            Map<String, Explanation> explanations) {}
+
+    /** A disaster's climate explanation and where it comes from. */
+    public record Explanation(String text, List<CardDef.Source> sources) {}
 
     /** {@code bankruptcy}. */
     public record Bankruptcy(int escapeRoll, int maxRounds, int loanOnReturn, int repayAtEnd) {}

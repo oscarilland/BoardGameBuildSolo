@@ -2,7 +2,9 @@
 
 Read this before changing anything in `src/`. The root `AGENTS.md` gates still apply: no change here without an approved plan in `docs/plans/`.
 
-> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) to [004](../docs/plans/004-climate-cards.md) are built: data loading and validation, seeded `Dice`, and in `model` the characters (with ability hooks), players, the square classes, the board, the Climate Card deck, a partial `ClimateMeter`, and a `Game` that starts games and runs turns as a phase machine: rolling and moving (with junction choices), drawing and resolving cards, and offering and applying the actions after moving. No end-of-round effects yet, and bankruptcy is only the trigger; the window is still empty. Base package: `netzerobelfast`.
+> **Current state:** plans [001](../docs/plans/001-walking-skeleton.md) to [005](../docs/plans/005-end-of-round-disasters-and-bankruptcy.md) are built: data loading and validation, seeded `Dice`, and in `model` every rule except scoring. That covers the characters (with ability hooks), players, squares, the board, the Climate Card deck, the `ClimateMeter`, the `DisasterManager`, and a `Game` that runs turns as a phase machine: bankrupt players' return rolls, rolling and moving (with junction choices), drawing and resolving cards, and the actions after moving. After the last player of each round it runs the six end-of-round steps; after round 12 it stops in `GAME_OVER`. Scoring is plan 006; the window is still empty. Base package: `netzerobelfast`.
+>
+> **Rounds in tests:** ending a round rolls the disaster die. When a test plays a full round with `ScriptedRandom`, add `.noDisaster()` where the round ends, or script the die and the disaster. `Game.endRound()` is package-private, so a test can also run it directly.
 >
 > **Squares that start something on arrival:** a Climate Card square draws a card in `Game.landed()`. In tests, `Games.arrive` triggers that too, so use `Games.nextCard` to choose the card, or arrive somewhere else.
 >

@@ -3,7 +3,7 @@ title: FR-07 Convert square
 type: requirement
 id: FR-07
 priority: must
-status: agreed
+status: built
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -43,7 +43,7 @@ Converting Green Projects back to Polluting.
 
 ## Build status
 
-Built in [plan 003](../../plans/003-square-actions.md): AC-1, AC-2, AC-3, AC-7, AC-8, and the converted-by mark for AC-5, tested in `ConvertTest`. The converted square's income (AC-4, AC-5) and the bankruptcy rule (AC-6) are plan 005.
+Built in [plan 003](../../plans/003-square-actions.md): AC-1, AC-2, AC-3, AC-7, AC-8, and the converted-by mark for AC-5, tested in `ConvertTest`. The converted square's income (AC-4, AC-5) and the bankruptcy rule (AC-6) were built in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md), tested in `IncomeTest` and `BankruptcyTest`.
 
 ## Related
 

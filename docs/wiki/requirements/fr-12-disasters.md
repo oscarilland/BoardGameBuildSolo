@@ -3,7 +3,7 @@ title: FR-12 Disasters
 type: requirement
 id: FR-12
 priority: must
-status: draft
+status: built
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -40,6 +40,11 @@ More than one disaster per round.
 
 1. Flood or Storm with no owned squares is skipped ([Q-17](../rules/open-questions.md)).
 2. Resilience-reduced costs round half up ([Q-08](../rules/open-questions.md)).
+3. **Agreed.**
+
+## Build status
+
+**Built** in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md): AC-1 to AC-11, tested in `DisasterTest` and `ClimateMeterTest`. The model gives each disaster's explanation and payments to the screen (AC-9); the pop-up is plan 007.
 
 ## Related
 

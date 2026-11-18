@@ -18,21 +18,21 @@ The acceptance criteria on each page were written on ingest from the rules and d
 |---|---|---|---|---|
 | [FR-01](fr-01-start-game.md) | Start a game with 4-6 players and distinct characters | Must | JUnit, manual | Agreed (rules built; screen in plan 007) |
 | [FR-02](fr-02-starting-values-and-first-player.md) | Starting values and a random first player | Must | JUnit | Built |
-| [FR-03](fr-03-dice-movement-and-junctions.md) | Two dice, clockwise movement, junction choice | Must | JUnit | Agreed (built except AC-6, plan 005) |
+| [FR-03](fr-03-dice-movement-and-junctions.md) | Two dice, clockwise movement, junction choice | Must | JUnit | Built |
 | [FR-04](fr-04-buy-square.md) | Buy an unowned square; no buying if unaffordable | Must | JUnit | Built |
-| [FR-05](fr-05-co-funding.md) | Co-fund a Green Project for £3M, one deal per player | Must | JUnit | Agreed (actions built; end-of-round effects in plan 005) |
-| [FR-06](fr-06-lobbying.md) | Lobby a Polluting square for £2M | Should | JUnit | Agreed (actions built; end-of-round effects in plan 005) |
-| [FR-07](fr-07-convert-square.md) | Convert one Polluting square per turn for £5M | Must | JUnit | Agreed (actions built; end-of-round effects in plan 005) |
-| [FR-08](fr-08-resilience.md) | Resilience levels cut disaster payments | Should | JUnit | Agreed (actions built; end-of-round effects in plan 005) |
+| [FR-05](fr-05-co-funding.md) | Co-fund a Green Project for £3M, one deal per player | Must | JUnit | Built |
+| [FR-06](fr-06-lobbying.md) | Lobby a Polluting square for £2M | Should | JUnit | Built |
+| [FR-07](fr-07-convert-square.md) | Convert one Polluting square per turn for £5M | Must | JUnit | Built |
+| [FR-08](fr-08-resilience.md) | Resilience levels cut disaster payments | Should | JUnit | Built |
 | [FR-09](fr-09-glider.md) | Glider ride for £1M | Should | Manual | Built |
 | [FR-10](fr-10-climate-cards.md) | Climate Cards with fact and source | Must | JUnit, manual | Built |
-| [FR-11](fr-11-end-of-round-order.md) | End-of-round steps in a fixed order | Must | JUnit | Draft |
-| [FR-12](fr-12-disasters.md) | Disasters by danger band, cut by Resilience | Must | JUnit | Draft |
-| [FR-13](fr-13-bankruptcy.md) | Bankruptcy | Should | JUnit | Draft |
+| [FR-11](fr-11-end-of-round-order.md) | End-of-round steps in a fixed order | Must | JUnit | Built |
+| [FR-12](fr-12-disasters.md) | Disasters by danger band, cut by Resilience | Must | JUnit | Built |
+| [FR-13](fr-13-bankruptcy.md) | Bankruptcy | Should | JUnit | Built |
 | [FR-14](fr-14-legacy-score-and-winner.md) | Legacy Score and one winner | Must | JUnit | Draft |
 | [FR-15](fr-15-always-visible-status.md) | Year, round, meter, band and every player's status always visible | Must | Manual | Draft |
 | [FR-16](fr-16-end-of-game-report.md) | End-of-game report | Must | Manual | Draft |
-| [FR-17](fr-17-disaster-explanation.md) | One-line explanation for each disaster | Should | Manual | Draft |
+| [FR-17](fr-17-disaster-explanation.md) | One-line explanation for each disaster | Should | Manual | Agreed |
 
 ## Non-functional requirements
 

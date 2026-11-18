@@ -3,7 +3,7 @@ title: FR-03 Dice, movement and junctions
 type: requirement
 id: FR-03
 priority: must
-status: agreed
+status: built
 sources: [../sources/sub1a-report.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -44,7 +44,7 @@ Animating the counter's move (UI polish, not logic).
 
 ## Build status
 
-Built in [plan 002](../../plans/002-players-characters-and-movement.md): AC-1 to AC-5 and AC-7, tested in `BoardTest`, `MovementTest` and `DiceTest`. AC-6 (a bankrupt player doesn't move) waits for bankruptcy in plan 005, so the page stays `agreed` until then.
+Built in [plan 002](../../plans/002-players-characters-and-movement.md): AC-1 to AC-5 and AC-7, tested in `BoardTest`, `MovementTest` and `DiceTest`. AC-6 (a bankrupt player doesn't move) was built in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md), tested in `BankruptcyTest`, so FR-03 is now `built`.
 
 **Confirmed by Oscar (17 November 2026):** a move that ends exactly on the far junction after the cut-through counts as landing on a junction, so the next move starts with the route question (tested in `q05_endingOnTheFarJunctionAsksNextTurn`).
 

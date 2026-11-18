@@ -34,6 +34,28 @@ final class ScriptedRandom extends Random {
         return this;
     }
 
+    /** Scripts one die (1-6), for example a disaster roll or a roll to return from bankruptcy. */
+    ScriptedRandom die(int face) {
+        values.add(face - 1);
+        return this;
+    }
+
+    /**
+     * Scripts the end-of-round disaster die as a 6, which is above every danger band, so no
+     * disaster happens. Put it where a round ends: after the last player's roll.
+     */
+    ScriptedRandom noDisaster() {
+        return die(6);
+    }
+
+    /** Scripts raw {@code nextInt} results, for example a disaster type (0-3) or which district floods. */
+    ScriptedRandom values(int... raw) {
+        for (int value : raw) {
+            values.add(value);
+        }
+        return this;
+    }
+
     @Override
     public int nextInt(int bound) {
         if (values.isEmpty()) {

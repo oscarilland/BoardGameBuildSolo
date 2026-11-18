@@ -3,7 +3,7 @@ title: FR-06 Lobbying
 type: requirement
 id: FR-06
 priority: should
-status: agreed
+status: built
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -40,7 +40,7 @@ Lobbying from a distance (only on landing).
 
 ## Build status
 
-Built in [plan 003](../../plans/003-square-actions.md): the cost and the lobbied mark (AC-1), the mark clearing at the end of the round (AC-2), the Activist's free lobbying (AC-5), and AC-6 and AC-7, tested in `LobbyTest`. The lost income and meter effects (rest of AC-1, AC-3, AC-4) are plan 005.
+Built in [plan 003](../../plans/003-square-actions.md): the cost and the lobbied mark (AC-1), the mark clearing at the end of the round (AC-2), the Activist's free lobbying (AC-5), and AC-6 and AC-7, tested in `LobbyTest`. The lost income and meter effects (rest of AC-1, AC-3, AC-4) were built in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md), tested in `IncomeTest`, `CarbonTaxTest` and `MeterUpdateTest`.
 
 ## Related
 

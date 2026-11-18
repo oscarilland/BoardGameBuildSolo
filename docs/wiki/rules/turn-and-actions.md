@@ -12,7 +12,7 @@ updated: 2026-11-17
 
 On their turn a player rolls two dice, moves clockwise, chooses a route at junctions, acts on the square they land on, may convert one polluting square, then ends the turn. After the last player, the round ends.
 
-> **Build status:** rolling, moving and junction choices are built ([plan 002](../../plans/002-players-characters-and-movement.md)), and so are buying, co-funding, lobbying, converting, Resilience and the Glider ([plan 003](../../plans/003-square-actions.md)). Not yet: drawing a Climate Card (plan 004), and the end-of-round effects of these actions (plan 005).
+> **Build status:** rolling, moving and junction choices are built ([plan 002](../../plans/002-players-characters-and-movement.md)), and so are buying, co-funding, lobbying, converting, Resilience and the Glider ([plan 003](../../plans/003-square-actions.md)). Drawing a Climate Card is built ([plan 004](../../plans/004-climate-cards.md)), and so are the end-of-round effects of these actions ([plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md)).
 
 ## Rules
 

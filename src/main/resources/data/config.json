@@ -176,19 +176,52 @@
     "FLOOD": {
       "target": "random district that has owned squares",
       "costPerOwnedSquarePerBand": 1,
-      "lostIncomeRounds": 1
+      "lostIncomeRounds": 1,
+      "explanation": "As the climate warms, the UK is getting wetter, so heavy rain and floods are more likely.",
+      "sources": [
+        {
+          "title": "Met Office, annual climate stocktake",
+          "url": "https://metoffice.gov.uk/about-us/news-and-media/media-centre/weather-and-climate-news/2025/annual-climate-stocktake-shows-weather-records-and-extremes-now-the-norm-in-uk-climate"
+        }
+      ]
     },
     "STORM": {
       "target": "random owned square",
       "repairCostPerBand": 2,
       "closedRounds": 1,
-      "repairMandatory": true
+      "repairMandatory": true,
+      "explanation": "Warmer air holds more water, so storms bring heavier rain, and UK winter storms are expected to get slightly stronger.",
+      "sources": [
+        {
+          "title": "Met Office, The influence of climate change on severe weather",
+          "url": "https://www.metoffice.gov.uk/blog/2024/the-influence-of-climate-change-on-severe-weather"
+        }
+      ]
     },
     "HEATWAVE": {
-      "costPerPlayerPerBand": 1
+      "costPerPlayerPerBand": 1,
+      "explanation": "Greenhouse gases are warming the air, so heatwaves like Northern Ireland's record 31.3°C are becoming more likely.",
+      "sources": [
+        {
+          "title": "Met Office, annual climate stocktake",
+          "url": "https://metoffice.gov.uk/about-us/news-and-media/media-centre/weather-and-climate-news/2025/annual-climate-stocktake-shows-weather-records-and-extremes-now-the-norm-in-uk-climate"
+        },
+        {
+          "title": "Met Office, UK climate extremes",
+          "url": "https://metoffice.gov.uk/public/weather/climate-extremes"
+        }
+      ]
     },
     "DROUGHT": {
-      "effect": "nature projects earn no GP next round"
+      "effect": "nature projects earn no GP next round",
+      "lostGPRounds": 1,
+      "explanation": "Scientists expect droughts in the UK to happen more often and last longer as the climate warms.",
+      "sources": [
+        {
+          "title": "Met Office, The influence of climate change on severe weather",
+          "url": "https://www.metoffice.gov.uk/blog/2024/the-influence-of-climate-change-on-severe-weather"
+        }
+      ]
     }
   },
   "bankruptcy": {

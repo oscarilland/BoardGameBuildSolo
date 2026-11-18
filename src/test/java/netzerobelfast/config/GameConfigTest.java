@@ -106,7 +106,10 @@ class GameConfigTest {
         assertEquals(List.of(0.25, 0.5, 0.75), rules.resilience().disasterCostCut());
         assertEquals(3, rules.resilience().maxLevel());
         assertEquals(2, rules.quizCorrectGP());
-        assertEquals(new Rules.Disasters(1, 1, 2, 1, 1), rules.disasters());
+        Rules.Disasters disasters = rules.disasters();
+        assertEquals(List.of(1, 1, 2, 1, 1, 1), List.of(disasters.floodCostPerSquarePerBand(), disasters.floodLostIncomeRounds(),
+                disasters.stormRepairCostPerBand(), disasters.stormClosedRounds(), disasters.heatwaveCostPerPlayerPerBand(),
+                disasters.droughtLostGPRounds()));
         assertEquals(new Rules.Bankruptcy(6, 2, 10, 15), rules.bankruptcy());
         assertEquals(new Rules.Scoring(5, 5), rules.scoring());
     }
@@ -156,6 +159,17 @@ class GameConfigTest {
 
         CardDef c05 = cards.stream().filter(c -> c.id().equals("C05")).findFirst().orElseThrow();
         assertEquals(2, c05.sources().size());
+    }
+
+    @Test
+    void fr17_nfr10_ac2_eachDisasterHasItsApprovedExplanationAndSources() {
+        Map<String, Rules.Explanation> explanations = config.rules().disasters().explanations();
+        assertEquals(java.util.Set.of("FLOOD", "STORM", "HEATWAVE", "DROUGHT"), explanations.keySet());
+        assertEquals("As the climate warms, the UK is getting wetter, so heavy rain and floods are more likely.",
+                explanations.get("FLOOD").text());
+        assertTrue(explanations.get("HEATWAVE").text().contains("31.3°C"));
+        assertEquals(2, explanations.get("HEATWAVE").sources().size());
+        assertTrue(explanations.get("DROUGHT").sources().get(0).url().startsWith("https://www.metoffice.gov.uk/"));
     }
 
     @Test

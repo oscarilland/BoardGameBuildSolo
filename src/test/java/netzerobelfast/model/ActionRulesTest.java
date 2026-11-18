@@ -47,7 +47,7 @@ class ActionRulesTest {
     void theLimitsResetOnTheNextTurn() {
         // Aoife rolls 3 to Milewater Flood Defence (3) and buys a level; the others roll 3;
         // Aoife then rolls 3 to Harbour Gas Plant (6), where she can buy.
-        Game game = Games.scripted(3, 3, 3, 3, 3);
+        Game game = Games.start(new ScriptedRandom().firstPlayer(0).rolls(3, 3, 3, 3).noDisaster().rolls(3), Games.FOUR);
         game.roll();
         assertEquals(3, game.currentPlayer().position());
         game.take(only(game, Kind.BUY_RESILIENCE));

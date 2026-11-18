@@ -1,7 +1,7 @@
 ---
 title: Setup and characters
 type: rules
-status: draft
+status: built
 sources: [../sources/handover.md, ../sources/rules-v4.md, ../sources/data-files.md]
 updated: 2026-11-17
 ---
@@ -12,7 +12,7 @@ updated: 2026-11-17
 
 4-6 players each take a different one of six characters. The characters start with unequal money and GP, and each has one ability. They're balanced by win rate, not by starting value.
 
-> **Build status:** setup is built in `Game.start` ([plan 002](../../plans/002-players-characters-and-movement.md)): names (up to `game.maxNameLength`, 20), distinct characters, starting money and GP, random first player, everyone on square 0. Abilities built in [plan 003](../../plans/003-square-actions.md): Tech Entrepreneur, Council Planner, Student Commuter and Community Activist (lobbying cost; the meter effect is plan 005). The Industrialist's bonus and the Farmer's nature GP are paid at the end of the round (plan 005).
+> **Build status:** setup is built in `Game.start` ([plan 002](../../plans/002-players-characters-and-movement.md)): names (up to `game.maxNameLength`, 20), distinct characters, starting money and GP, random first player, everyone on square 0. Every ability is built: Tech Entrepreneur, Council Planner, Student Commuter and Community Activist in [plan 003](../../plans/003-square-actions.md); the Activist's meter effect, the Industrialist's bonus and the Farmer's nature GP in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md).
 
 ## Rules
 

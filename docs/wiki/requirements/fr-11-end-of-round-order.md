@@ -3,7 +3,7 @@ title: FR-11 End-of-round order
 type: requirement
 id: FR-11
 priority: must
-status: draft
+status: built
 sources: [../sources/sub1a-report.md, ../sources/handover.md]
 updated: 2026-11-17
 ---
@@ -39,6 +39,11 @@ Animating each step (UI polish).
 
 1. The meter can go below 0 ([Q-02](../rules/open-questions.md)).
 2. Closed and flooded squares still pay carbon tax and move the meter, but earn nothing ([Q-15](../rules/open-questions.md)).
+3. **Agreed.**
+
+## Build status
+
+**Built** in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md): AC-1 to AC-10, tested in `RoundOrderTest`, `IncomeTest`, `CarbonTaxTest`, `MeterUpdateTest`, `InterimTargetTest` and `ClimateMeterTest`. AC-7's end of game stops in `GAME_OVER`; scoring is plan 006.
 
 ## Related
 

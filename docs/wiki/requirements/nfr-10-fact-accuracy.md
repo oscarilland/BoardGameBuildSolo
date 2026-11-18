@@ -33,7 +33,7 @@ Checking that URLs still work (needs a network, which the game never uses).
 
 ## Build status
 
-AC-1 is enforced by plan 001's validation. AC-3: the model gives every source's title and web address with the fact ([plan 004](../../plans/004-climate-cards.md)); the screen is plan 007. AC-2 (disaster explanations) is plan 005. AC-4 is a gate in build progress.
+AC-1 is enforced by plan 001's validation. AC-3: the model gives every source's title and web address with the fact ([plan 004](../../plans/004-climate-cards.md)); the screen is plan 007. AC-2 (disaster explanations with sources) is built and validated on load ([plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md)). AC-4 is a gate in build progress.
 
 ## Related
 

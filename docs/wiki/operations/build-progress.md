@@ -92,6 +92,17 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 
 ### Plan 005 - End of round, meter, disasters, bankruptcy (FR-11, FR-12, FR-13, FR-17)
 
+- [x] Disaster explanation lines sourced (Met Office) and approved by Oscar, 17 November 2026
+- [x] FR-11, FR-12, FR-13, FR-17 agreed (a returning player takes a normal roll in the same turn), 17 November 2026
+- [x] Plan drafted ([plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md)), 17 November 2026
+- [x] Gate: plan 005 approved, 18 November 2026
+- [x] Explanations and sources in the working `config.json`, validated
+- [x] The six end-of-round steps in order, with `RoundReport`; `GAME_OVER` after round 12
+- [x] `ClimateMeter` complete; `DisasterManager`; lasting effects with durations from the data
+- [x] Bankruptcy complete: return roll, automatic return, loan, no moves or actions
+- [x] Tests, 30 complete headless games, deliberate-bug check: 268 tests, `model` coverage 99.4%; all five bugs caught
+- [x] Plan 005 marked `done` (18 November 2026)
+
 ### Plan 006 - Scoring, end of game and the 20-game headless run (FR-14, NFR-06)
 
 ### Plan 007 - Game UI: setup, board, panel, actions, pop-ups (FR-01, FR-15, NFR-02, NFR-04, NFR-05, NFR-11)
@@ -115,6 +126,7 @@ Newest last. Each entry says what happened, its effect and what was done.
 | 1 | 2026-11-17 | The handbook PDF couldn't be read with the PDF page renderer (`pdftoppm` isn't installed). Text was extracted with Python's PyMuPDF instead; all 18 pages came through | Worked around. Install Poppler if page images are ever needed |
 | 2 | 2026-11-17 | **Gson 2.15.0 has a dependency, `error_prone_annotations`**, which ADR-004 said it didn't. The shaded jar warned about overlapping files | Excluded from the jar (compile-time annotations only); ADR-004 has a correction note. Clean build now has no warnings |
 | 3 | 2026-11-17 | Plan 001 asked the validator to enforce 36 squares, 10/12/4/3/7 types and 30 cards. That would hard-code the board's size, against NFR-07 | The validator checks structure only; the counts are asserted by `GameConfigTest`. Recorded in plan 001's Outcome |
+| 4 | 2026-11-18 | **Bankruptcy almost never happens.** In 60 complete headless games (random players, and players who took every action they could afford), nobody went bankrupt: each end of round pays income before the disaster step, so money is topped up before a disaster can take it. The rules work (tested directly in `BankruptcyTest`); this is a balance question | Open, for Oscar and playtests ([Q-10](../rules/open-questions.md) covers re-tuning). Plan 006's balance check can measure it with smarter bots |
 
 ## Related
 

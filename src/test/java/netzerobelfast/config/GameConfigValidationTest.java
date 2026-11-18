@@ -478,6 +478,36 @@ class GameConfigValidationTest {
     }
 
     @Test
+    void nfr10_ac2_disasterWithoutAnExplanation() {
+        assertRejected(CONFIG_FILE, c -> obj(c, "disasters", "STORM").remove("explanation"),
+                "config.json: disasters.STORM.explanation is missing");
+    }
+
+    @Test
+    void nfr10_ac2_disasterExplanationWithoutASource() {
+        assertRejected(CONFIG_FILE, c -> obj(c, "disasters", "DROUGHT").add("sources", new JsonArray()),
+                "config.json: disasters.DROUGHT.sources is empty; every explanation needs a source (NFR-10)");
+    }
+
+    @Test
+    void disasterEffectsLastAtLeastOneRound() {
+        assertRejected(CONFIG_FILE, c -> obj(c, "disasters", "FLOOD").addProperty("lostIncomeRounds", 0),
+                "config.json: disasters.FLOOD.lostIncomeRounds should be at least 1");
+    }
+
+    @Test
+    void stormClosuresLastAtLeastOneRound() {
+        assertRejected(CONFIG_FILE, c -> obj(c, "disasters", "STORM").addProperty("closedRounds", 0),
+                "config.json: disasters.STORM.closedRounds should be at least 1");
+    }
+
+    @Test
+    void droughtsLastAtLeastOneRound() {
+        assertRejected(CONFIG_FILE, c -> obj(c, "disasters", "DROUGHT").addProperty("lostGPRounds", 0),
+                "config.json: disasters.DROUGHT.lostGPRounds should be at least 1");
+    }
+
+    @Test
     void nfr10_ac1_sourceWithoutAUrl() {
         assertRejected(CARDS_FILE, c -> card(c, 5).getAsJsonArray("sources").get(0).getAsJsonObject().remove("url"),
                 "climate_cards.json: cards[5].sources[0].url is missing");
