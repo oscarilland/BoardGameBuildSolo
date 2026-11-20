@@ -7,7 +7,6 @@ import netzerobelfast.model.Game.PlayerSetup;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -40,12 +39,12 @@ final class SetupScreen extends JPanel {
     private final List<Character> characters;
     private final Function<List<PlayerSetup>, String> onStart;
     private final JComboBox<Integer> count = new JComboBox<>();
-    private final JPanel rows = new JPanel(new GridBagLayout());
+    private final CardPanel rows = new CardPanel(new GridBagLayout(), Palette.SURFACE, Palette.BORDER, 1);
     private final List<JTextField> names = new ArrayList<>();
     private final List<JComboBox<String>> choices = new ArrayList<>();
     private final List<JLabel> abilities = new ArrayList<>();
     private final JLabel status = Ui.label(" ", Ui.BOLD, Palette.MUTED_TEXT);
-    private final JButton start;
+    private final GameButton start;
 
     /**
      * @param onStart starts the game with these players, and returns null, or the model's reason for refusing
@@ -61,7 +60,11 @@ final class SetupScreen extends JPanel {
         JPanel top = new JPanel();
         top.setOpaque(false);
         top.setLayout(new BoxLayout(top, BoxLayout.Y_AXIS));
-        JLabel heading = Ui.label("Who's playing?", Ui.TITLE.deriveFont(32f), Palette.TEXT);
+        JLabel kicker = Ui.label("NEW GAME", Ui.SMALL_BOLD, Palette.ACCENT);
+        kicker.setAlignmentX(LEFT_ALIGNMENT);
+        top.add(kicker);
+        top.add(Box.createVerticalStrut(4));
+        JLabel heading = Ui.label("Who's playing?", Ui.TITLE.deriveFont(36f), Palette.TEXT);
         top.add(heading);
         top.add(Box.createVerticalStrut(12));
         JPanel countRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -72,7 +75,7 @@ final class SetupScreen extends JPanel {
         for (int n = this.rules.minPlayers(); n <= this.rules.maxPlayers(); n++) {
             count.addItem(n);
         }
-        count.setFont(Ui.BODY);
+        DarkComboBox.style(count);
         count.addActionListener(e -> buildRows());
         countRow.add(count);
         countRow.setAlignmentX(LEFT_ALIGNMENT);
@@ -81,14 +84,14 @@ final class SetupScreen extends JPanel {
         top.add(Box.createVerticalStrut(12));
         add(top, BorderLayout.NORTH);
 
-        rows.setOpaque(false);
+        rows.setBorder(BorderFactory.createEmptyBorder(14, 22, 20 + CardPanel.SHADOW, 22 + CardPanel.SHADOW / 2));
         JPanel rowsHolder = new JPanel(new BorderLayout());
         rowsHolder.setOpaque(false);
         rowsHolder.add(rows, BorderLayout.NORTH);
         add(rowsHolder, BorderLayout.CENTER);
 
-        start = Ui.button("Start the game", this::start);
-        JButton back = Ui.button("Back", onBack);
+        start = Ui.primary("Start the game  ▶", this::start);
+        GameButton back = Ui.button("Back", onBack);
         JPanel bottom = new JPanel(new BorderLayout());
         bottom.setOpaque(false);
         bottom.add(status, BorderLayout.CENTER);
@@ -132,6 +135,24 @@ final class SetupScreen extends JPanel {
 
             JTextField name = new JTextField(16);
             name.setFont(Ui.BODY);
+            name.setBackground(Palette.RAISED);
+            name.setForeground(Palette.TEXT);
+            name.setCaretColor(Palette.ACCENT);
+            name.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(Palette.BORDER, 1), BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+            name.addFocusListener(new java.awt.event.FocusAdapter() {
+                @Override
+                public void focusGained(java.awt.event.FocusEvent e) {
+                    name.setBorder(BorderFactory.createCompoundBorder(
+                            BorderFactory.createLineBorder(Palette.FOCUS, 2), BorderFactory.createEmptyBorder(5, 9, 5, 9)));
+                }
+
+                @Override
+                public void focusLost(java.awt.event.FocusEvent e) {
+                    name.setBorder(BorderFactory.createCompoundBorder(
+                            BorderFactory.createLineBorder(Palette.BORDER, 1), BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+                }
+            });
             ((AbstractDocument) name.getDocument()).setDocumentFilter(new MaxLength(rules.maxNameLength()));
             name.getAccessibleContext().setAccessibleName("Player " + (i + 1) + " name");
             label.setLabelFor(name);
@@ -147,7 +168,7 @@ final class SetupScreen extends JPanel {
             for (Character character : characters) {
                 choice.addItem(character.name());
             }
-            choice.setFont(Ui.BODY);
+            DarkComboBox.style(choice);
             choice.getAccessibleContext().setAccessibleName("Player " + (i + 1) + " character");
             if (i < oldChoices.size()) {
                 choice.setSelectedIndex(oldChoices.get(i));

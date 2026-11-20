@@ -29,6 +29,8 @@ updated: 2026-11-18
 
 [plan 007](../../plans/007-game-screens.md): AC-3 is tested by `ResponsivenessTest` (the fastest of six ends of round on a full six-player board must be under 50 ms). AC-1 was timed on Oscar's laptop on 18 November 2026: the window opened 1.1 seconds after launch. AC-2 is checked by hand in Oscar's play-through, so the page stays `agreed`.
 
+[plan 008](../../plans/008-visual-polish.md): the window still opens in 1.2 seconds with the font loading. Animations start at once and are capped (a counter's slide at 1 second, `AnimatorTest`), and any key or click skips them, so the screen always responds straight away.
+
 ## Related
 
 - [NFR-11 Energy efficiency](nfr-11-energy-efficiency.md)

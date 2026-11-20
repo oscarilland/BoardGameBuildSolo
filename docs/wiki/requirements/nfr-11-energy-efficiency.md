@@ -27,6 +27,8 @@ updated: 2026-11-18
 
 Built in [plan 007](../../plans/007-game-screens.md): AC-2, the UI only acts on Swing events and modal dialogs, with no timers or loops, and `LayoutAndTutorialTest.nfr11_ac2_noPollingInUi` fails the build if `Thread.sleep`, `while (true)` or a timer appears in `ui`. AC-1: on 18 November 2026 the title screen used 0.4 CPU-seconds in 10 idle seconds, about 4% of one of the laptop's 12 cores, or about 0.3% of the whole processor. Oscar repeats this on the game screen in his play-through.
 
+[plan 008](../../plans/008-visual-polish.md) added animation. Its one timer lives in `Animator`, runs only while something is moving, and stops when the last animation ends (`AnimatorTest`); the source test now fails if a timer appears anywhere else in `ui`. With the dark theme, the title screen used 0.27 CPU-seconds in 20 idle seconds on 18 November 2026, about 1.3% of one core.
+
 ## Related
 
 - [NFR-04 Responsiveness](nfr-04-responsiveness.md)

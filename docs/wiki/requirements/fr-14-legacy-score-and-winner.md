@@ -39,7 +39,7 @@ Shared wins; a cooperative "everyone wins" mode.
 
 ## Build status
 
-**Built** in [plan 006](../../plans/006-scoring-and-balance-simulation.md): AC-1 to AC-6, tested in `ScoringTest` and `EndOfGameReportTest`. The model says whether Belfast reached net zero (AC-3); the end screen that shows it is plan 008.
+**Built** in [plan 006](../../plans/006-scoring-and-balance-simulation.md): AC-1 to AC-6, tested in `ScoringTest` and `EndOfGameReportTest`. The model says whether Belfast reached net zero (AC-3); the end screen that shows it is plan 009.
 
 ## Related
 

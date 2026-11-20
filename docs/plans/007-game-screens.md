@@ -26,9 +26,9 @@ At the end of this plan the game can be played from start to finish on one compu
 - **Decisions relied on:** [ADR-002](../decisions/002-ui-toolkit.md) (Swing), [ADR-003](../decisions/003-build-tool-and-java-version.md) (Maven, Java 21, Oscar's laptop as the reference PC), [ADR-004](../decisions/004-reading-the-json-data-files.md) (data through `GameConfig` only).
 - **Open rules questions answered first:** none open. Q-02 and Q-03 (the meter label and values below 0) are already decided.
 - **Out of scope:**
-  - The end-of-game report's meter graph and emissions shares ([FR-16](../wiki/requirements/fr-16-end-of-game-report.md), plan 008). This plan ends on a plain final-scores screen with the winner, so a game can finish.
+  - The end-of-game report's meter graph and emissions shares ([FR-16](../wiki/requirements/fr-16-end-of-game-report.md), plan 009). This plan ends on a plain final-scores screen with the winner, so a game can finish.
   - Animation of counters, sound, saving a game, a full-screen toggle (the window is resizable and can be maximised).
-  - The readability check ([NFR-03](../wiki/requirements/nfr-03-readability.md)) and packaging (NFR-09), plan 009.
+  - The readability check ([NFR-03](../wiki/requirements/nfr-03-readability.md)) and packaging (NFR-09), plan 010.
   - Any rule change. If a screen needs information the model doesn't offer, add a read-only accessor to the model with a test; never compute a rule in `ui`.
 
 ## Prerequisites
@@ -50,7 +50,7 @@ At the end of this plan the game can be played from start to finish on one compu
 | `lastCard()` changed | The card's outcome, then its fact and source title and web address (FR-10, NFR-10) |
 | `lastRound()` changed | Round report: income, carbon tax, meter change, interim target, disaster and its explanation (FR-11, FR-17) |
 | `AWAITING_RETURN_ROLL`, then `lastReturn()` | "Roll to return" for a bankrupt player, then the result |
-| `GAME_OVER` | Final scores and winner from `result()` (plan 008 replaces this with the full report) |
+| `GAME_OVER` | Final scores and winner from `result()` (plan 009 replaces this with the full report) |
 
 **Presenters keep the logic testable.** Swing windows can't be opened in a headless CI build, so anything worth testing lives in plain classes with no Swing in them: `StatusText` (top bar and player card lines), `ActionOptions` (the buttons for the current phase, their labels such as "Buy £9M", whether each is enabled, and its shortcut key), `HowToPlay` (the tutorial pages), `BoardLayout` (where each square sits) and `Palette` (the colour tokens). The Swing classes just draw what these return.
 

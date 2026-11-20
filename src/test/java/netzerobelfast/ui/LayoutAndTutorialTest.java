@@ -139,7 +139,7 @@ class LayoutAndTutorialTest {
     // ---- NFR-11 AC-2 -------------------------------------------------------------
 
     @Test
-    void nfr11_ac2_noPollingInUi() throws IOException {
+    void nfr11_ac2_onlyTheAnimatorUsesATimer() throws IOException {
         Path ui = Path.of("src/main/java/netzerobelfast/ui");
         List<String> found = new ArrayList<>();
         List<Path> sources;
@@ -150,13 +150,18 @@ class LayoutAndTutorialTest {
         {
             for (Path file : sources) {
                 String source = Files.readString(file);
-                for (String banned : List.of("Thread.sleep", "while (true)", "javax.swing.Timer", "java.util.Timer")) {
+                for (String banned : List.of("Thread.sleep", "while (true)", "java.util.Timer")) {
                     if (source.contains(banned)) {
                         found.add(file.getFileName() + ": " + banned);
                     }
                 }
+                // Plan 008: animation needs a timer, but only the Animator may have one, and it stops itself (AnimatorTest).
+                if (source.contains("javax.swing.Timer") && !file.getFileName().toString().equals("Animator.java")) {
+                    found.add(file.getFileName() + ": javax.swing.Timer outside Animator");
+                }
             }
         }
         assertTrue(found.isEmpty(), "polling or timers in the UI: " + found);
+        assertTrue(Files.readString(ui.resolve("Animator.java")).contains("timer.stop()"), "the Animator must stop its timer");
     }
 }

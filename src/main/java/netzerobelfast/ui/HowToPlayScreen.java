@@ -8,7 +8,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -18,7 +17,6 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
-import java.awt.RenderingHints;
 import java.util.List;
 
 /**
@@ -31,7 +29,7 @@ final class HowToPlayScreen extends JPanel {
 
     private final List<Page> pages;
     private final Rules rules;
-    private final JPanel body = new JPanel();
+    private final CardPanel body = new CardPanel(null, Palette.SURFACE, Palette.BORDER, 1);
     private final JLabel pageNumber = Ui.label("", Ui.BODY, Palette.MUTED_TEXT);
     private final JButton back;
     private final JButton next;
@@ -43,7 +41,6 @@ final class HowToPlayScreen extends JPanel {
         this.pages = HowToPlay.pages(rules);
         setBackground(Palette.BACKGROUND);
 
-        body.setOpaque(false);
         body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
         JPanel centre = new JPanel(new GridBagLayout());
         centre.setOpaque(false);
@@ -51,7 +48,7 @@ final class HowToPlayScreen extends JPanel {
         add(centre, BorderLayout.CENTER);
 
         back = Ui.button("◀ Back", () -> turn(-1));
-        next = Ui.button("Next ▶", () -> turn(1));
+        next = Ui.primary("Next ▶", () -> turn(1));
         JButton done = Ui.button("Back to the title", onDone);
         JPanel row = new JPanel(new FlowLayout(FlowLayout.CENTER, 12, 12));
         row.setOpaque(false);
@@ -71,7 +68,11 @@ final class HowToPlayScreen extends JPanel {
         page = Math.max(0, Math.min(pages.size() - 1, index));
         Page shown = pages.get(page);
         body.removeAll();
-        JLabel heading = Ui.label(shown.title(), Ui.TITLE.deriveFont(32f), Palette.TEXT);
+        JLabel step = Ui.label("HOW TO PLAY  ·  " + (page + 1) + " / " + pages.size(), Ui.SMALL_BOLD, Palette.ACCENT);
+        step.setAlignmentX(LEFT_ALIGNMENT);
+        body.add(step);
+        body.add(Box.createVerticalStrut(6));
+        JLabel heading = Ui.label(shown.title(), Ui.TITLE.deriveFont(34f), Palette.TEXT);
         heading.setAlignmentX(LEFT_ALIGNMENT);
         body.add(heading);
         body.add(Box.createVerticalStrut(16));
@@ -85,7 +86,7 @@ final class HowToPlayScreen extends JPanel {
             body.add(label);
             body.add(Box.createVerticalStrut(10));
         }
-        body.setBorder(BorderFactory.createEmptyBorder(24, 24, 24, 24));
+        body.setBorder(BorderFactory.createEmptyBorder(28, 34, 28 + CardPanel.SHADOW, 34 + CardPanel.SHADOW / 2));
         pageNumber.setText("Page " + (page + 1) + " of " + pages.size());
         back.setEnabled(page > 0);
         next.setEnabled(page < pages.size() - 1);
@@ -99,7 +100,7 @@ final class HowToPlayScreen extends JPanel {
     }
 
     /** The page's picture, drawn from the palette. Labels sit beside the colours, never on them. */
-    private static final class PictureView extends JComponent {
+    private static final class PictureView extends JPanel {
         private final Picture picture;
         private final Rules rules;
 
@@ -109,26 +110,29 @@ final class HowToPlayScreen extends JPanel {
             Dimension size = new Dimension(TEXT_WIDTH, 90);
             setPreferredSize(size);
             setMaximumSize(size);
+            setOpaque(false);
             setFont(Ui.BODY);
         }
 
         @Override
         protected void paintComponent(Graphics graphics) {
-            Graphics2D g = (Graphics2D) graphics.create();
-            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            Graphics2D g = Ui.smooth(graphics);
+            g.setFont(Ui.BODY);
             FontMetrics metrics = g.getFontMetrics();
             switch (picture) {
                 case METER -> {
                     List<Rules.DangerBand> bands = rules.meter().dangerBands();
                     int width = TEXT_WIDTH / bands.size();
+                    g.setClip(new java.awt.geom.RoundRectangle2D.Double(0, 10, width * bands.size(), 22, 22, 22));
                     for (int i = 0; i < bands.size(); i++) {
                         g.setColor(Palette.band(bands.get(i).band()));
-                        g.fillRect(i * width, 10, width, 30);
-                        g.setColor(Palette.TEXT);
-                        g.drawString(StatusText.bandText(bands.get(i).band()), i * width + 4, 62);
+                        g.fillRect(i * width, 10, width, 22);
                     }
-                    g.drawRect(0, 10, width * bands.size() - 1, 30);
+                    g.setClip(null);
+                    g.setColor(Palette.TEXT);
+                    for (int i = 0; i < bands.size(); i++) {
+                        g.drawString(StatusText.bandText(bands.get(i).band()), i * width + 4, 54);
+                    }
                     g.drawString("Start: " + rules.meter().start() + " · Net zero: " + rules.meter().netZeroAtOrBelow()
                             + " or below", 0, 84);
                 }
@@ -136,20 +140,30 @@ final class HowToPlayScreen extends JPanel {
                     die(g, 0, 3);
                     die(g, 80, 4);
                     g.setColor(Palette.TEXT);
-                    g.drawString("3 + 4 = move 7 squares", 170, 45);
+                    g.setFont(Fonts.BOLD.deriveFont(18f));
+                    g.drawString("3 + 4 = move 7 squares", 170, 48);
                 }
                 case SQUARES -> {
                     String[] labels = {"Polluting", "Green", "Nature", "Resilience", "Glider", "Card"};
                     java.awt.Color[] fills = {Palette.POLLUTING, Palette.GREEN, Palette.NATURE, Palette.RESILIENCE,
                             Palette.GLIDER, Palette.CLIMATE_CARD};
+                    netzerobelfast.config.BoardDef.SquareType[] types = {
+                            netzerobelfast.config.BoardDef.SquareType.POLLUTING, netzerobelfast.config.BoardDef.SquareType.GREEN_PROJECT,
+                            netzerobelfast.config.BoardDef.SquareType.GREEN_PROJECT, netzerobelfast.config.BoardDef.SquareType.RESILIENCE,
+                            netzerobelfast.config.BoardDef.SquareType.GLIDER_STOP, netzerobelfast.config.BoardDef.SquareType.CLIMATE_CARD};
                     for (int i = 0; i < labels.length; i++) {
-                        int x = i * 100;
+                        int x = i * 102;
+                        boolean nature = i == 2;
+                        java.awt.Color band = Palette.squareBand(types[i], nature);
                         g.setColor(fills[i]);
-                        g.fillRoundRect(x, 6, 90, 60, 10, 10);
-                        g.setColor(Palette.BORDER);
-                        g.drawRoundRect(x, 6, 90, 60, 10, 10);
+                        g.fillRoundRect(x, 6, 94, 64, 14, 14);
+                        g.setColor(band);
+                        g.fillRoundRect(x, 6, 94, 6, 6, 6);
+                        g.drawRoundRect(x, 6, 94, 64, 14, 14);
+                        Icons.draw(g, Icons.forSquare(types[i], nature), x + 8, 20, 18, band);
                         g.setColor(Palette.TEXT);
-                        g.drawString(labels[i], x + 6, 42);
+                        g.setFont(Ui.SMALL_BOLD);
+                        g.drawString(labels[i], x + 8, 58);
                     }
                 }
                 case BANDS -> {
@@ -176,10 +190,9 @@ final class HowToPlayScreen extends JPanel {
         }
 
         private static void die(Graphics2D g, int x, int pips) {
-            g.setColor(Palette.SURFACE);
-            g.fillRoundRect(x, 10, 64, 64, 12, 12);
             g.setColor(Palette.TEXT);
-            g.drawRoundRect(x, 10, 64, 64, 12, 12);
+            g.fillRoundRect(x, 10, 64, 64, 16, 16);
+            g.setColor(Palette.BACKGROUND);
             int[][] spots = pips == 3 ? new int[][] {{16, 16}, {32, 32}, {48, 48}}
                     : new int[][] {{18, 18}, {46, 18}, {18, 46}, {46, 46}};
             for (int[] spot : spots) {
@@ -190,9 +203,9 @@ final class HowToPlayScreen extends JPanel {
         private static void box(Graphics2D g, FontMetrics metrics, int x, String text, java.awt.Color fill) {
             int width = TEXT_WIDTH / 2 - 10;
             g.setColor(fill);
-            g.fillRoundRect(x, 10, width, 60, 12, 12);
+            g.fillRoundRect(x, 10, width, 60, 16, 16);
             g.setColor(Palette.BORDER);
-            g.drawRoundRect(x, 10, width, 60, 12, 12);
+            g.drawRoundRect(x, 10, width, 60, 16, 16);
             g.setColor(Palette.TEXT);
             g.drawString(text, x + (width - metrics.stringWidth(text)) / 2, 45);
         }

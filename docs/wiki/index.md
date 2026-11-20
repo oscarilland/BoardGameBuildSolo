@@ -64,7 +64,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 
 ## UX
 
-- [Screens and layout](ux/screens-and-layout.md) - built: screen flow, the game screen as built, keys, colour tokens, UI rules
+- [Screens and layout](ux/screens-and-layout.md) - built: screen flow, the dark game look, animation, keys, colour tokens, UI rules
 
 ## Operations
 
@@ -88,6 +88,7 @@ Every page in `docs/`, one line each. Read this first, then open only what you n
 - [Plan 005 End of round, disasters and bankruptcy](../plans/005-end-of-round-disasters-and-bankruptcy.md) - done: FR-11, FR-12, FR-13, FR-17; the six steps, disasters, full bankruptcy, game over after round 12
 - [Plan 006 Scoring, end-of-game report and balance simulation](../plans/006-scoring-and-balance-simulation.md) - done: FR-14, FR-16, NFR-06; exact scores and tie-breaks, report data, computer players, `--simulate`
 - [Plan 007 Game screens](../plans/007-game-screens.md) - approved, built (Oscar's play-through pending): FR-01, FR-15, NFR-02, NFR-04, NFR-05, NFR-11; title, tutorial, setup and game screens, controller and presenters, keyboard play
+- [Plan 008 Visual polish](../plans/008-visual-polish.md) - approved, built (Oscar's play-through pending): dark game theme, bundled Inter font, painted buttons, cards and icons, light animation with a timer that stops
 
 See [build progress](operations/build-progress.md) for the proposed order of later plans.
 

@@ -123,3 +123,23 @@ Oscar approved [plan 007](../plans/007-game-screens.md) with a minimum window of
 ## [2026-11-18] decide | Q-10 balance: wait for playtests
 
 Oscar read plan 006's simulation results and decided to change no balance values until real players have tried the game. Recorded on [Q-10](rules/open-questions.md), [balance and design history](rules/balance-and-history.md#java-simulation-plan-006) and [build progress](operations/build-progress.md), with the two things to watch in playtests: net zero in mixed games and the Farmer's win rate.
+
+## [2026-11-18] plan | Plan 008 visual polish drafted
+
+After trying plan 007, Oscar asked for the game to look "more sleek and like an actual online game". He chose a dark game theme, light animation, hand-painted Swing (no theme library, so no ADR) and a bundled free font. Drafted [plan 008](../plans/008-visual-polish.md): a dark `Palette` still contrast-tested, Inter (SIL Open Font License) in the jar with a fallback, painted buttons, cards and icons, and an `Animator` whose one timer stops when the last animation ends (NFR-11 AC-2), with pop-ups waiting for animations through a `SecondaryLoop`. The proposed end-of-game report and packaging plans move from 008 and 009 to 009 and 010; live pages and two code comments were updated, and finished plans and earlier log entries keep their wording. Proposes that one play-through after plan 008 covers plan 007 too. Waiting for Oscar's approval.
+
+## [2026-11-18] build | Plan 008 visual polish built
+
+Oscar approved [plan 008](../plans/008-visual-polish.md), agreeing that one play-through covers plans 007 and 008, and that Inter is downloaded once from its official release. Both plans stay `approved` until that play-through.
+
+What changed:
+- **Look:** a dark theme in `Palette`, still contrast-tested on every pair; the Inter font (SIL Open Font License) in the jar, with a fallback; painted buttons, cards, icons and player cards; a skyline title screen; and pop-ups with coloured headers over a dimmed game.
+- **Animation:** an `Animator` whose one timer stops when the last animation ends. Dice tumble, counters slide along their real path, and the meter eases. Pop-ups wait for animations through a `SecondaryLoop`, and any key or click skips them.
+
+Checks:
+- 365 tests pass with no warnings, and five deliberate bugs were each caught.
+- The new tests caught two real bugs: skip left the chained slide running, and a declared contrast pair failed.
+- Rendering the screens at both sizes found layout problems, all fixed. At 1280×720, small tiles now show the type by icon, which NFR-05 AC-2 allows.
+- The window opens in 1.2 seconds and idles at about 1.3% of one core.
+
+Updated the [screens page](ux/screens-and-layout.md) (look, animation, keys and tokens), NFR-04, NFR-05 and NFR-11 build notes, the [system overview](architecture/system-overview.md) (the Inter licence), `src/AGENTS.md`, the README, the overview, build progress and the index.

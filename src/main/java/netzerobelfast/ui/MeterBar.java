@@ -4,101 +4,153 @@ import netzerobelfast.config.Rules;
 
 import javax.swing.JPanel;
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.RenderingHints;
+import java.awt.LinearGradientPaint;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.RoundRectangle2D;
+import java.util.List;
 
 /**
- * The Climate Meter as a bar coloured by danger band, with a marker at the value and a dashed
- * line at the next target (FR-15 AC-1, AC-2). The value and band are written under the bar, so
- * colour is never the only signal (NFR-05 AC-3). The bands' limits come from the data.
+ * The Climate Meter as a rounded bar coloured by danger band, with a glowing marker at the
+ * value and a dashed line at the next target (FR-15 AC-1, AC-2). The value and band are
+ * written beside it as a chip, so colour is never the only signal (NFR-05 AC-3). The bands'
+ * limits come from the data. The marker can be drawn between two values while it eases.
+ *
+ * <p>A {@code JPanel}, not a bare {@code JComponent}, for its accessibility context.
  */
 final class MeterBar extends JPanel {
 
     /** Room above the highest band limit, so the top band has some width on the bar. */
     private static final int TOP_BAND_ROOM = 20;
+    private static final int CHIP_ROOM = 190;
 
     private final Rules.Meter rules;
+    private double shown;
     private int value;
+    private int band;
     private String valueText = "";
     private StatusText.Target target;
 
     MeterBar(Rules.Meter rules) {
         this.rules = rules;
+        this.shown = rules.start();
+        this.value = rules.start();
         setOpaque(false);
-        setPreferredSize(new Dimension(520, 66));
-        setFont(Ui.SMALL.deriveFont(java.awt.Font.BOLD, 13f));
+        setPreferredSize(new Dimension(560, 54));
     }
 
-    void show(int value, String valueText, StatusText.Target target) {
+    void show(int value, int band, String valueText, StatusText.Target target) {
         this.value = value;
+        this.band = band;
         this.valueText = valueText;
         this.target = target;
         getAccessibleContext().setAccessibleName("Climate Meter " + valueText + ", " + target.text());
         repaint();
     }
 
-    /** The bar's range: from 0 (or the value, if below 0) to above the top band's lower limit. */
+    /** Where the marker is drawn; an animation moves it towards {@link #value()}. */
+    void marker(double at) {
+        shown = at;
+        repaint();
+    }
+
+    double marker() {
+        return shown;
+    }
+
+    int value() {
+        return value;
+    }
+
     private int low() {
-        return Math.min(0, value);
+        return (int) Math.min(0, Math.min(value, Math.floor(shown)));
     }
 
     private int high() {
         int top = rules.start();
-        for (Rules.DangerBand band : rules.dangerBands()) {
-            if (band.maxMeter() != null) {
-                top = Math.max(top, band.maxMeter());
+        for (Rules.DangerBand b : rules.dangerBands()) {
+            if (b.maxMeter() != null) {
+                top = Math.max(top, b.maxMeter());
             }
         }
-        return Math.max(top + TOP_BAND_ROOM, value);
+        return (int) Math.max(top + TOP_BAND_ROOM, Math.max(value, Math.ceil(shown)));
     }
 
-    private int x(int meter, int width) {
-        return (int) Math.round((meter - low()) / (double) (high() - low()) * (width - 1));
+    private float x(double meter, int width) {
+        return (float) ((meter - low()) / (high() - low()) * (width - 1));
     }
 
     @Override
     protected void paintComponent(Graphics graphics) {
-        Graphics2D g = (Graphics2D) graphics.create();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        int width = getWidth();
-        int barTop = 10;
-        int barHeight = 18;
+        Graphics2D g = Ui.smooth(graphics);
+        int width = getWidth() - CHIP_ROOM;
+        int barTop = 14;
+        int barHeight = 14;
 
-        // Band segments, from the bottom of the range to each band's upper limit.
-        int from = low();
-        for (Rules.DangerBand band : rules.dangerBands()) {
-            int to = band.maxMeter() == null ? high() : band.maxMeter();
-            g.setColor(Palette.band(band.band()));
-            g.fillRect(x(from, width), barTop, Math.max(1, x(to, width) - x(from, width)), barHeight);
+        // The bands as hard-edged colour stops along a rounded track.
+        List<Rules.DangerBand> bands = rules.dangerBands();
+        float[] stops = new float[bands.size() * 2];
+        Color[] colours = new Color[bands.size() * 2];
+        double from = low();
+        for (int i = 0; i < bands.size(); i++) {
+            double to = bands.get(i).maxMeter() == null ? high() : bands.get(i).maxMeter();
+            stops[i * 2] = (float) ((from - low()) / (high() - low()));
+            stops[i * 2 + 1] = (float) ((to - low()) / (high() - low()));
+            colours[i * 2] = Palette.band(bands.get(i).band());
+            colours[i * 2 + 1] = Palette.band(bands.get(i).band());
             from = to;
         }
-        g.setColor(Palette.HEADER_TEXT);
-        g.drawRect(0, barTop, width - 1, barHeight);
+        // Gradient stops must run from 0 to 1 and strictly increase; nudge any repeats.
+        stops[0] = 0f;
+        for (int i = 1; i < stops.length; i++) {
+            stops[i] = Math.max(stops[i], stops[i - 1] + 0.0001f);
+        }
+        float last = stops[stops.length - 1];
+        for (int i = 0; i < stops.length; i++) {
+            stops[i] = stops[i] / last;
+        }
+        g.setColor(Palette.SURFACE);
+        g.fill(new RoundRectangle2D.Float(-2, barTop - 2, width + 4, barHeight + 4, barHeight + 4, barHeight + 4));
+        g.setPaint(new LinearGradientPaint(0, 0, Math.max(1, width), 0, stops, colours));
+        g.fill(new RoundRectangle2D.Float(0, barTop, width, barHeight, barHeight, barHeight));
 
+        g.setFont(Ui.SMALL_BOLD);
         FontMetrics metrics = g.getFontMetrics();
-        int textY = barTop + barHeight + metrics.getAscent() + 4;
 
-        // The next target: a dashed line, labelled under the bar.
+        // The next target: a dashed line and its label under the bar.
         if (target != null) {
-            int tx = x(target.value(), width);
-            g.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10, new float[] {4, 3}, 0));
-            g.drawLine(tx, barTop - 4, tx, barTop + barHeight + 2);
-            String text = target.text();
-            int left = Math.max(0, Math.min(width - metrics.stringWidth(text), tx - metrics.stringWidth(text) / 2));
-            g.drawString(text, left, textY + metrics.getHeight());
+            float tx = x(target.value(), width);
+            g.setColor(Palette.TEXT);
+            g.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10, new float[] {3, 3}, 0));
+            g.drawLine((int) tx, barTop - 5, (int) tx, barTop + barHeight + 4);
+            String text = "▲ " + target.text();
+            int left = (int) Math.max(0, Math.min(width - metrics.stringWidth(text), tx - metrics.stringWidth(text) / 2f));
+            g.setColor(Palette.MUTED_TEXT);
+            g.drawString(text, left, barTop + barHeight + 6 + metrics.getAscent());
         }
 
-        // The value: a marker above the bar, and the value and band in words.
-        int vx = x(value, width);
-        g.setStroke(new BasicStroke(1));
-        g.fillPolygon(new Polygon(new int[] {vx - 6, vx + 6, vx}, new int[] {0, 0, barTop + 4}, 3));
-        int left = Math.max(0, Math.min(width - metrics.stringWidth(valueText), vx - metrics.stringWidth(valueText) / 2));
-        g.drawString(valueText, left, textY);
+        // The marker: a glowing dot on the bar.
+        float vx = x(shown, width);
+        Color dot = Palette.band(band);
+        for (int i = 3; i > 0; i--) {
+            g.setColor(Palette.alpha(dot, 15 * i));
+            float r = 9 + i * 3;
+            g.fill(new Ellipse2D.Float(vx - r, barTop + barHeight / 2f - r, r * 2, r * 2));
+        }
+        g.setColor(Palette.TEXT);
+        g.fill(new Ellipse2D.Float(vx - 9, barTop + barHeight / 2f - 9, 18, 18));
+        g.setColor(dot);
+        g.fill(new Ellipse2D.Float(vx - 6, barTop + barHeight / 2f - 6, 12, 12));
+
+        // The value and band, as a chip to the right of the bar; the value counts as the marker moves.
+        if (!valueText.isEmpty()) {
+            String chip = Math.round(shown) + valueText.substring(valueText.indexOf(' '));
+            Ui.chip(g, chip, width + 18, barTop - 6, Palette.band(band), Palette.BACKGROUND, Fonts.BOLD.deriveFont(14f));
+        }
         g.dispose();
     }
 }

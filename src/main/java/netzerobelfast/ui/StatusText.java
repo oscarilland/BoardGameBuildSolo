@@ -358,7 +358,7 @@ public final class StatusText {
 
     // ---- The end (FR-14) ------------------------------------------------------------------
 
-    /** The final-scores screen until plan 008's report replaces it. */
+    /** The final-scores screen until plan 009's report replaces it. */
     public List<String> finalScores(Game game, GameResult result) {
         List<String> lines = new ArrayList<>();
         lines.add(result.netZero()

@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Builds and paints every screen without opening a window, so a screen that crashes while
@@ -43,21 +44,27 @@ class ScreensTest {
             assertDoesNotThrow(() -> paint(howTo));
         }
         assertDoesNotThrow(() -> paint(new SetupScreen(UiGames.CONFIG.rules(), players -> null, () -> {})));
-        assertDoesNotThrow(() -> paint(new GameOverScreen(List.of("a", "b"), () -> {}, () -> {})));
+        assertDoesNotThrow(() -> paint(new GameOverScreen(2050, List.of("a", "b", "c"), () -> {}, () -> {})));
     }
 
     @Test
     void theGameScreenBuildsAndPaintsThroughAWholeGame() {
         Ui.installDefaults();
         Game game = UiGames.seeded(4);
-        GameScreen screen = new GameScreen(UiGames.CONFIG, game, result -> {});
+        // A fake ticker: animations start but never tick by themselves; the test skips them.
+        AnimatorTest.FakeTicker ticker = new AnimatorTest.FakeTicker();
+        Animator animator = new Animator(() -> 0L, ticker);
+        GameScreen screen = new GameScreen(UiGames.CONFIG, game, result -> {}, animator);
         paint(screen);
         int guard = 0;
         while (game.phase() != Game.Phase.GAME_OVER && guard++ < 5_000) {
             UiGames.step(game);
             if (guard % 7 == 0) {
                 screen.refresh();
+                paint(screen); // mid-animation
+                animator.skip();
                 paint(screen);
+                assertFalse(ticker.running(), "the timer stops once animations are skipped");
             }
         }
         screen.refresh();

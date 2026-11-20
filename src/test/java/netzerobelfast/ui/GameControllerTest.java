@@ -46,6 +46,11 @@ class GameControllerTest {
         }
 
         @Override
+        public void settle() {
+            calls.add("settle");
+        }
+
+        @Override
         public void showError(String message) {
             calls.add("error");
         }
@@ -130,7 +135,7 @@ class GameControllerTest {
         FakeView view = new FakeView();
         view.answers.add(2); // 2050: the right answer
         new GameController(game, view).perform(new Command.Roll());
-        assertEquals(List.of("refresh", "quiz", "refresh", "card"), view.calls);
+        assertEquals(List.of("refresh", "settle", "quiz", "refresh", "settle", "card"), view.calls);
         assertTrue(view.cards.get(0).correct());
         assertEquals(Game.Phase.MOVE_DONE, game.phase());
     }
@@ -141,7 +146,7 @@ class GameControllerTest {
         TestGames.nextCard(game, "C01");
         FakeView view = new FakeView();
         new GameController(game, view).perform(new Command.Roll());
-        assertEquals(List.of("refresh", "choice", "refresh", "card"), view.calls);
+        assertEquals(List.of("refresh", "settle", "choice", "refresh", "settle", "card"), view.calls);
         assertEquals(List.of(0, 1), view.affordableSeen);
     }
 
@@ -151,7 +156,7 @@ class GameControllerTest {
         TestGames.nextCard(game, "E05");
         FakeView view = new FakeView();
         new GameController(game, view).perform(new Command.Roll());
-        assertEquals(List.of("refresh", "card"), view.calls);
+        assertEquals(List.of("refresh", "settle", "card"), view.calls);
     }
 
     @Test
@@ -162,12 +167,12 @@ class GameControllerTest {
         view.answers.add(9);
         GameController controller = new GameController(game, view);
         controller.perform(new Command.Roll());
-        assertEquals(List.of("refresh", "quiz", "error", "refresh"), view.calls);
+        assertEquals(List.of("refresh", "settle", "quiz", "error", "refresh"), view.calls);
         assertEquals(Game.Phase.AWAITING_QUIZ_ANSWER, game.phase());
 
         view.calls.clear();
         controller.perform(new Command.OpenCard());
-        assertEquals(List.of("quiz", "refresh", "card"), view.calls);
+        assertEquals(List.of("quiz", "refresh", "settle", "card"), view.calls);
         assertEquals(Game.Phase.MOVE_DONE, game.phase());
     }
 
@@ -184,6 +189,9 @@ class GameControllerTest {
         assertEquals(1, view.rounds.get(0).round());
         assertEquals("round", view.calls.get(view.calls.size() - 1));
         assertEquals(8, view.count("refresh"));
+        // Plan 008: the pop-up waits for animations, and nothing else does.
+        assertEquals("settle", view.calls.get(view.calls.size() - 2));
+        assertEquals(1, view.count("settle"));
     }
 
     @Test
@@ -196,7 +204,7 @@ class GameControllerTest {
         controller.perform(new Command.EndTurn());
         assertEquals(Game.Phase.AWAITING_RETURN_ROLL, game.phase());
         controller.perform(new Command.RollToReturn());
-        assertEquals(List.of("refresh", "refresh", "return:Ben"), view.calls);
+        assertEquals(List.of("refresh", "refresh", "settle", "return:Ben"), view.calls);
         assertTrue(view.returns.get(0).returned());
     }
 

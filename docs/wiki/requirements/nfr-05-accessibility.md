@@ -30,6 +30,8 @@ updated: 2026-11-18
 
 Built in [plan 007](../../plans/007-game-screens.md): AC-1, every colour is a token in `Palette`, and `PaletteTest` checks every text and background pair; AC-2, every square shows a type label (`StatusText.typeLabel`); AC-3, the band is written as a number and a word, such as "band 3 (high)"; AC-4, every button can be reached with Tab and pressed with Enter or Space, with shortcut keys listed on [screens and layout](../ux/screens-and-layout.md#keys-nfr-05-ac-4) and checked for clashes in `ActionOptionsTest`. A choice option the player can't afford is shown as plain text rather than a disabled button, because Swing greys disabled wrapped text too faintly. Keyboard-only play is part of Oscar's play-through.
 
+[plan 008](../../plans/008-visual-polish.md) kept all four with a dark theme: every new pair is in `Palette.TEXT_PAIRS` and tested (the lowest is 4.9:1). On small tiles (at 1280×720) the type is shown by its icon, which AC-2 allows ("text or a distinct icon"), with the word in the tooltip; on larger tiles both show. The current player's card says "YOUR TURN" in words. Any key or click skips an animation.
+
 ## Related
 
 - [UX: screens and layout](../ux/screens-and-layout.md)

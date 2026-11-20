@@ -125,12 +125,25 @@ Disaster explanations (Q-11) move to plan 005, once Oscar has approved the lines
 - [x] Route choices, card, round-report and return-roll pop-ups; final-scores screen
 - [x] Keyboard-only play; `--seed`
 - [x] Tests, screens rendered and checked as images, deliberate-bug check: 351 tests; all four bugs caught; window opens in 1.1 s
-- [ ] Gate: Oscar plays a full round by hand at the minimum size and maximised
+- [ ] Gate: Oscar plays a full round by hand at the minimum size and maximised (one play-through after plan 008 covers both)
 - [ ] Plan 007 marked `done`
 
-### Plan 008 - End-of-game report (FR-16)
+### Plan 008 - Visual polish: dark game theme, bundled font, light animation (NFR-02, NFR-04, NFR-05, NFR-11, FR-15)
 
-### Plan 009 - Packaging and release (NFR-09), readability check (NFR-03)
+- [x] Oscar asked for a sleeker, game-like look after trying plan 007, and chose a dark theme, light animation, hand-painted Swing and a bundled font, 18 November 2026
+- [x] Plan drafted ([plan 008](../../plans/008-visual-polish.md)), 18 November 2026
+- [x] Gate: plan 008 approved; one play-through covers plans 007 and 008; Inter downloaded once from its official release, 18 November 2026
+- [x] Inter font and licence; dark palette with contrast test
+- [x] Painted buttons, cards, icons; every screen restyled
+- [x] `Animator` with dice, counter-slide and meter animations; pop-ups wait for them
+- [x] Tests, screens rendered at both sizes and fixed, deliberate-bug check: 365 tests; all five bugs caught; window opens in 1.2 s
+- [ ] Gate: Oscar plays; plans 007 and 008 marked `done`
+
+### Plan 009 - End-of-game report (FR-16)
+
+### Plan 010 - Packaging and release (NFR-09), readability check (NFR-03)
+
+The report and packaging plans moved from 008 and 009 when the visual polish was added (18 November 2026); neither had been drafted.
 
 ## Phase 3 - Playtesting
 

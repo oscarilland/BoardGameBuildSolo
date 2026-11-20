@@ -31,7 +31,7 @@ The acceptance criteria on each page were written on ingest from the rules and d
 | [FR-13](fr-13-bankruptcy.md) | Bankruptcy | Should | JUnit | Built |
 | [FR-14](fr-14-legacy-score-and-winner.md) | Legacy Score and one winner | Must | JUnit | Built |
 | [FR-15](fr-15-always-visible-status.md) | Year, round, meter, band and every player's status always visible | Must | Manual | Built |
-| [FR-16](fr-16-end-of-game-report.md) | End-of-game report | Must | Manual | Agreed (data built; drawing in plan 008) |
+| [FR-16](fr-16-end-of-game-report.md) | End-of-game report | Must | Manual | Agreed (data built; drawing in plan 009) |
 | [FR-17](fr-17-disaster-explanation.md) | One-line explanation for each disaster | Should | Manual | Agreed |
 
 ## Non-functional requirements

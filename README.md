@@ -26,7 +26,7 @@ The game was designed by a CSC2058 team at QUB. This repo is a separate solo ver
 
 ## Status
 
-**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plans 001 to 007 are built: **the game can be played** on one computer, from the title screen and a short How to play through setup, 12 rounds on the board with cards, disasters and round reports, to the final scores. `--simulate` plays thousands of games with computer players to check the balance. Next: the end-of-game report (plan 008).
+**Building.** Java 21 with a Swing UI, built with Maven, reading the data files with Gson (ADR-002 to ADR-004). Plans 001 to 008 are built: **the game can be played** on one computer, from the title screen and a short How to play through setup, 12 rounds on the board with cards, disasters and round reports, to the final scores. `--simulate` plays thousands of games with computer players to check the balance. Plan 008 gave it a dark, game-like look with light animation ([plan 008](docs/plans/008-visual-polish.md)). Next: the end-of-game report (plan 009).
 
 ## Setting up
 

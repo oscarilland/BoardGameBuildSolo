@@ -37,7 +37,7 @@ Different explanations for different bands.
 
 ## Build status
 
-AC-1 and AC-2 are built in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md): the approved lines and sources are in the working `config.json`, validated on load, and attached to each `DisasterResult`. AC-3 (readability) is plan 009; the pop-up is plan 007.
+AC-1 and AC-2 are built in [plan 005](../../plans/005-end-of-round-disasters-and-bankruptcy.md): the approved lines and sources are in the working `config.json`, validated on load, and attached to each `DisasterResult`. AC-3 (readability) is plan 010; the pop-up is plan 007.
 
 ## Related
 

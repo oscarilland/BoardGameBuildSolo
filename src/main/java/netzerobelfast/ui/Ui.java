@@ -2,85 +2,101 @@ package netzerobelfast.ui;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.FontUIResource;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.LayoutManager;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 /**
- * Shared Swing helpers: fonts, buttons with a visible focus ring, and wrapped labels. Every
- * colour comes from {@link Palette}.
+ * Shared Swing helpers: fonts, painted buttons and cards, chips, and wrapped labels. Every
+ * colour comes from {@link Palette}, every font from {@link Fonts}.
  */
 final class Ui {
 
-    static final Font BODY = new Font(Font.SANS_SERIF, Font.PLAIN, 15);
-    static final Font BOLD = BODY.deriveFont(Font.BOLD);
-    static final Font SMALL = BODY.deriveFont(12f);
-    static final Font HEADING = BODY.deriveFont(Font.BOLD, 22f);
-    static final Font TITLE = BODY.deriveFont(Font.BOLD, 44f);
-
-    private static final Border FOCUSED = BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(Palette.FOCUS, 3), BorderFactory.createEmptyBorder(6, 12, 6, 12));
-    private static final Border UNFOCUSED = BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(Palette.BORDER, 1), BorderFactory.createEmptyBorder(8, 14, 8, 14));
+    static final Font BODY = Fonts.REGULAR.deriveFont(15f);
+    static final Font BOLD = Fonts.SEMIBOLD.deriveFont(15f);
+    static final Font SMALL = Fonts.REGULAR.deriveFont(12f);
+    static final Font SMALL_BOLD = Fonts.SEMIBOLD.deriveFont(12f);
+    static final Font HEADING = Fonts.BOLD.deriveFont(22f);
+    static final Font TITLE = Fonts.BOLD.deriveFont(48f);
 
     private Ui() {}
 
-    /** Sets Swing's defaults that buttons, tooltips and dialogs use, so they follow the palette. */
+    /** Sets the defaults Swing's own controls use (text fields, lists, tooltips, scroll bars) to the dark theme. */
     static void installDefaults() {
-        UIManager.put("Button.disabledText", Palette.BUTTON_DISABLED_TEXT);
-        UIManager.put("Button.select", Palette.HEADER);
-        UIManager.put("Panel.background", Palette.BACKGROUND);
-        UIManager.put("OptionPane.background", Palette.BACKGROUND);
-        UIManager.put("ToolTip.background", Palette.SURFACE);
-        UIManager.put("ToolTip.foreground", Palette.TEXT);
-        UIManager.put("ToolTip.font", BODY);
+        ColorUIResource background = new ColorUIResource(Palette.BACKGROUND);
+        ColorUIResource raised = new ColorUIResource(Palette.RAISED);
+        ColorUIResource text = new ColorUIResource(Palette.TEXT);
+        FontUIResource body = new FontUIResource(BODY);
+        UIManager.put("Panel.background", background);
+        UIManager.put("OptionPane.background", background);
+        UIManager.put("Viewport.background", background);
+        UIManager.put("ScrollPane.background", background);
+        UIManager.put("ScrollBar.background", background);
+        UIManager.put("ScrollBar.track", background);
+        UIManager.put("ScrollBar.thumb", raised);
+        UIManager.put("ScrollBar.thumbHighlight", raised);
+        UIManager.put("ScrollBar.thumbShadow", raised);
+        UIManager.put("ScrollBar.thumbDarkShadow", raised);
+        UIManager.put("ToolTip.background", raised);
+        UIManager.put("ToolTip.foreground", text);
+        UIManager.put("ToolTip.font", body);
+        UIManager.put("ToolTip.border", BorderFactory.createLineBorder(Palette.BORDER));
+        for (String control : new String[] {"TextField", "ComboBox", "List"}) {
+            UIManager.put(control + ".background", raised);
+            UIManager.put(control + ".foreground", text);
+            UIManager.put(control + ".font", body);
+            UIManager.put(control + ".selectionBackground", new ColorUIResource(Palette.BUTTON_HOVER));
+            UIManager.put(control + ".selectionForeground", text);
+        }
+        UIManager.put("TextField.caretForeground", new ColorUIResource(Palette.ACCENT));
+        UIManager.put("TextField.inactiveForeground", new ColorUIResource(Palette.MUTED_TEXT));
+        UIManager.put("ComboBox.buttonBackground", raised);
+        UIManager.put("ComboBox.disabledForeground", new ColorUIResource(Palette.MUTED_TEXT));
+        UIManager.put("Label.foreground", text);
+    }
+
+    /** Graphics with smooth shapes and text; callers dispose it. */
+    static Graphics2D smooth(Graphics graphics) {
+        Graphics2D g = (Graphics2D) graphics.create();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+        return g;
+    }
+
+    /** A quieter button. */
+    static GameButton button(String text, Runnable onPress) {
+        return new GameButton(text, GameButton.Kind.SECONDARY, onPress);
+    }
+
+    /** The screen's main action, in the accent colour. */
+    static GameButton primary(String text, Runnable onPress) {
+        return new GameButton(text, GameButton.Kind.PRIMARY, onPress);
+    }
+
+    /** A rounded card with a soft shadow; {@code fill} and {@code border} come from the palette. */
+    static CardPanel card(LayoutManager layout, Color fill, Color border, int borderWidth) {
+        return new CardPanel(layout, fill, border, borderWidth);
     }
 
     /**
-     * A button in the palette's colours, with a thick focus ring, that Enter presses as well as
-     * Space (NFR-05 AC-4).
+     * A label that wraps its text at {@code width} pixels. The text is escaped, so names can't
+     * inject HTML. Use {@link Fonts#REGULAR} or {@link Fonts#SEMIBOLD} here: Swing's HTML finds
+     * fonts by family, and Inter Bold shares its family name with Inter Regular, so it would
+     * show as Regular.
      */
-    static JButton button(String text, Runnable onPress) {
-        JButton button = new JButton(text) {
-            @Override
-            public void setEnabled(boolean enabled) {
-                super.setEnabled(enabled);
-                setBackground(enabled ? Palette.BUTTON : Palette.BUTTON_DISABLED);
-            }
-        };
-        button.setFont(BOLD);
-        button.setForeground(Palette.BUTTON_TEXT);
-        button.setBackground(Palette.BUTTON);
-        button.setContentAreaFilled(false);
-        button.setOpaque(true);
-        button.setFocusPainted(false);
-        button.setBorder(UNFOCUSED);
-        button.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                button.setBorder(FOCUSED);
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                button.setBorder(UNFOCUSED);
-            }
-        });
-        button.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("ENTER"), "pressed");
-        button.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("released ENTER"), "released");
-        button.addActionListener(e -> onPress.run());
-        return button;
-    }
-
-    /** A label that wraps its text at {@code width} pixels. The text is escaped, so names can't inject HTML. */
     static JLabel wrapped(String text, Font font, Color color, int width) {
         JLabel label = new JLabel(html(text, width));
         label.setFont(font);
@@ -93,6 +109,22 @@ final class Ui {
         label.setFont(font);
         label.setForeground(color);
         return label;
+    }
+
+    /**
+     * Draws a small rounded chip with text, for example "band 3 · high" or "YOUR TURN", and
+     * returns its width.
+     */
+    static int chip(Graphics2D g, String text, int x, int y, Color fill, Color textColour, Font font) {
+        g.setFont(font);
+        FontMetrics metrics = g.getFontMetrics();
+        int w = metrics.stringWidth(text) + 16;
+        int h = metrics.getHeight() + 4;
+        g.setColor(fill);
+        g.fillRoundRect(x, y, w, h, h, h);
+        g.setColor(textColour);
+        g.drawString(text, x + 8, y + 2 + metrics.getAscent());
+        return w;
     }
 
     /** Wraps plain text as Swing HTML at a width in pixels, escaping it and keeping line breaks. */

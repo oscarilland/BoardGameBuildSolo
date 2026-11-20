@@ -37,7 +37,7 @@ A single Java 21 desktop application, built with Maven, with four parts: a **hea
 |---|---|---|
 | `model` | Every rule: turns, actions, end of round, meter, disasters, bankruptcy, cards, scoring | [Domain model](domain-model.md), [game flow](game-flow.md) |
 | `config` | Read and validate the data files; build the board, characters and deck | [Data files](data-files.md) |
-| `ui` | Built in [plan 007](../../plans/007-game-screens.md): the title, How to play, setup, game and final-scores screens in Swing ([ADR-002](../../decisions/002-ui-toolkit.md)). `GameController` is the only class that calls the model; presenter classes (`StatusText`, `ActionOptions`, `BoardLayout`, `HowToPlay`, `SetupRules`, `Palette`) hold the testable logic with no Swing in them | [Screens and layout](../ux/screens-and-layout.md) |
+| `ui` | Built in [plan 007](../../plans/007-game-screens.md): the title, How to play, setup, game and final-scores screens in Swing ([ADR-002](../../decisions/002-ui-toolkit.md)). `GameController` is the only class that calls the model; presenter classes (`StatusText`, `ActionOptions`, `BoardLayout`, `HowToPlay`, `SetupRules`, `Palette`) hold the testable logic with no Swing in them. [Plan 008](../../plans/008-visual-polish.md) added the dark theme, painted pieces (`GameButton`, `CardPanel`, `Icons`, `PlayerCard`), the bundled font (`Fonts`) and `Animator`, the only class with a timer | [Screens and layout](../ux/screens-and-layout.md) |
 | `sim` | Built in [plan 006](../../plans/006-scoring-and-balance-simulation.md): three computer-player strategies, `Simulator` (one seeded game) and `BalanceReport` (`--simulate`), for NFR-06's 20 games and balance checks | [Balance and design history](../rules/balance-and-history.md) |
 
 ## Key design choices
@@ -57,6 +57,7 @@ A single Java 21 desktop application, built with Maven, with four parts: a **hea
 | JUnit (Jupiter) | 6.1.3 | EPL 2.0 | Tests (test scope only) | Module requirement |
 | Maven (through Maven Wrapper 3.3.4) | 3.9.16 | Apache 2.0 | Build, test, package (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
 | JaCoCo | 0.8.16 | EPL 2.0 | Coverage (build only) | [ADR-003](../../decisions/003-build-tool-and-java-version.md) (accepted) |
+| Inter font | 4.1 (Regular, SemiBold, Bold) | SIL Open Font License 1.1 | The game's typeface, bundled in the jar with its `OFL.txt`, so it looks the same on every computer. A resource file, not code; downloaded once from the official release on GitHub | [Plan 008](../../plans/008-visual-polish.md) |
 | Gson | 2.15.0 | Apache 2.0 | Reading the data files; the only runtime library, used only in `config`. Its compile-time `error_prone_annotations` dependency is left out of the jar | [ADR-004](../../decisions/004-reading-the-json-data-files.md) (accepted) |
 
 ## Failure modes

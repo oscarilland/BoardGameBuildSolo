@@ -25,8 +25,14 @@ public final class GameController {
 
     /** What the controller needs from the screen. The Swing game screen implements it. */
     public interface View {
-        /** Redraw everything from the model. */
+        /** Redraw everything from the model, starting any animations of what changed. */
         void refresh();
+
+        /**
+         * Wait until any animation has finished, without blocking the window, so a pop-up opens
+         * after the counter has arrived (plan 008). Returns at once if nothing is moving.
+         */
+        void settle();
 
         /** The model refused a call; nothing changed. */
         void showError(String message);
@@ -97,19 +103,29 @@ public final class GameController {
         view.refresh();
 
         CardResult card = game.lastCard().orElse(null);
-        if (card != null && card != cardBefore) {
+        RoundReport round = game.lastRound().orElse(null);
+        ReturnAttempt attempt = game.lastReturn().orElse(null);
+        boolean newCard = card != null && card != cardBefore;
+        boolean newRound = round != null && round != roundBefore;
+        boolean newReturn = attempt != null && attempt != returnBefore;
+        boolean over = game.phase() == Game.Phase.GAME_OVER;
+        boolean asking = !over && game.currentPlayer() == mover
+                && (game.phase() == Game.Phase.AWAITING_QUIZ_ANSWER || game.phase() == Game.Phase.AWAITING_CHOICE);
+        if (newCard || newRound || newReturn || over || asking) {
+            view.settle();
+        }
+
+        if (newCard) {
             view.showCardResult(card);
         }
-        RoundReport round = game.lastRound().orElse(null);
-        if (round != null && round != roundBefore) {
+        if (newRound) {
             view.showRoundReport(round);
         }
-        ReturnAttempt attempt = game.lastReturn().orElse(null);
-        if (attempt != null && attempt != returnBefore) {
+        if (newReturn) {
             // After End turn the new current player's return is shown; after Roll to return, the same player's.
             view.showReturn(game.currentPlayer(), attempt);
         }
-        if (game.phase() == Game.Phase.GAME_OVER) {
+        if (over) {
             game.result().ifPresent(view::showGameOver);
             return;
         }

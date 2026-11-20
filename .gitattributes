@@ -7,3 +7,4 @@ mvnw text eol=lf
 *.pdf binary
 *.docx binary
 *.jar binary
+*.ttf binary

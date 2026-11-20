@@ -109,7 +109,8 @@ public final class MainWindow {
     }
 
     private void showGameOver(GameResult result) {
-        gameOver = new GameOverScreen(game.text().finalScores(game.game(), result), this::showTitle, frame::dispose);
+        gameOver = new GameOverScreen(config.rules().game().endYear(),
+                game.text().finalScores(game.game(), result), this::showTitle, frame::dispose);
         screens.add(gameOver, GAME_OVER);
         cards.show(screens, GAME_OVER);
         // The finished game's screen goes, so its shortcut keys can't act on it.

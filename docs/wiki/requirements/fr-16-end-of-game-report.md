@@ -36,7 +36,7 @@ After scoring, a report screen shows: a line graph of the meter for every round 
 
 ## Build status
 
-The report's data is built in [plan 006](../../plans/006-scoring-and-balance-simulation.md): the 13 meter values with the target and net zero lines (AC-1), each player's share counted across the game (AC-2), and the scores and winner (AC-3), tested in `EndOfGameReportTest`. Drawing it (the graph, AC-4) is plan 008, so the page stays `agreed` until then.
+The report's data is built in [plan 006](../../plans/006-scoring-and-balance-simulation.md): the 13 meter values with the target and net zero lines (AC-1), each player's share counted across the game (AC-2), and the scores and winner (AC-3), tested in `EndOfGameReportTest`. Drawing it (the graph, AC-4) is plan 009, so the page stays `agreed` until then.
 
 ## Related
 
